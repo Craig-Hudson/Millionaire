@@ -74,15 +74,13 @@ the up to 15 general knowledge questions, and being able to use life lines along
 
 ![color pallette](./assets/images/readme-images/colour%20palette.png)
 
-- I will #0D004F which is a Federal blue colour for the background colours mixed with Indigo(#64007B)
-  - I will be using #27374D, #DDE6ED and white as background colors on the home page and the game page.
-
+- I will #0D004F which is a Federal blue colour for the background colour.
+  
   - **typography**
-  - For headings I will be using Black Han Sans with a fallback of sans-serif.
-    - For page text I will be using Quattrocento with a fall back of serif.
+  - font-family: 'Kanit', sans-serif; will be used through out all pages titles and ordinary text, its easy to read, It's looks very elegant and clean and it will appeal to users who take part in the quiz.
 
   - **Structure**
-    - The structure will be a single scrolling page, with multiple pages with each section being clearly identifiable, and the use of a pop up modal for the reservation booking form which has a form dump which opens up in a new tab, to allow the user to be able to stay on the website itself to be able to continue browsing if they would like to. and the use of an image carousel to make the website more appealing and not overloading the website full of images that aren't contained.
+    - The structure of the quiz app consists of a home page which contains a page title, a logo and 3 buttons, Start quiz, how to play and high scores. The start quiz button will take the user to the quiz area on another page, which consists of the question area with 4 possible answers, 3 life lines and a money ladder so the user can track the progress. While the how to play and high scores i will be using a pop up modal to display these.
 
   - **Imagery**
     - I will be using images of food and pictures of the restaurant to create more of a visual effect and to make the site more appealing to viewers, all of the images on the website were taken from [pexels](https://www.pexels.com/)
@@ -170,7 +168,7 @@ Chrome Dev Tools - To troubleshoot and test features, solve issues with responsi
 
 [tiny.png](https://tinypng.com/) - To reduce the file size of my images for better website performance
 
-[Image resizer](https://imageresizer.com/) - To reduce any unnecessary height and width on photos, also minimizing file size
+[Image resizer](https://www.resizepixel.com/) - To reduce any unnecessary height and width on photos, also minimizing file size
 
 [visily](https://app.visily.ai/) To create my wireframes.
 
@@ -217,7 +215,7 @@ To clone The SmokeHouse repository:
 ​
 
 1. Log in (or sign up) to GitHub.
-2. Go to the repository for this project, Birmingham-egg-milestone-project.
+2. Go to the repository for this project.
 3. Click on the code button, select whether you would like to clone with HTTPS !(<https://github.com/Craig-Hudson/The-SmokeHouse>) and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.

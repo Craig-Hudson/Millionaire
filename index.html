@@ -22,17 +22,36 @@
     <!--buttons for each section of the site for user to access-->
     <div class="buttons">
       <button type="button" class="btn start-quiz">Start Quiz</button>
-      <button type="button" class="btn btn-modal how-to-play" >How To Play</button>
-      <button type="button" class="btn btn-modal high-scores">High Scores</button>
-      <div id="my-modal" class="modal-hidden modal-open">
-        <div class="model-content">
-          <span class="close-modal">Close x</span>
-          <P>Text here</P>
+      <button type="button" data-modal="how-to-play" class="btn open-modal">How To Play</button>
+      <button type="button" data-modal="high-scores"class="btn open-modal">High Scores</button>
+      <button type="button" data-modal="contact-us" class="btn open-modal">Contact us</button>
+      <!--How to play modal-->
+      <div class="modal-container">
+        <div id="how-to-play" class="modal">
+          <div class="model-content">
+            <span class="close-modal">Close&times;</span>
+            <P>Text here</P>
+          </div>
+        </div>
+        <!--High score modal-->
+        <div id="high-scores" class="modal">
+          <div class="modal-content">
+            <span class="close-modal">Close&times;</span>
+            <p>text here</p>
+            <p>high score here</p>
+          </div>
+        </div>
+        <!--Contact us modal-->
+        <div id="contact-us" class="modal">
+          <div class="modal-content">
+            <span class="close-modal">Close&times;</span>
+            <p>form to go here</p>
+          </div>
         </div>
       </div>
-    </div>
+      
   </section>
   <footer></footer>
-  <script src="./assets/js/script..js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -7,23 +7,26 @@
   font-family: 'Kanit', sans-serif;
 }
 
+html {
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(13,0,64,1) 60%, rgba(13,0,79,1) 100%, rgba(0,212,255,1) 100%);
+}
+
 body {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(13,0,64,1) 60%, rgba(13,0,79,1) 100%, rgba(0,212,255,1) 100%);
-  
 }
 
 header {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  height: 20vh;
 }
 
 h1 {
   color: whitesmoke;
   letter-spacing: 2px;
   font-size: 220%;
+  margin-top: 40px;
 }
 
 /*-----Logo styling and positioning-----*/
@@ -33,9 +36,12 @@ h1 {
 }
 
 .logo img {
+  position: absolute;
   width: 150px;
   height: 150px;
   margin-right: 20px;
+  top: 0;
+  padding-top: 20px;
 }
 /*-----Button styling-----*/
 .buttons {
@@ -43,7 +49,8 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  padding-top: 20px;
+  height: 80vh;
 }
 
 .btn {
@@ -57,6 +64,7 @@ h1 {
   color: whitesmoke;
 }
 
+/*-------MODAL STYLING---------*/
 
 .modal-container {
   display: none;
@@ -77,7 +85,8 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  max-width: 400px;
+  width: 400px;
+  height: 400px;
   background-color: #fff;
 }
 
@@ -85,5 +94,66 @@ h1 {
   display: block;
 }
 
+/*QUIZ SECTION*/
 
-/*----CLASS TO MAKE MODAL APPEAR*/
+.quiz-area {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(13,0,64,1) 60%, rgba(13,0,79,1) 100%, rgba(0,212,255,1) 100%);
+  color: whitesmoke;
+}
+
+.quiz-scores-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border: 2px solid orange;
+}
+
+.quiz-scores {
+  list-style: none;
+  padding-left: 0;
+}
+
+.quiz-scores li {
+  padding-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.quiz-title {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.quiz-body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.quiz-body {
+  height: 60vh;
+  width: 70%;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answer-options{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  position: fixed;
+}
+
+.answer-button {
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+}

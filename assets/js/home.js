@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 //to open and close modal on how to play, highscores, and contact us buttons
 

@@ -1,7 +1,7 @@
 # Millionaire Quiz
 
 ------------
-[Link to live site here](  "Link to live site here")
+[Link to live site here](https://craig-hudson.github.io/Millionaire/  "Link to live site here")
 
 ![Am I responsive image]()
 
@@ -66,9 +66,13 @@ the up to 15 general knowledge questions, and being able to use life lines along
     4. As a first time visitor I want to be able to keep track on where I am on the money ladder, with the option to bank money on questions I may be unsure of.
 
   - **Returning Visitor goals**
-    1. As a returning Visitor I want to be able to keep track of my previous high scores.
+    1. As a returning Visitor I want to be able to keep track of my previous high scores locally.
     2. As a returning Visitor I want the life lines to not always give the correct answers especially on the questions later on in the quiz.
-    3. 
+    3. As a returning visitor I want to be able to contact form to provide feedback, or any errors that may occur on the webpage.
+
+  - **Frequent visitor goals**
+  - 1. As a frequent visitor I want to be able to keep track of my highscore even if I exit the page.
+  - 2. As a frequent visitor I want to be able to see the highscores of users from all over the world.
 
 ### Design
 
@@ -146,7 +150,7 @@ By implementing them few points above I have made my webpage as accessible and u
 
 ### Languages Used
 
-HTML, CSS and Bootstrap have been used for this project
+HTML, CSS Bootstrap and javaScript has been used for this project
 
 ### Frameworks, Libraries & Programs Used
 

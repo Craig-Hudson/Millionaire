@@ -1,129 +1,105 @@
-// api link for question 1-5
-const easyQuestions = ('https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple');
-// api link for question 6-10
-const mediumQuestions = ('https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple');
-// api link for question 11-15
-const hardQuestions = ('https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple');
-
+// API link for question 1-5
+const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple';
+// API link for question 6-10
+const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple';
+// API link for question 11-15
+const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
 let data = {};
 let score = 0;
-// let questionIndex = 0;
-let questionIndex = 1;
-console.log(data);
+let questionIndex = 0;
 
 async function callApi(urlApi) {
-  const response = await fetch(urlApi);
-  if (response.status >= 200 && response.status <= 299) {
-    data = await response.json();
-    getQuestion(data);
-    getAnswers(data);
-  } else 
-    // This is where the error is handled - redirects to 500 page
-   console.log('error')
-}
-
-function getQuestion(data) {
-  console.log(data);
+  try {
+    const response = await fetch(urlApi);
+    if (response.status >= 200 && response.status <= 299) {
+      data = await response.json();
+      getQuestion();
+      getAnswers();
+       
+    } else {
+      console.log('error');
+    }
+  } catch (error) {
+    console.error(error);
+  }
   console.log(data.results);
-  const question = document.getElementById('question').innerHTML = data.results[0].question;
 }
-
-//get incorrect and correct answers, and store them randomly so the correct answer is not at the same index for every question
-function getAnswers(data) {
-  
-  const correctAnswer = data.results[0].correct_answer;
-  const incorrectAnswer = data.results[0].incorrect_answers;
+function getQuestion() {
+  const question = document.getElementById('question').innerHTML = data.results[questionIndex].question;
+}
+function getAnswers() {
+  const correctAnswer = data.results[questionIndex].correct_answer;
+  const incorrectAnswer = data.results[questionIndex].incorrect_answers;
   const answerButtons = document.querySelectorAll('.answer-button');
   const newAnswerArray = incorrectAnswer.concat(correctAnswer);
-  //call shuffle answers function so correct answer appears at different indexes for every question
   shuffleAnswers(newAnswerArray);
-
-  for(let i = 0; i < newAnswerArray.length; i++) {
+  for (let i = 0; i < answerButtons.length; i++) {
     answerButtons[i].innerHTML = newAnswerArray[i];
-    // event listener to determine the correct answer
-    answerButtons[i].addEventListener('click', function () {
-        
-      if(this.innerHTML === correctAnswer) {
-      // alert('correct Answer')
-      this.style.backgroundColor = 'orange';
-      for(let j = 0; j < answerButtons.length; j++) {
-        answerButtons[j].disabled = true;
-      }
-      
-      enableNextButton();
-      
-      } else {
-      // alert('incorrect Answer');
-      this.style.backgroundColor = 'red';
-      for(let j = 0; j < answerButtons.length; j++) {
-        answerButtons[j].disabled = true;
-        }
-      }
-    })
+    answerButtons[i].style.backgroundColor = '';
+    answerButtons[i].disabled = false;
+    // Remove all previous event listeners to prevent duplicate event binding
+    answerButtons[i].removeEventListener('click', checkAnswer);
+    // Bind the event listener again for the new question
+    answerButtons[i].addEventListener('click', checkAnswer);
   }
-    console.log(correctAnswer);
-    console.log(newAnswerArray);
-    // shuffleAnswers(newAnswerArray);
-    // console.log(correctAnswer, incorrectAnswer)
-    // console.log(answers);
-    // document.querySelectorAll('.answer-button').innerHTML = answers;
-  }
-
+}
 function shuffleAnswers(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
-
-console.log('working')
-
-// let nextButton = document.getElementById('next-button').addEventListener('click',nextQuestion)
-
-
-//Function to handle the next button click event
-function nextQuestion() {
-  score ++;
-  const question = data.results[questionIndex].question;
+function checkAnswer() {
+  const selectedAnswer = this.innerHTML;
   const correctAnswer = data.results[questionIndex].correct_answer;
-  const incorrectAnswers = data.results[questionIndex].incorrect_answers;
-  const answerButtons = document.querySelectorAll('.answer-button');
-  const newAnswerArray = incorrectAnswers.concat(correctAnswer);
-  shuffleAnswers(newAnswerArray);
-  console.log(question)
-  document.getElementById('question').innerHTML = question;
-  for (let i = 0; i < newAnswerArray.length; i++) {
-    answerButtons[i].innerHTML = newAnswerArray[i];
-    answerButtons[i].style.backgroundColor = '';
-    answerButtons[i].disabled = false;
+  if (selectedAnswer === correctAnswer) {
+    this.style.backgroundColor = 'orange';
+    const answerButtons = document.querySelectorAll('.answer-button');
+    for (let j = 0; j < answerButtons.length; j++) {
+      answerButtons[j].disabled = true;
+    }
+    incrementScore(score);
+    setTimeout(nextQuestion, 1000);
+    
+    
+  } else {
+    this.style.backgroundColor = 'red';
+    const answerButtons = document.querySelectorAll('.answer-button');
+    for (let j = 0; j < answerButtons.length; j++) {
+      answerButtons[j].disabled = true;
+    }
   }
-
-  questionIndex ++;
-  console.log(question);
+  
+}
+function nextQuestion() {
+  questionIndex++;
   if (questionIndex >= data.results.length) {
     alert(`Quiz complete! Your score: ${score}/${data.results.length}`);
     return;
   }
+  getQuestion();
+  getAnswers();
   
-  disableNextButton();
 }
 
-//display next button and call next question function when button is clicked
-function enableNextButton() {
-  const nextButton = document.getElementById('next-button');
-  nextButton.style.display = 'block'
+function incrementScore() {
+  // incrementScore
+  score++;
+  // get .score class
+  let scoreList = document.querySelectorAll('.score');
+  // to get current index
+  let currentScoreIndex = scoreList.length - score;
+  // iterate in reverse to start at last element in currentScore class
+  for (let i = scoreList.length - 1; i >= 0; i--) {
+    let scoreItem = scoreList[i];
+    scoreItem.classList.remove('current-score');
+    
+    if (i === currentScoreIndex) {
+      scoreItem.classList.add('current-score');
+      break; // exit the loop once we find the current score
+    }
+  }
 }
 
-document.getElementById('next-button').addEventListener('click', nextQuestion);
-
-function disableNextButton() {
-  const nextButton = document.getElementById('next-button');
-  nextButton.style.display = 'none';
-}
-
-
+// Call API for easy questions initially
 callApi(easyQuestions);
-// getQuestion(data);
-
-
-

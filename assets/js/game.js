@@ -26,7 +26,9 @@ async function callApi(urlApi) {
 }
 function getQuestion() {
   const question = document.getElementById('question').innerHTML = data.results[questionIndex].question;
+  console.log(question);
 }
+
 function getAnswers() {
   const correctAnswer = data.results[questionIndex].correct_answer;
   const incorrectAnswer = data.results[questionIndex].incorrect_answers;
@@ -35,7 +37,7 @@ function getAnswers() {
   shuffleAnswers(newAnswerArray);
   for (let i = 0; i < answerButtons.length; i++) {
     answerButtons[i].innerHTML = newAnswerArray[i];
-    answerButtons[i].style.backgroundColor = '';
+    answerButtons[i].style.background = '';
     answerButtons[i].disabled = false;
     // Remove all previous event listeners to prevent duplicate event binding
     answerButtons[i].removeEventListener('click', checkAnswer);
@@ -49,33 +51,48 @@ function shuffleAnswers(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
 function checkAnswer() {
   const selectedAnswer = this.innerHTML;
   const correctAnswer = data.results[questionIndex].correct_answer;
-  if (selectedAnswer === correctAnswer) {
-    this.style.backgroundColor = 'orange';
+  const sanitizedSelectedAnswer = sanitizeAnswer(selectedAnswer);
+  const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+
+  if (sanitizedSelectedAnswer === sanitizedCorrectAnswer) {
+    this.style.background = 'orange';
     const answerButtons = document.querySelectorAll('.answer-button');
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
     incrementScore(score);
-    setTimeout(nextQuestion, 1000);
-    
-    
+    setTimeout(nextQuestion, 1500);
   } else {
-    this.style.backgroundColor = 'red';
+    this.style.background = 'red';
+
+    // Display the background color of the correct answer
+    const correctAnswerButtons = document.querySelectorAll('.answer-button');
+    for (let j = 0; j < correctAnswerButtons.length; j++) {
+      if (correctAnswerButtons[j].innerHTML === correctAnswer) {
+        correctAnswerButtons[j].style.background = 'orange';
+        break;
+      }
+    }
     const answerButtons = document.querySelectorAll('.answer-button');
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
   }
-  
 }
+
+// function to get the next question
 function nextQuestion() {
+  //increment question index when next question is called
   questionIndex++;
-  if (questionIndex >= data.results.length) {
-    alert(`Quiz complete! Your score: ${score}/${data.results.length}`);
-    return;
+  if (questionIndex === 5) {
+    // alert(`Quiz complete! Your score: ${score}/${data.results.length}`);
+    callApi(mediumQuestions);
+  } else if (questionIndex === 10) {
+    callApi(hardQuestions);
   }
   getQuestion();
   getAnswers();
@@ -101,5 +118,16 @@ function incrementScore() {
   }
 }
 
+// https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
+// code for some of this function was taken from the link above.
+function sanitizeAnswer(answer) {
+  // Replace HTML entities with their original characters
+  const tempElement = document.createElement('div');
+  tempElement.innerHTML = answer;
+  const sanitizedAnswer = tempElement.textContent;
+  
+  // Remove any other special characters
+  return sanitizedAnswer.replace(/[^\w\s]/gi, '');
+}
 // Call API for easy questions initially
 callApi(easyQuestions);

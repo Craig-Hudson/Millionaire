@@ -13,24 +13,35 @@ async function callApi(urlApi) {
     const response = await fetch(urlApi);
     if (response.status >= 200 && response.status <= 299) {
       data = await response.json();
-      getQuestion();
-      getAnswers();
-       
-    } else {
-      console.log('error');
+      if (data.results && data.results.length > 0) {
+        questionIndex = 0; // Reset question index to 0 when new data is fetched
+        getQuestion(); // call get question function to display new questions
+        getAnswers(); // call get answers function to grab new answers
+       } //else {
+      //   console.log('No questions found in the API response.');
+      // }
+       } else {
+      console.log('Error fetching data from the API.');
     }
   } catch (error) {
     console.error(error);
   }
-  console.log(data.results);
 }
+
+	
 function getQuestion() {
-  const question = document.getElementById('question').innerHTML = data.results[questionIndex].question;
-  console.log(question);
+  const question = document.getElementById('question');
+  if (questionIndex < data.results.length) {
+    question.innerHTML = data.results[questionIndex].question;
+  }
 }
+
 
 function getAnswers() {
   const correctAnswer = data.results[questionIndex].correct_answer;
+  console.log(correctAnswer);
+  console.log(data.results);
+  console.log(questionIndex);
   const incorrectAnswer = data.results[questionIndex].incorrect_answers;
   const answerButtons = document.querySelectorAll('.answer-button');
   const newAnswerArray = incorrectAnswer.concat(correctAnswer);
@@ -61,6 +72,7 @@ function checkAnswer() {
   if (sanitizedSelectedAnswer === sanitizedCorrectAnswer) {
     this.style.background = 'orange';
     const answerButtons = document.querySelectorAll('.answer-button');
+    //disable buttons so user can not click anymore
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
@@ -69,7 +81,7 @@ function checkAnswer() {
   } else {
     this.style.background = 'red';
 
-    // Display the background color of the correct answer
+    // Display the background color of the correct answer when user selects wrong answer
     const correctAnswerButtons = document.querySelectorAll('.answer-button');
     for (let j = 0; j < correctAnswerButtons.length; j++) {
       if (correctAnswerButtons[j].innerHTML === correctAnswer) {
@@ -88,15 +100,19 @@ function checkAnswer() {
 function nextQuestion() {
   //increment question index when next question is called
   questionIndex++;
-  if (questionIndex === 5) {
-    // alert(`Quiz complete! Your score: ${score}/${data.results.length}`);
-    callApi(mediumQuestions);
-  } else if (questionIndex === 10) {
-    callApi(hardQuestions);
+  if (questionIndex < data.results.length) {
+    // Continue to the next question if available
+    getQuestion();
+    getAnswers();
+  } else if (questionIndex === data.results.length && score === 5) {
+   //Call medium question api when user reaches question 5
+   callApi(mediumQuestions);
+  }else if(questionIndex === data.results.length && score === 10){
+    // Call hard question api when use reaches question 10
+    callApi(hardQuestions)
+  } else if (score === 15) {
+    alert('Congratulation you won £1,000,000');
   }
-  getQuestion();
-  getAnswers();
-  
 }
 
 function incrementScore() {
@@ -125,9 +141,48 @@ function sanitizeAnswer(answer) {
   const tempElement = document.createElement('div');
   tempElement.innerHTML = answer;
   const sanitizedAnswer = tempElement.textContent;
-  
   // Remove any other special characters
   return sanitizedAnswer.replace(/[^\w\s]/gi, '');
 }
+
+// grab 
+const askTheAudience = document.getElementById('ask-the-audience');
+askTheAudience.addEventListener('click', handleAskTheAudience);
+
+function handleAskTheAudience(event) {
+  const correctAnswer = data.results[questionIndex].correct_answer;
+  const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+  const incorrectAnswers = data.results[questionIndex].incorrect_answers;
+  const sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
+  
+  if (questionIndex >= 0 && score < 5) {
+    alert(`The correct answer is ${sanitizedCorrectAnswer}`);
+  } else if (questionIndex >= 0 && score > 5) {
+    alert(`The answer is either ${sanitizedCorrectAnswer}/ or ${sanitizedIncorrectAnswers}` )
+  }
+
+  askTheAudience.disabled = true; // Disable the button
+  askTheAudience.removeEventListener('click', handleAskTheAudience); // Remove the event listener
+}
+
+function getRandomIndex(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+const buttons = document.querySelectorAll('.answer-buttons');
+const fiftyFifty = document.getElementById('fifty-fifty');
+fiftyFifty.addEventListener('click', function(event) {
+  const incorrectAnswers = data.results[questionIndex].incorrect_answers;
+  let poppedIncorrectAnswers = [];
+  for (let i = 0; i < 2; i++) {
+    const randomIndex = Math.floor(Math.random() * incorrectAnswers.length);
+    poppedIncorrectAnswers.push(incorrectAnswers[randomIndex]);
+    incorrectAnswers.splice(randomIndex, 1);
+  }
+  sanitizedIncorrectPoppedAnswers = sanitizeAnswer(poppedIncorrectAnswers); 
+  console.log(poppedIncorrectAnswers);
+
+  
+})
 // Call API for easy questions initially
 callApi(easyQuestions);

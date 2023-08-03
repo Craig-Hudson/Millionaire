@@ -72,7 +72,7 @@ the up to 15 general knowledge questions, and being able to use life lines along
 
   - **Frequent visitor goals**
   - 1. As a frequent visitor I want to be able to keep track of my highscore even if I exit the page.
-  - 2. As a frequent visitor I want to be able to see the highscores of users from all over the world.
+  - 2. As a frequent visitor I want to be able to see the highscores of users from all over the
 
 ### Design
 
@@ -174,15 +174,16 @@ Chrome Dev Tools - To troubleshoot and test features, solve issues with responsi
 
 [Image resizer](https://www.resizepixel.com/) - To reduce any unnecessary height and width on photos, also minimizing file size
 
-[visily](https://app.visily.ai/) To create my wireframes.
+Balsamiq - I used Balsamiq wireframes from a desktop app for my wireframes
 
 [W3School](https://www.w3schools.com/) To refer to anything CSS related that i may have been unsure of
 
 [Pexels](https://www.pexels.com/) I used pexels for all my images for this project
 
+[flaticon](https://www.flaticon.com/) I used flaticon for my life line logos on the game page
+
 VsCode - I have used vscode as my ide
 
-[Covertio.co](https://convertio.co/jpg-webp/) I have used Convertio to convert image formats to webp
 
 ## Deployment & Local Development
 

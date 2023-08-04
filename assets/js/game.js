@@ -54,6 +54,8 @@ function getAnswers () {
     answerButtons[i].addEventListener('click', checkAnswer);
   }
 }
+
+
 function shuffleAnswers (array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -66,7 +68,7 @@ function checkAnswer () {
   const correctAnswer = data.results[questionIndex].correct_answer;
   const sanitizedSelectedAnswer = sanitizeAnswer(selectedAnswer);
   const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
-
+  // Checks if the selected answer by the user is the same as the correct answer in the api
   if (sanitizedSelectedAnswer === sanitizedCorrectAnswer) {
     this.style.background = 'orange';
     const answerButtons = document.querySelectorAll('.answer-button');
@@ -138,13 +140,10 @@ function incrementScore () {
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
 // code for some of this function was taken from the link above.
-function sanitizeAnswer (answer) {
-  // Replace HTML entities with their original characters
+function sanitizeAnswer(answer) {
   const tempElement = document.createElement('div');
   tempElement.innerHTML = answer;
-  const sanitizedAnswer = tempElement.textContent;
-  // Remove any other special characters
-  return sanitizedAnswer.replace(/[^\w\s]/gi, '');
+  return tempElement.textContent.replace(/[\u2018\u2019]/g, "'");
 }
 
 // grab
@@ -158,7 +157,7 @@ function handleAskTheAudience (event) {
   const sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
   if (questionIndex >= 0 && score < 5) {
     alert(`The correct answer is ${sanitizedCorrectAnswer}`);
-  } else if (questionIndex >= 0 && score > 5) {
+  } else if (questionIndex >= 0 && score >= 5) {
     alert(`The answer is either ${sanitizedCorrectAnswer}/ or ${sanitizedIncorrectAnswers}`)
   }
 
@@ -170,6 +169,7 @@ function getRandomIndex (arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
+
 let fiftyFiftyUsed = false;
 const fiftyFifty = document.getElementById('fifty-fifty');
 fiftyFifty.addEventListener('click', function () {
@@ -187,6 +187,31 @@ fiftyFifty.addEventListener('click', function () {
     });
   }
 });
+
+let PhoneAFriendUsed = false;
+const PhoneAFriend = document.getElementById('phone-a-friend');
+PhoneAFriend.addEventListener('click', function () {
+  if (!PhoneAFriendUsed) {
+    const correctAnswer = data.results[questionIndex].correct_answer;
+    const incorrectAnswers = data.results[questionIndex].incorrect_answers;
+    const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+    const sanitizedIncorrectAnswer = sanitizeAnswer(getRandomIndex(incorrectAnswers));
+    const incorrectAnswerArray = [...incorrectAnswers];
+    const correctAnswerArray = [correctAnswer];
+    const concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
+    const oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
+    if (questionIndex >= 0 && score < 5) {
+      alert(`Hi Craig, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
+    } else if (questionIndex >= 0 && score >= 5 && score < 10) {
+      alert(`Hi Craig I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}`);
+    } else if (questionIndex >= 0 && score >= 10) {
+      alert(`Hi Craig I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
+    }
+  }
+  PhoneAFriendUsed = true; // disables the use of the phone a friend lifeline once the user has used it once.
+})
+
+
 
 // Call API for easy questions initially
 callApi(easyQuestions);

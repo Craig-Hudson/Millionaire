@@ -4,9 +4,14 @@ const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficult
 const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple';
 // API link for question 11-15
 const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
+
+// Global variables
+
 let data = {};
 let score = 0;
 let questionIndex = 0;
+// money index to start at minus 1
+let moneyIndex = -1;
 
 async function callApi (urlApi) {
   try {
@@ -39,7 +44,9 @@ function getAnswers () {
   const correctAnswer = data.results[questionIndex].correct_answer;
   console.log(correctAnswer);
   console.log(data.results);
-  console.log(questionIndex);
+  // console.log(questionIndex);
+  console.log(score);
+  console.log(moneyIndex);
   const incorrectAnswer = data.results[questionIndex].incorrect_answers;
   const answerButtons = document.querySelectorAll('.answer-button');
   const newAnswerArray = incorrectAnswer.concat(correctAnswer);
@@ -76,6 +83,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
+    incrementMoneyIndex(moneyIndex);
     incrementScore(score);
     setTimeout(nextQuestion, 1500);
   } else {
@@ -211,7 +219,23 @@ PhoneAFriend.addEventListener('click', function () {
   PhoneAFriendUsed = true; // disables the use of the phone a friend lifeline once the user has used it once.
 })
 
+function incrementMoneyIndex () {
+  moneyIndex++
+}
 
+const bank = document.getElementById('bank')
+bank.addEventListener('click', bankMoney);
+
+function bankMoney () {
+  const moneyList = document.querySelectorAll('.money');
+  const reverseMoneyList = [...moneyList].reverse();
+  if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
+    const money = reverseMoneyList[moneyIndex].innerHTML;
+    alert(`${money}`);
+  } else {
+    alert('Invalid index!');
+  }
+}
 
 // Call API for easy questions initially
 callApi(easyQuestions);

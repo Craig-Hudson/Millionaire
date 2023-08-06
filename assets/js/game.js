@@ -36,6 +36,7 @@ let score = 0;
 let questionIndex = 0;
 // money index to start at minus 1
 let moneyIndex = -1;
+let questionNumber = 1
 
 async function callApi (urlApi) {
   try {
@@ -62,6 +63,13 @@ function getQuestion () {
   if (questionIndex < data.results.length) {
     question.innerHTML = data.results[questionIndex].question;
   }
+  getQuestionNumber();
+}
+
+function getQuestionNumber () {
+  const questionNumberId = document.getElementById('question-number');
+  questionNumberId.innerText = questionNumber;
+  questionNumber++
 }
 
 function getAnswers () {
@@ -233,11 +241,11 @@ PhoneAFriend.addEventListener('click', function () {
     const concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     const oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
     if (questionIndex >= 0 && score < 5) {
-      alert(`Hi Craig, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
+      alert(`Hi ${userName}, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
     } else if (questionIndex >= 0 && score >= 5 && score < 10) {
       alert(`Hi Craig I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}`);
     } else if (questionIndex >= 0 && score >= 10) {
-      alert(`Hi Craig I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
+      alert(`Hi ${userName} I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
     }
   }
   PhoneAFriendUsed = true; // disables the use of the phone a friend lifeline once the user has used it once.
@@ -261,5 +269,12 @@ function bankMoney () {
   }
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+// Used the link above to undestand how to prevent the user to exit the page without conformaion
+window.addEventListener('beforeunload', function(event) {
+  event.preventDefault();
+  event.returnValue = '';
+  return 'Are you sure you want to leave this page? Your progress may not be saved.';
+});
 // Call API for easy questions initially
 callApi(easyQuestions);

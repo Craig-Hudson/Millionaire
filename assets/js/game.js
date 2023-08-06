@@ -1,3 +1,27 @@
+let userName; // declare the global userName variable
+
+window.onload = function() {
+  const quizArea = document.getElementById('quiz');
+  const user = document.getElementById('name-input');
+  const inputNameArea = document.querySelector('.input-name-section');
+  const submitButton = document.getElementById('submit-button');
+  
+  submitButton.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
+      quizArea.classList.remove('hidden');
+      inputNameArea.classList.add('hidden');
+      userName = user.value; // assign user input to the global userName variable
+
+      console.log(userName);
+    } else {
+      alert('Please enter a name between 4-12 characters long.')
+    }
+  });
+};
+
+console.log(userName);
 // API link for question 1-5
 const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple';
 // API link for question 6-10

@@ -8,8 +8,18 @@
   <title>Quiz Game Page</title>
 </head>
 <body>
+  <section class="input-name-section">
+    <div class="input-container">
+      <form id="input-form">
+        <label for="name-input">Please Enter Your Name:</label>
+        <input id="name-input" class="input-box" type="text" placeholder="Enter your name" required>
+        <button id="submit-button" class="submit-button" type="submit">Submit</button>
+      </form>
+
+    </div>
+  </section>
   <!-- QUIZ AREA -->
-  <section class="quiz-area">
+  <section id = quiz class="quiz-area hidden">
     <div class="container-fluid g-0 h-100 w-100">
       <div class="row g-0">
         <div class="col-3">

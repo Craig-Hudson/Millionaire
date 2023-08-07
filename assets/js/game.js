@@ -1,7 +1,7 @@
 'use strict';
 let userName; // declare the global userName variable
 
-window.onload = function() {
+window.onload = function () {
   const quizArea = document.getElementById('quiz');
   const user = document.getElementById('name-input');
   const inputNameArea = document.querySelector('.input-name-section');
@@ -30,7 +30,7 @@ const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficu
 const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
 
 // Global variables
-const mostRecentHighScores = JSON.parse(localStorage.getItem('highScores')) || [];
+// const mostRecentHighScores = JSON.parse(localStorage.getItem('highScores')) || [];
 let data = {};
 let score = 0;
 let questionIndex = 0;
@@ -180,7 +180,7 @@ function incrementScore () {
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
 // code for some of this function was taken from the link above.
-function sanitizeAnswer(answer) {
+function sanitizeAnswer (answer) {
   const tempElement = document.createElement('div');
   tempElement.innerHTML = answer;
   return tempElement.textContent.replace(/[\u2018\u2019]/g, "'");
@@ -275,7 +275,7 @@ const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 function setHighScore (name, score) {
   const highScoreObject = {
     userName: name,
-    score: score
+    score
   };
 
   highScores.push(highScoreObject);
@@ -284,27 +284,41 @@ function setHighScore (name, score) {
   console.log(highScores);
 }
 
+
+
 function endQuiz () {
+  const hideQuiz = document.getElementById('quiz');
+  const endGameArea = document.getElementById('end-game-area');
+
+  if (hideQuiz && endGameArea) {
+    hideQuiz.classList.add('hidden');
+    endGameArea.style.display = 'flex';
+  }
+
+ 
+
+  
+
   const nameInput = document.getElementById('name-input');
   const userName = nameInput.value;
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
   const highScore = reverseMoneyList[moneyIndex].innerHTML;
-  console.log(highScore, userName)
+  console.log(highScore, userName);
   setHighScore(userName, highScore);
-  const endGameArea = document.getElementById('end-game-area');
-  endGameArea.classList.remove('hidden')
 
-  const playAgain = document.querySelector('.play-again');
-  playAgain.addEventListener('click', function () {
-    window.location.href = '/quiz.html'
-  })
-  const returnHome = document.querySelector('.return-home');
-  returnHome.addEventListener('click', function () {
-    window.location.href = '/index.html';
-  })
+  
 }
 
+const playAgain = document.querySelector('.play-again');
+const returnHome = document.querySelector('.return-home')
+document.addEventListener('click', function (event) {
+  if (event.target === playAgain) {
+    window.location.href = '/quiz.html';
+  } else if (event.target === returnHome) {
+    window.location.href = '/index.html'
+  }
+})
 // Call endQuiz() when the quiz is over
 
 // Call API for easy questions initially

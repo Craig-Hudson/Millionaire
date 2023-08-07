@@ -1,3 +1,4 @@
+'use strict';
 let userName; // declare the global userName variable
 
 window.onload = function() {
@@ -5,7 +6,6 @@ window.onload = function() {
   const user = document.getElementById('name-input');
   const inputNameArea = document.querySelector('.input-name-section');
   const submitButton = document.getElementById('submit-button');
-  
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -30,7 +30,7 @@ const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficu
 const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
 
 // Global variables
-
+const mostRecentHighScores = JSON.parse(localStorage.getItem('highScores')) || [];
 let data = {};
 let score = 0;
 let questionIndex = 0;
@@ -94,7 +94,6 @@ function getAnswers () {
   }
 }
 
-
 function shuffleAnswers (array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -133,6 +132,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
+    endQuiz();
   }
 }
 
@@ -269,12 +269,43 @@ function bankMoney () {
   }
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
-// Used the link above to undestand how to prevent the user to exit the page without conformaion
-window.addEventListener('beforeunload', function(event) {
-  event.preventDefault();
-  event.returnValue = '';
-  return 'Are you sure you want to leave this page? Your progress may not be saved.';
-});
+// https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
+// tutorial video above and made my own adjustments
+const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+function setHighScore (name, score) {
+  const highScoreObject = {
+    userName: name,
+    score: score
+  };
+
+  highScores.push(highScoreObject);
+
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+  console.log(highScores);
+}
+
+function endQuiz () {
+  const nameInput = document.getElementById('name-input');
+  const userName = nameInput.value;
+  const moneyList = document.querySelectorAll('.money');
+  const reverseMoneyList = [...moneyList].reverse();
+  const highScore = reverseMoneyList[moneyIndex].innerHTML;
+  console.log(highScore, userName)
+  setHighScore(userName, highScore);
+  const endGameArea = document.getElementById('end-game-area');
+  endGameArea.classList.remove('hidden')
+
+  const playAgain = document.querySelector('.play-again');
+  playAgain.addEventListener('click', function () {
+    window.location.href = '/quiz.html'
+  })
+  const returnHome = document.querySelector('.return-home');
+  returnHome.addEventListener('click', function () {
+    window.location.href = '/index.html';
+  })
+}
+
+// Call endQuiz() when the quiz is over
+
 // Call API for easy questions initially
 callApi(easyQuestions);

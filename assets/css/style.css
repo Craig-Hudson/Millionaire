@@ -150,14 +150,17 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(31,31,33,1) 73%, rgba(78,79,80,1) 100%, rgba(0,212,255,1) 100%);
+
 }
 
 .quiz-scores {
   list-style: none;
+  padding-top: 15px;
 }
 
 .score {
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   letter-spacing: 1.5px;
 }
 
@@ -193,12 +196,16 @@ h1 {
   justify-content: center;
   flex-wrap: wrap;
   margin: 0;
-  padding-left: 20px;
+  
+  padding-bottom: 15px;
 }
 
 .life-lines {
- font-size: 22px;
- padding: 12px;
+ font-size: 20px;
+ padding: 18px;
+ border: solid 2px orange;
+ border-radius: 10px;
+ margin: 0 5px 0 5px;
 }
 
 /* INPUT NAME AREA */
@@ -251,6 +258,7 @@ h1 {
     display: none;
     align-items: center;
     height: 100%;
+    color: whitesmoke;
 }
 
 .end-game-container {

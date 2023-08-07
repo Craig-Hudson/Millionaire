@@ -19,7 +19,7 @@
     </div>
   </section>
   <!-- QUIZ AREA -->
-  <section id = quiz class="quiz-area hidden">
+  <section id = "quiz" class="quiz-area hidden">
     <div class="container-fluid g-0 h-100 w-100">
       <div class="row g-0">
         <div class="col-3">
@@ -75,12 +75,17 @@
       </div>
     </div>
   </section>
-  <section id="end-game-area hidden">
-    <div class="container-fluid">
+  <section id="end-game-area" class=" get-center">
+    <div class="container g-0">
       <div class="row">
-        <div class="col">
-          <button type="button" class="buttons play-again">Play Again?</button>
-          <button type="button" class="buttons return-home">Return Home?</button>
+        <div class="col-12">
+          <div class="end-game-container">
+            <h2>You won: <span id="show-users-score"></span></h2>
+            <p>Great job <span id="users-name"></span> on playing the quiz.</p>
+            <p>You can either play again, or return home and view your high scores!</p>
+            <button type="button" class="buttons play-again">Play Again?</button>
+            <button type="button" class="buttons return-home">Return Home?</button>
+          </div>
         </div>
       </div>
     </div>

@@ -92,6 +92,10 @@ h1 {
   background-color: #fff;
 }
 
+#high-scores  {
+  overflow-y: scroll;
+}
+
 .active {
   display: block;
 }
@@ -196,6 +200,23 @@ h1 {
 .life-lines {
  font-size: 22px;
  padding: 12px;
+}
+
+/* END GAME AREA */
+
+.get-center {
+    display: none;
+    align-items: center;
+    height: 100%;
+}
+
+.end-game-container {
+  display: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 500px) {

@@ -132,7 +132,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
-    endQuiz();
+    setTimeout(endQuiz, 1000);
   }
 }
 
@@ -284,8 +284,6 @@ function setHighScore (name, score) {
   console.log(highScores);
 }
 
-
-
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
@@ -294,11 +292,6 @@ function endQuiz () {
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }
-
- 
-
-  
-
   const nameInput = document.getElementById('name-input');
   const userName = nameInput.value;
   const moneyList = document.querySelectorAll('.money');
@@ -306,9 +299,21 @@ function endQuiz () {
   const highScore = reverseMoneyList[moneyIndex].innerHTML;
   console.log(highScore, userName);
   setHighScore(userName, highScore);
-
+  displayQuizMessage();
   
 }
+
+// function to adjust the display of how much the user won, and username used.
+function displayQuizMessage () {
+  const moneyList = document.querySelectorAll('.money');
+  const reverseMoneyList = [...moneyList].reverse();
+  const displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
+  const showUserMoney = document.getElementById('show-users-score')
+  const getUserName = document.getElementById('users-name');
+  getUserName.innerHTML = `${userName}`
+  showUserMoney.innerHTML = `${displayMoneyWon}`;
+}
+
 
 const playAgain = document.querySelector('.play-again');
 const returnHome = document.querySelector('.return-home')

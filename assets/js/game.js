@@ -11,7 +11,7 @@ window.onload = function () {
 
     if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
       quizArea.classList.remove('hidden');
-      inputNameArea.classList.add('hidden');
+      inputNameArea.style.display = 'none'
       userName = user.value; // assign user input to the global userName variable
 
       console.log(userName);
@@ -262,11 +262,20 @@ function bankMoney () {
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    const money = reverseMoneyList[moneyIndex].innerHTML;
-    alert(`${money}`);
+    // Confirm the action with the user before proceeding
+    if (confirmAction()) {
+      // const money = reverseMoneyList[moneyIndex].innerHTML;
+      setTimeout(endQuiz, 1500)
+    }
   } else {
-    alert('Invalid index!');
+    // bank.removeEventListener('click', bankMoney);
+    bank.disabled = true;
   }
+}
+
+function confirmAction () {
+  const confirmation = confirm('Are you sure you want to proceed?')
+  return confirmation;
 }
 
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9

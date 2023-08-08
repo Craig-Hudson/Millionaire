@@ -29,30 +29,79 @@
     <div class="modal-container">
       <dialog id="how-to-play" class="modal">
         <div class="model-content">
-          <span class="close-modal">Close&times;</span>
-          <h2>How to play</h2>
-          <ol>
-            <li></li>
-          </ol>
+          <h2>How to play <span class="close-modal">Close &times;</span></h2>
+          <div class="content-container">
+            <ol>
+              <li>Click start quiz to begin the quiz</li>
+              <li>Enter your name before you begin to play</li>
+              <li>There will be one question, and four possible questions only one will be correct
+                for every question.
+              </li>
+              <li><i class="fa-solid fa-people-group"></i> This is the ask the audience life line,
+              it can only be used once, and be wary it may not always give the correct answer,
+              especially when you're past question 5.</li>
+              </li>
+              <li><i class="fa-solid fa-percent"></i>This is the 50/50 life line, it will randomly take
+                away to incorrect answers, again this can only be used once.
+              </li>
+              <li><i class="fa-sharp fa-solid fa-phone"></i> This is the phone a friend life line, 
+                this life life can only be used once, and will also not  give the correct answers the
+                further along the quiz you go.
+              </li>
+              <li><i class="fa-solid fa-building-columns"></i> This is the bank option, if you select this option
+              the quiz will end, only use this option if you can't answer the question and have used all your 
+              life lines.
+              </li>
+            </ol>
+          </div>
         </div>
       </dialog>
       <!--High score modal-->
       <dialog id="high-scores" class="modal">
         <div class="modal-content">
           <span class="close-modal">close &times;</span>
-          <ol id="highscores-list"></ol>
+          <h2>High Scores</h2>
+          <h3>Top 50</h3>
+          <ol id="highscores-list">
+            
+          </ol>
         </div>
       </dialog>
       <!--Contact us modal-->
       <dialog id="contact-us" class="modal">
         <div class="modal-content">
-          <span class="close-modal">Close&times;</span>
-          <p>form to go here</p>
+          <div class="div">
+          <h2>Contact us</h2>
+          <span class="close-modal">Close &times;</span>
+          </div>
+          <form>
+            <div>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+              <label for="email">Email Address:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+              <label for="phone">Phone Number:</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
         </div>
       </dialog>
     </div>
   </section>
   <footer></footer>
+  <script src="https://kit.fontawesome.com/67d3e93815.js" crossorigin="anonymous"></script>
+
   <script src="assets/js/home.js"></script>
   <!-- <script src="assets/js/game.js"></script> -->
 </body>

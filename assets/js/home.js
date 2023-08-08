@@ -63,16 +63,19 @@ quizHtmlPage.addEventListener('click', function() {
 
 // https://www.youtube.com/watch?v=jfOv18lCMmw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=10
 // tutorial link above to help implement and make my own adjustments
-const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-console.log(highScores);
 const highScoresList = document.getElementById('highscores-list');
-
+const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 function updateHighScores() {
-  highScoresList.innerHTML = ''; // Clear the previous list items
+  highScoresList.innerHTML = '';
 
-  highScores.forEach((score) => {
+  
+  // Sort the high scores based on the score property
+  highScores.sort((a, b) => parseInt(b.score) - parseInt(a.score));
+
+  // Display the sorted high scores in the HTML
+  highScores.forEach(score => {
     const listItem = document.createElement('li');
-    listItem.innerText = `${score.userName} - ${score.score}`;
+    listItem.innerText = score.userName + ' - ' + score.score;
     highScoresList.appendChild(listItem);
   });
 }

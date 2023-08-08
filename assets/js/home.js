@@ -67,8 +67,9 @@ const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 console.log(highScores);
 const highScoresList = document.getElementById('highscores-list');
 
-function updateHighScores () {
-  // Iterate over the high scores array and generate HTML list items
+function updateHighScores() {
+  highScoresList.innerHTML = ''; // Clear the previous list items
+
   highScores.forEach((score) => {
     const listItem = document.createElement('li');
     listItem.innerText = `${score.userName} - ${score.score}`;

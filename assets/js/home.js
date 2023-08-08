@@ -68,9 +68,6 @@ console.log(highScores);
 const highScoresList = document.getElementById('highscores-list');
 
 function updateHighScores () {
-  // Clear previously displayed high scores
-  // highScoresList.innerHTML = '';
-
   // Iterate over the high scores array and generate HTML list items
   highScores.forEach((score) => {
     const listItem = document.createElement('li');

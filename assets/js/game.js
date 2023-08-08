@@ -176,6 +176,25 @@ function incrementScore () {
       break; // exit the loop once we find the current score
     }
   }
+  
+}
+
+function safeHaven () {
+  const moneyList = document.querySelectorAll('.money');
+  const reverseMoneyList = [...moneyList].reverse();
+  console.log(reverseMoneyList);
+  if (score < 5) {
+    moneyIndex[-1] =  reverseMoneyList
+    
+  } else if (score < 10) {
+    moneyIndex[4] = reverseMoneyList;
+
+  } else if (score < 15) {
+    moneyIndex[9] = reverseMoneyList
+    
+  } else {
+    moneyIndex[15] = reverseMoneyList
+  }
 }
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
@@ -281,22 +300,32 @@ function confirmAction () {
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
 // tutorial video above and made my own adjustments
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-function setHighScore (name, score) {
+console.log(highScores);
+
+function setHighScore(name, score) {
   const highScoreObject = {
     userName: name,
-    score
+    score: parseInt(score, 10)
   };
 
   highScores.push(highScoreObject);
+  highScores.sort((a, b) => b.score - a.score);
+
+  if (highScores.length > 50) {
+    highScores.splice(50);
+  }
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log(highScores);
+
+  // Return the updated high scores array
+  return highScores;
 }
 
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
-
+  
   if (hideQuiz && endGameArea) {
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
@@ -309,7 +338,6 @@ function endQuiz () {
   console.log(highScore, userName);
   setHighScore(userName, highScore);
   displayQuizMessage();
-  
 }
 
 // function to adjust the display of how much the user won, and username used.
@@ -322,7 +350,6 @@ function displayQuizMessage () {
   getUserName.innerHTML = `${userName}`
   showUserMoney.innerHTML = `${displayMoneyWon}`;
 }
-
 
 const playAgain = document.querySelector('.play-again');
 const returnHome = document.querySelector('.return-home')

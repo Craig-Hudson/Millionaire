@@ -328,9 +328,9 @@ const playAgain = document.querySelector('.play-again');
 const returnHome = document.querySelector('.return-home')
 document.addEventListener('click', function (event) {
   if (event.target === playAgain) {
-    window.location.href = '/quiz.html';
+    window.location.href = 'quiz.html';
   } else if (event.target === returnHome) {
-    window.location.href = '/index.html'
+    window.location.href = 'index.html';
   }
 })
 // Call endQuiz() when the quiz is over

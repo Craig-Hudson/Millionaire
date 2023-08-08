@@ -179,23 +179,23 @@ function incrementScore () {
   
 }
 
-function safeHaven () {
-  const moneyList = document.querySelectorAll('.money');
-  const reverseMoneyList = [...moneyList].reverse();
-  console.log(reverseMoneyList);
-  if (score < 5) {
-    moneyIndex[-1] =  reverseMoneyList
+// function safeHaven () {
+//   const moneyList = document.querySelectorAll('.money');
+//   const reverseMoneyList = [...moneyList].reverse();
+//   console.log(reverseMoneyList);
+//   if (score < 5) {
+//     moneyIndex[-1] =  reverseMoneyList
     
-  } else if (score < 10) {
-    moneyIndex[4] = reverseMoneyList;
+//   } else if (score < 10) {
+//     moneyIndex[4] = reverseMoneyList;
 
-  } else if (score < 15) {
-    moneyIndex[9] = reverseMoneyList
+//   } else if (score < 15) {
+//     moneyIndex[9] = reverseMoneyList
     
-  } else {
-    moneyIndex[15] = reverseMoneyList
-  }
-}
+//   } else {
+//     moneyIndex[15] = reverseMoneyList
+//   }
+// }
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
 // code for some of this function was taken from the link above.
@@ -300,32 +300,22 @@ function confirmAction () {
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
 // tutorial video above and made my own adjustments
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-console.log(highScores);
-
-function setHighScore(name, score) {
+function setHighScore (name, score) {
   const highScoreObject = {
     userName: name,
-    score: parseInt(score, 10)
+    score
   };
-
+  highScores.sort((a, b) => parseInt(b.score) - parseInt(a.score));
   highScores.push(highScoreObject);
-  highScores.sort((a, b) => b.score - a.score);
-
-  if (highScores.length > 50) {
-    highScores.splice(50);
-  }
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log(highScores);
-
-  // Return the updated high scores array
-  return highScores;
 }
 
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
-  
+ 
   if (hideQuiz && endGameArea) {
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
@@ -349,6 +339,7 @@ function displayQuizMessage () {
   const getUserName = document.getElementById('users-name');
   getUserName.innerHTML = `${userName}`
   showUserMoney.innerHTML = `${displayMoneyWon}`;
+ 
 }
 
 const playAgain = document.querySelector('.play-again');

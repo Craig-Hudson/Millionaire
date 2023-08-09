@@ -300,16 +300,20 @@ function confirmAction () {
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
 // tutorial video above and made my own adjustments
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-function setHighScore (name, score) {
+
+function setHighScore(name, score) {
   const highScoreObject = {
     userName: name,
-    score
+    score: score
   };
-  highScores.sort((a, b) => parseInt(b.score) - parseInt(a.score));
+
   highScores.push(highScoreObject);
 
+  // Sort the highScores array by score in descending order
+  highScores.sort((a, b) => b.score - a.score);
+  highScores.splice(5);
+
   localStorage.setItem('highScores', JSON.stringify(highScores));
-  console.log(highScores);
 }
 
 function endQuiz () {

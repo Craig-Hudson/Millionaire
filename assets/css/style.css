@@ -23,11 +23,14 @@ header {
   height: 20vh;
 }
 
-h1 {
+
+
+ .page-title {
   color: whitesmoke;
   letter-spacing: 2px;
   font-size: 220%;
   margin-top: 40px;
+  text-decoration: underline orange;
 }
 
 /*-----Logo styling and positioning-----*/
@@ -37,9 +40,9 @@ h1 {
 }
 
 .logo img {
-  position: absolute;
-  width: 150px;
-  height: 150px;
+  position: fixed;
+  width: 120px;
+  height: 120px;
   margin-right: 20px;
   top: 0;
   padding-top: 20px;
@@ -50,7 +53,6 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
   height: 80vh;
 }
 
@@ -83,6 +85,7 @@ h1 {
   display: none;
   color: whitesmoke;
   position: absolute;
+  text-align: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -97,24 +100,33 @@ h1 {
   width: 20px;
 }
 
-.model-content h2{
+.modal-heading {
   text-align: center;
   cursor: pointer;
+  text-decoration: underline orange;
+  padding-bottom: 15px;
 }
+
+
 
 .content-container ol {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.content-container ol > li {
-  padding: 5px 0 5px 0;
-}
-  
-  
 
+  
 .close-modal {
-  float: right;
+  right: 0;
+  position: fixed;
+  margin-right: 10px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #high-scores  {
@@ -232,6 +244,7 @@ h1 {
 .life-lines-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin: 0;
   
@@ -308,8 +321,158 @@ h1 {
   align-items: center;
 }
 
-@media screen and (max-width: 500px) {
+
+/* media screen under 1000px */
+@media screen and (max-width: 1000px) {
+  .life-lines-container {
+    padding-bottom: 0;
+  }
+
+  .life-lines-container i {
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+  }
+
+  .quiz-scores {
+    padding-left: 16px;
+  }
+
+  .quiz-body {
+    height: 70vh;
+  }
+
+  .answer-button {
+    height: 65px;
+    width: 220px;
+  }
+}
+
+/* MEDIA SCREEN UNDER 800PX */
+
+@media screen and (max-width: 800px) {
+/* PAGE TITLE AND LOGO UNDER 800PX */
+  .page-title {
+    font-size: 160%;
+  }
+
+  .logo img {
+    width: 100px;
+    height: 100px;
+    margin-top: 5px;
+}
+  .page-title {
+    font-size: 190%;
+}
+/* BUTTONS UNDER 800PX */
+  .buttons {
+    width: 25%;
+}
+/* MODAL UNDER 800PX */
+  .modal {
+    width: 80%;
+    overflow: scroll;
+    height: 80%;
+  }
+
+  .modal-heading {
+    font-size: 120%;
+  }
+
+  .close-modal {
+    font-size: 70%;
+    margin-top: 5px;
+  }
+
+  .quiz-score-mobile {
+    display: none;
+  }
+
+  .mobile-width {
+    width: 100% !important;
+  }
+
+  .quiz-body {
+    width: 80%;
+    height: 80vh;
+  }
+
   .columns {
     flex-direction: column;
   }
+}
+
+/* MEDIA SCREEN UNDER 550PX */
+@media screen and (max-width: 550px) {
+/* BUTTONS UNDER  550PX*/
+  .buttons {
+    width: 25%;
+    font-size: 14px;
+  }
+
+  .answer-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  /* H1 AND LOGO IMAGE AND POSITION UNDER 550PX */
+
+  .page-title {
+    letter-spacing: 1px;
+    font-size: 150%;
+    padding-right: 15px;
+  }
+
+  .logo img {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+  
+    .quiz-body {
+      font-size: 90%;
+    }
+  /* INPUT BOX SECTION BEFORE QUIZ START */
+ 
+  .input-form-position {
+    font-size: 65%;
+  }
+}
+
+/* MEDIA SCREEN UNDER 350PX */
+@media screen and (max-width: 350px) {
+  .buttons {
+    width: 35%;
+  }
+
+  .page-title {
+    letter-spacing: 1px;
+    font-size: 120%;
+    padding-right: 25px;
+}
+
+  .input-form-position {
+     font-size: 50%;
+}
+  
+  .answer-button {
+    width: 190px;
+    height: 50px;
+  }
+
+  .quiz-question {
+    font-size: 130%;
+  }
+
+  .quiz-body {
+  font-size: 80%;
+}
+
 }

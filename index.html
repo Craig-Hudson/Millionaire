@@ -9,7 +9,7 @@
 <body>
   <header>
     <!--Page Title-->
-    <h1>Millionaire Quiz</h1>
+    <h1 class="page-title">Millionaire Quiz</h1>
   </header>
   <section id="logo-image">
     <!--Logo-->
@@ -29,7 +29,7 @@
     <div class="modal-container">
       <dialog id="how-to-play" class="modal">
         <div class="model-content">
-          <h2>How to play <span class="close-modal">Close &times;</span></h2>
+          <h2 class="modal-heading">How to play <span class="close-modal">Close &times;</span></h2>
           <div class="content-container">
             <ol>
               <li>Click start quiz to begin the quiz</li>
@@ -59,22 +59,18 @@
       <!--High score modal-->
       <dialog id="high-scores" class="modal">
         <div class="modal-content">
-          <span class="close-modal">close &times;</span>
-          <h2>High Scores</h2>
+          <h2 class="modal-heading">High Scores  <span class="close-modal">close &times;</span></h2>
           <h3>Top 50</h3>
           <ol id="highscores-list">
-            
+
           </ol>
         </div>
       </dialog>
       <!--Contact us modal-->
       <dialog id="contact-us" class="modal">
         <div class="modal-content">
-          <div class="div">
-          <h2>Contact us</h2>
-          <span class="close-modal">Close &times;</span>
-          </div>
-          <form>
+         <h2 class="modal-heading">Contact us<span class="close-modal">Close &times;</span></h2>
+         <form>
             <div>
               <label for="name">Name:</label>
               <input type="text" id="name" name="name" required>
@@ -101,8 +97,8 @@
   </section>
   <footer></footer>
   <script src="https://kit.fontawesome.com/67d3e93815.js" crossorigin="anonymous"></script>
-
   <script src="assets/js/home.js"></script>
+  
   <!-- <script src="assets/js/game.js"></script> -->
 </body>
 </html>

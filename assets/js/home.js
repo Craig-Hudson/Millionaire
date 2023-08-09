@@ -1,9 +1,7 @@
 'use strict';
-
-document.addEventListener('DOMContentLoaded', () => {
-  updateHighScores();
-});
-
+// window.onload = function () {
+//   localStorage.clear();
+// }
 const openBtnModals = document.querySelectorAll('.open-modal');
 const modalContainer = document.querySelector('.modal-container');
 const closeModals = document.querySelectorAll('.close-modal');
@@ -15,6 +13,10 @@ openBtnModals.forEach((btn) => {
     const modal = document.getElementById(modalId);
     modalContainer.classList.add('active');
     modal.classList.add('active');
+    if (modalId === 'high-scores') {
+      console.log('highscores')
+      updateHighScores();
+    }
   });
 });
 
@@ -29,7 +31,6 @@ function closeModal() {
   });
 }
 
-
 // close modals when user clicks the x or close
 closeModals.forEach((btn) => {
   btn.addEventListener('click', closeModal);
@@ -41,7 +42,6 @@ modalContainer.addEventListener('click', function(event) {
     closeModal();
   }
 });
-
 
 // close modals when user presses escape key
 document.addEventListener('keydown', function(event) {
@@ -64,18 +64,15 @@ quizHtmlPage.addEventListener('click', function() {
 // https://www.youtube.com/watch?v=jfOv18lCMmw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=10
 // tutorial link above to help implement and make my own adjustments
 const highScoresList = document.getElementById('highscores-list');
+// Get high scores from local storage
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+
 function updateHighScores() {
   highScoresList.innerHTML = '';
-
-  
-  // Sort the high scores based on the score property
-  highScores.sort((a, b) => parseInt(b.score) - parseInt(a.score));
-
-  // Display the sorted high scores in the HTML
+ // Display the sorted high scores in the HTML
   highScores.forEach(score => {
     const listItem = document.createElement('li');
-    listItem.innerText = score.userName + ' - ' + score.score;
+    listItem.innerText = score.userName + ' - ' + '£' + score.score;
     highScoresList.appendChild(listItem);
   });
 }

@@ -114,6 +114,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
+    // openScoresMobile();
     incrementMoneyIndex(moneyIndex);
     incrementScore(score);
     setTimeout(nextQuestion, 1500);
@@ -355,7 +356,25 @@ document.addEventListener('click', function (event) {
     window.location.href = 'index.html';
   }
 })
-// Call endQuiz() when the quiz is over
+
+// FUNCTION TO OPEN AND CLOSE SIDE BAR
+document.addEventListener('DOMContentLoaded', function () {
+  const sidePanelToggle = document.getElementById('side-panel-toggle');
+  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  const contentMain = document.querySelector('.content.main');
+
+  sidePanelToggle.addEventListener('click', function () {
+    scoreWrapperMobile.classList.toggle('side-panel-open');
+    scoreWrapperMobile.classList.toggle('side-panel-closed');
+    // Toggle the visibility of the content
+    contentMain.classList.toggle('hidden');
+    // Toggle visibilty of side bar
+    if (window.innerWidth > 800) {
+      scoreWrapperMobile.classList.add('hidden')
+    }
+  });
+});
+
 
 // Call API for easy questions initially
 callApi(easyQuestions);

@@ -1,17 +1,19 @@
 'use strict';
 let userName; // declare the global userName variable
 
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function () {
   const quizArea = document.getElementById('quiz');
   const user = document.getElementById('name-input');
   const inputNameArea = document.querySelector('.input-name-section');
   const submitButton = document.getElementById('submit-button');
+  const sidePanel = document.querySelector('.side-panel');
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
     if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
       quizArea.classList.remove('hidden');
       inputNameArea.style.display = 'none'
+      sidePanel.classList.remove('hidden');
       userName = user.value; // assign user input to the global userName variable
 
       console.log(userName);
@@ -19,7 +21,33 @@ window.onload = function () {
       alert('Please enter a name between 4-12 characters long.')
     }
   });
-};
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sidePanelToggle = document.getElementById('side-panel-toggle');
+  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  const contentMain = document.querySelector('.content.main');
+  const iconOpen = document.querySelector('.icon-open');
+  const inputNameSection = document.querySelector('.input-name-section');
+  const quizSection = document.getElementById('quiz');
+  const sidePanel = document.querySelector('.side-panel')
+  
+  // Output the initial window width for debugging
+  console.log('Initial window width:', window.innerWidth);
+
+  sidePanelToggle.addEventListener('click', function () {
+    scoreWrapperMobile.classList.toggle('side-panel-open');
+    scoreWrapperMobile.classList.toggle('side-panel-closed');
+    // Toggle the visibility of the content
+    contentMain.classList.toggle('hidden');
+  });
+  
+  // Hide the side panel toggle when the user is in the input name section
+  if (inputNameSection) {
+    sidePanel.classList.add('hidden');
+  } 
+
+});
 
 console.log(userName);
 // API link for question 1-5
@@ -63,6 +91,7 @@ function getQuestion () {
   if (questionIndex < data.results.length) {
     question.innerHTML = data.results[questionIndex].question;
   }
+  
   getQuestionNumber();
 }
 
@@ -207,22 +236,28 @@ function sanitizeAnswer (answer) {
 }
 
 // grab
-const askTheAudience = document.getElementById('ask-the-audience');
-askTheAudience.addEventListener('click', handleAskTheAudience);
+const askTheAudience = document.querySelectorAll('.audience');
+
+askTheAudience.forEach(element => {
+  element.addEventListener('click', handleAskTheAudience);
+});
 
 function handleAskTheAudience (event) {
   const correctAnswer = data.results[questionIndex].correct_answer;
   const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
   const incorrectAnswers = data.results[questionIndex].incorrect_answers;
   const sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
+  
   if (questionIndex >= 0 && score < 5) {
     alert(`The correct answer is ${sanitizedCorrectAnswer}`);
   } else if (questionIndex >= 0 && score >= 5) {
-    alert(`The answer is either ${sanitizedCorrectAnswer}/ or ${sanitizedIncorrectAnswers}`)
+    alert(`The answer is either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswers}`);
   }
 
-  askTheAudience.disabled = true; // Disable the button
-  askTheAudience.removeEventListener('click', handleAskTheAudience); // Remove the event listener
+  askTheAudience.forEach(element => {
+    element.disabled = true; // Disable all audience buttons
+    element.removeEventListener('click', handleAskTheAudience); // Remove event listener from all audience buttons
+  });
 }
 
 function getRandomIndex (arr) {
@@ -299,10 +334,10 @@ function confirmAction () {
 }
 
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
-// tutorial video above and made my own adjustments
+// tutorial video above and made my own adjustments to set highscores into local storage
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
-function setHighScore(name, score) {
+function setHighScore (name, score) {
   const highScoreObject = {
     userName: name,
     score: score
@@ -356,25 +391,6 @@ document.addEventListener('click', function (event) {
     window.location.href = 'index.html';
   }
 })
-
-// FUNCTION TO OPEN AND CLOSE SIDE BAR
-document.addEventListener('DOMContentLoaded', function () {
-  const sidePanelToggle = document.getElementById('side-panel-toggle');
-  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
-  const contentMain = document.querySelector('.content.main');
-
-  sidePanelToggle.addEventListener('click', function () {
-    scoreWrapperMobile.classList.toggle('side-panel-open');
-    scoreWrapperMobile.classList.toggle('side-panel-closed');
-    // Toggle the visibility of the content
-    contentMain.classList.toggle('hidden');
-    // Toggle visibilty of side bar
-    if (window.innerWidth > 800) {
-      scoreWrapperMobile.classList.add('hidden')
-    }
-  });
-});
-
 
 // Call API for easy questions initially
 callApi(easyQuestions);

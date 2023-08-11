@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 let userName; // declare the global userName variable
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
       quizArea.classList.remove('hidden');
-      inputNameArea.style.display = 'none'
+      inputNameArea.style.display = 'none';
       sidePanel.classList.remove('hidden');
       userName = user.value; // assign user input to the global userName variable
 
       console.log(userName);
     } else {
-      alert('Please enter a name between 4-12 characters long.')
+      alert('Please enter a name between 4-12 characters long.');
     }
   });
 });
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const inputNameSection = document.querySelector('.input-name-section');
  
-  const sidePanel = document.querySelector('.side-panel')
+  const sidePanel = document.querySelector('.side-panel');
   
   // Output the initial window width for debugging
   console.log('Initial window width:', window.innerWidth);
@@ -65,7 +65,7 @@ let scoreMobile = 0;
 let questionIndex = 0;
 // money index to start at minus 1
 let moneyIndex = -1;
-let questionNumber = 1
+let questionNumber = 1;
 
 async function callApi (urlApi) {
   try {
@@ -99,7 +99,7 @@ function getQuestion () {
 function getQuestionNumber () {
   const questionNumberId = document.getElementById('question-number');
   questionNumberId.innerText = questionNumber;
-  questionNumber++
+  questionNumber++;
 }
 
 function getAnswers () {
@@ -167,6 +167,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
+    determineMoneyWon();
     setTimeout(endQuiz, 1000);
   }
 }
@@ -188,7 +189,7 @@ function nextQuestion () {
     callApi(mediumQuestions);
   } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
   //  Call hard question api when use reaches question 10
-    callApi(hardQuestions)
+    callApi(hardQuestions);
   } else if (score === 15) {
     alert('Congratulation you won £1,000,000');
   }
@@ -237,13 +238,9 @@ function incrementScoreMobile () {
   }
 }
 
-function safeHaven() {
-  
-  const scoresDesktop = document.querySelectorAll('.score');
-  const scoresDesktopReversed = Array.from(scoresDesktop).reverse();
-  const scoresMobile = document.querySelectorAll('.score-mobile');
-  const scoreMobileReverse = Array.from(scoresMobile).reverse();
-
+function safeHaven () {
+  const scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
+  const scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
   console.log('Scores Desktop Reversed:', scoresDesktopReversed);
   console.log('Score:', score);
   console.log('Score Mobile:', scoreMobile);
@@ -253,7 +250,7 @@ function safeHaven() {
     const targetElement5 = scoresDesktopReversed[4];
     const targetElementMobile5 = scoreMobileReverse[4];
     console.log('Target Element:', targetElementMobile5);
-    console.log('mobile score', scoreMobile)
+    console.log('mobile score', scoreMobile);
     targetElement5.classList.add('red');
     targetElementMobile5.classList.add('red');
   } else if (score >= 10 || scoreMobile >= 10) {
@@ -278,7 +275,6 @@ function sanitizeAnswer (answer) {
 
 
 const askTheAudience = document.querySelectorAll('.audience');
-
 askTheAudience.forEach(element => {
   element.addEventListener('click', handleAskTheAudience);
 });
@@ -309,8 +305,8 @@ function getRandomIndex (arr) {
 let fiftyFiftyUsed = false;
 const fiftyFifty = document.querySelectorAll('.fifty-fifty');
 fiftyFifty.forEach(Element => {
-  Element.addEventListener('click', fiftyFiftyLifeLine)
-})
+  Element.addEventListener('click', fiftyFiftyLifeLine);
+});
 function fiftyFiftyLifeLine () {
   if (!fiftyFiftyUsed) {
     const answerButtons = document.querySelectorAll('.answer-button');
@@ -325,13 +321,13 @@ function fiftyFiftyLifeLine () {
       fiftyFifty.disabled = true; // disable 50/50 from being used after the user has used it once.
     });
   }
-};
+}
 
 let PhoneAFriendUsed = false;
 const phoneAFriend = document.querySelectorAll('.phone-a-friend');
 phoneAFriend.forEach(Element => {
-  Element.addEventListener('click', phoneAFriendLifeLine)
-})
+  Element.addEventListener('click', phoneAFriendLifeLine);
+});
 // PhoneAFriend.addEventListener('click', function () {
 function phoneAFriendLifeLine () {
   if (!PhoneAFriendUsed) {
@@ -355,13 +351,13 @@ function phoneAFriendLifeLine () {
 }
 
 function incrementMoneyIndex () {
-  moneyIndex++
+  moneyIndex++;
 }
 
-const bank = document.querySelectorAll('.bank')
+const bank = document.querySelectorAll('.bank');
 bank.forEach(Element => {
   Element.addEventListener('click', bankMoney);
-})
+});
 
 function bankMoney () {
   const moneyList = document.querySelectorAll('.money');
@@ -370,7 +366,7 @@ function bankMoney () {
     // Confirm the action with the user before proceeding
     if (confirmAction()) {
       // const money = reverseMoneyList[moneyIndex].innerHTML;
-      setTimeout(endQuiz, 1500)
+      setTimeout(endQuiz, 1500);
     }
   } else {
     // bank.removeEventListener('click', bankMoney);
@@ -379,7 +375,7 @@ function bankMoney () {
 }
 
 function confirmAction () {
-  const confirmation = confirm('Are you sure you want to proceed?')
+  const confirmation = confirm('Are you sure you want to proceed?');
   return confirmation;
 }
 
@@ -405,9 +401,9 @@ function setHighScore (name, score) {
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
-  const sidePanel = document.querySelector('.side-panel')
+  const sidePanel = document.querySelector('.side-panel');
   if (hideQuiz && endGameArea) {
-    sidePanel.classList.add('hidden')
+    sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }
@@ -416,6 +412,7 @@ function endQuiz () {
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
   const highScore = reverseMoneyList[moneyIndex].innerHTML;
+  console.log(highScore)
   console.log(highScore, userName);
   setHighScore(userName, highScore);
   displayQuizMessage();
@@ -426,22 +423,36 @@ function displayQuizMessage () {
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
   const displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
-  const showUserMoney = document.getElementById('show-users-score')
+  const showUserMoney = document.getElementById('show-users-score');
   const getUserName = document.getElementById('users-name');
-  getUserName.innerHTML = `${userName}`
-  showUserMoney.innerHTML = `${displayMoneyWon}`;
+  getUserName.innerHTML = `${userName}`;
+  showUserMoney.innerHTML = `£${displayMoneyWon}`;
+  if (moneyIndex === -1) {
+    getUserName.innerHTML = `Better luck next time ${userName}`; 
+    showUserMoney.innerHTML = '0'
+  }
  
 }
 
 const playAgain = document.querySelector('.play-again');
-const returnHome = document.querySelector('.return-home')
+const returnHome = document.querySelector('.return-home');
 document.addEventListener('click', function (event) {
   if (event.target === playAgain) {
     window.location.href = 'quiz.html';
   } else if (event.target === returnHome) {
     window.location.href = 'index.html';
   }
-})
+});
 
+
+function determineMoneyWon () {
+  if (score < 5 || scoreMobile < 5) {
+    moneyIndex = -1;
+  } else if (score < 10 || scoreMobile < 10) {
+    moneyIndex = 4;
+  } else if ( score < 15 || scoreMobile < 15) {
+    moneyIndex = 9;
+  }
+}
 // Call API for easy questions initially
 callApi(easyQuestions);

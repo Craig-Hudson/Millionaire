@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidePanelToggle = document.getElementById('side-panel-toggle');
   const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   const contentMain = document.querySelector('.content.main');
-  const iconOpen = document.querySelector('.icon-open');
+
   const inputNameSection = document.querySelector('.input-name-section');
-  const quizSection = document.getElementById('quiz');
+ 
   const sidePanel = document.querySelector('.side-panel')
   
   // Output the initial window width for debugging
@@ -61,6 +61,7 @@ const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficult
 // const mostRecentHighScores = JSON.parse(localStorage.getItem('highScores')) || [];
 let data = {};
 let score = 0;
+let scoreMobile = 0;
 let questionIndex = 0;
 // money index to start at minus 1
 let moneyIndex = -1;
@@ -144,8 +145,12 @@ function checkAnswer () {
       answerButtons[j].disabled = true;
     }
     // openScoresMobile();
+    if (window.innerWidth <= 800) {
+      incrementScoreMobile();
+    } else {
+      incrementScore();
+    }
     incrementMoneyIndex(moneyIndex);
-    incrementScore(score);
     setTimeout(nextQuestion, 1500);
   } else {
     this.style.background = 'red';
@@ -178,10 +183,10 @@ function nextQuestion () {
     // Continue to the next question if available
     getQuestion();
     getAnswers();
-  } else if (questionIndex === data.results.length && score === 5) {
+  } else if ((questionIndex === data.results.length) && (score === 5 || scoreMobile === 5)) {
     //  Call medium question api when user reaches question 5
     callApi(mediumQuestions);
-  } else if (questionIndex === data.results.length && score === 10) {
+  } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
   //  Call hard question api when use reaches question 10
     callApi(hardQuestions)
   } else if (score === 15) {
@@ -206,7 +211,27 @@ function incrementScore () {
       break; // exit the loop once we find the current score
     }
   }
-  
+}
+
+function incrementScoreMobile () {
+  if (window.innerWidth <= 800) {
+    // incrementScore
+    scoreMobile++;
+    // get .score-mobile class in the mobile scores section
+    const scoreListMobile = document.querySelectorAll('.quiz-scores-mobile .score-mobile');
+    // to get current index
+    const currentScoreIndex = scoreListMobile.length - scoreMobile;
+    // iterate in reverse to start at the last element in the currentScore class
+    for (let i = scoreListMobile.length - 1; i >= 0; i--) {
+      const scoreItem = scoreListMobile[i];
+      scoreItem.classList.remove('current-score');
+
+      if (i === currentScoreIndex) {
+        scoreItem.classList.add('current-score');
+        break; // exit the loop once we find the current score
+      }
+    }
+  }
 }
 
 // function safeHaven () {
@@ -266,8 +291,11 @@ function getRandomIndex (arr) {
 }
 
 let fiftyFiftyUsed = false;
-const fiftyFifty = document.getElementById('fifty-fifty');
-fiftyFifty.addEventListener('click', function () {
+const fiftyFifty = document.querySelectorAll('.fifty-fifty');
+fiftyFifty.forEach(Element => {
+  Element.addEventListener('click', fiftyFiftyLifeLine)
+})
+function fiftyFiftyLifeLine () {
   if (!fiftyFiftyUsed) {
     const answerButtons = document.querySelectorAll('.answer-button');
     const incorrectAnswers = data.results[questionIndex].incorrect_answers;
@@ -281,11 +309,15 @@ fiftyFifty.addEventListener('click', function () {
       fiftyFifty.disabled = true; // disable 50/50 from being used after the user has used it once.
     });
   }
-});
+};
 
 let PhoneAFriendUsed = false;
-const PhoneAFriend = document.getElementById('phone-a-friend');
-PhoneAFriend.addEventListener('click', function () {
+const phoneAFriend = document.querySelectorAll('.phone-a-friend');
+phoneAFriend.forEach(Element => {
+  Element.addEventListener('click', phoneAFriendLifeLine)
+})
+// PhoneAFriend.addEventListener('click', function () {
+function phoneAFriendLifeLine () {
   if (!PhoneAFriendUsed) {
     const correctAnswer = data.results[questionIndex].correct_answer;
     const incorrectAnswers = data.results[questionIndex].incorrect_answers;
@@ -295,16 +327,16 @@ PhoneAFriend.addEventListener('click', function () {
     const correctAnswerArray = [correctAnswer];
     const concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     const oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
-    if (questionIndex >= 0 && score < 5) {
+    if ((questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5)) {
       alert(`Hi ${userName}, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
-    } else if (questionIndex >= 0 && score >= 5 && score < 10) {
+    } else if ((questionIndex >= 0 && score >= 5 && score < 10) || (questionIndex >= 0 && scoreMobile >= 5 && scoreMobile < 10)) {
       alert(`Hi Craig I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}`);
-    } else if (questionIndex >= 0 && score >= 10) {
+    } else if ((questionIndex >= 0 && score >= 10) || (questionIndex >= 0 && scoreMobile >= 10)) {
       alert(`Hi ${userName} I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
     }
   }
   PhoneAFriendUsed = true; // disables the use of the phone a friend lifeline once the user has used it once.
-})
+}
 
 function incrementMoneyIndex () {
   moneyIndex++

@@ -197,7 +197,8 @@ function nextQuestion () {
 function incrementScore () {
   // incrementScore
   score++;
-  // get .score class
+  // function to display users save haven / minimum amount of money won
+  safeHaven();
   const scoreList = document.querySelectorAll('.score');
   // to get current index
   const currentScoreIndex = scoreList.length - score;
@@ -217,6 +218,8 @@ function incrementScoreMobile () {
   if (window.innerWidth <= 800) {
     // incrementScore
     scoreMobile++;
+    // function to display users save haven / minimum amount of money won
+    safeHaven();
     // get .score-mobile class in the mobile scores section
     const scoreListMobile = document.querySelectorAll('.quiz-scores-mobile .score-mobile');
     // to get current index
@@ -234,23 +237,36 @@ function incrementScoreMobile () {
   }
 }
 
-// function safeHaven () {
-//   const moneyList = document.querySelectorAll('.money');
-//   const reverseMoneyList = [...moneyList].reverse();
-//   console.log(reverseMoneyList);
-//   if (score < 5) {
-//     moneyIndex[-1] =  reverseMoneyList
-    
-//   } else if (score < 10) {
-//     moneyIndex[4] = reverseMoneyList;
+function safeHaven() {
+  
+  const scoresDesktop = document.querySelectorAll('.score');
+  const scoresDesktopReversed = Array.from(scoresDesktop).reverse();
+  const scoresMobile = document.querySelectorAll('.score-mobile');
+  const scoreMobileReverse = Array.from(scoresMobile).reverse();
 
-//   } else if (score < 15) {
-//     moneyIndex[9] = reverseMoneyList
-    
-//   } else {
-//     moneyIndex[15] = reverseMoneyList
-//   }
-// }
+  console.log('Scores Desktop Reversed:', scoresDesktopReversed);
+  console.log('Score:', score);
+  console.log('Score Mobile:', scoreMobile);
+
+  // Check if the user's score is 6 and there are at least 5 elements in the scoresDesktopReversed array
+  if ((score >= 5 && score < 10 ) || (scoreMobile >= 5 && scoreMobile < 10)) {
+    const targetElement5 = scoresDesktopReversed[4];
+    const targetElementMobile5 = scoreMobileReverse[4];
+    console.log('Target Element:', targetElementMobile5);
+    console.log('mobile score', scoreMobile)
+    targetElement5.classList.add('red');
+    targetElementMobile5.classList.add('red');
+  } else if (score >= 10 || scoreMobile >= 10) {
+    const targetElement5 = scoresDesktopReversed[4];
+    const targetElementMobile5 = scoreMobileReverse[4];
+    targetElement5.classList.remove('red');
+    targetElementMobile5.classList.remove('red');
+    const targetElement10 = scoresDesktopReversed[9];
+    const targetElementMobile10 = scoreMobileReverse[9];
+    targetElement10.classList.add('red');
+    targetElementMobile10.classList.add('red');
+  }
+}
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
 // code for some of this function was taken from the link above.
@@ -260,14 +276,14 @@ function sanitizeAnswer (answer) {
   return tempElement.textContent.replace(/[\u2018\u2019]/g, "'");
 }
 
-// grab
+
 const askTheAudience = document.querySelectorAll('.audience');
 
 askTheAudience.forEach(element => {
   element.addEventListener('click', handleAskTheAudience);
 });
 
-function handleAskTheAudience (event) {
+function handleAskTheAudience () {
   const correctAnswer = data.results[questionIndex].correct_answer;
   const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
   const incorrectAnswers = data.results[questionIndex].incorrect_answers;
@@ -342,8 +358,10 @@ function incrementMoneyIndex () {
   moneyIndex++
 }
 
-const bank = document.getElementById('bank')
-bank.addEventListener('click', bankMoney);
+const bank = document.querySelectorAll('.bank')
+bank.forEach(Element => {
+  Element.addEventListener('click', bankMoney);
+})
 
 function bankMoney () {
   const moneyList = document.querySelectorAll('.money');
@@ -387,8 +405,9 @@ function setHighScore (name, score) {
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
- 
+  const sidePanel = document.querySelector('.side-panel')
   if (hideQuiz && endGameArea) {
+    sidePanel.classList.add('hidden')
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }

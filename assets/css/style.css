@@ -208,6 +208,7 @@ header {
   background-color: orange;
 }
 
+
 /* ANSWER BUTTONS THAT ARE IN THE QUIZ BODY */
 
 .answer-button {
@@ -347,6 +348,15 @@ header {
   }
 }
 
+
+/* MEDIA SCREEN MIN WIDTH 800PX */
+
+@media screen and (min-width: 801px) {
+  #side-panel-toggle {
+    display: none !important;
+  }
+}
+
 /* MEDIA SCREEN UNDER 800PX */
 
 @media screen and (max-width: 800px) {
@@ -420,7 +430,7 @@ header {
 /* SIDE PANEL TO HIDE SCORES IN FOR TABLET AND MOBILE UNDER 800PX */
 .side-panel {
   position: absolute;
-  top: 8%;
+  top: 50%;
   left: 2%;
   transform: translateY(-50%);
   background: none;

@@ -1,11 +1,11 @@
 'use strict';
 // window.onload = function () {
-//   localStorage.clear();
+  localStorage.clear();
 // }
 const openBtnModals = document.querySelectorAll('.open-modal');
 const modalContainer = document.querySelector('.modal-container');
 const closeModals = document.querySelectorAll('.close-modal');
-
+// localStorage.clear();
 // iterate over the 3 modals to determine the data modal
 openBtnModals.forEach((btn) => {
   btn.addEventListener('click', function() {

@@ -397,25 +397,37 @@ function setHighScore (name, score) {
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
 }
-
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
+  
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }
+  
   const nameInput = document.getElementById('name-input');
   const userName = nameInput.value;
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
-  const highScore = reverseMoneyList[moneyIndex].innerHTML;
-  console.log(highScore)
-  console.log(highScore, userName);
-  setHighScore(userName, highScore);
-  displayQuizMessage();
+  
+  if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
+    const highScore = reverseMoneyList[moneyIndex].innerHTML;
+    setHighScore(userName, highScore);
+    displayQuizMessage();
+  } else {
+    // Handle the case when moneyIndex is still -1
+    displayQuizMessageNoMoney();
+  }
+}
+
+function displayQuizMessageNoMoney() {
+  const showUserMoney = document.getElementById('show-users-score');
+  const getUserName = document.getElementById('users-name');
+  getUserName.innerHTML = `Better luck next time ${userName}`;
+  showUserMoney.innerHTML = 'You walked away with nothing';
 }
 
 // function to adjust the display of how much the user won, and username used.
@@ -425,11 +437,20 @@ function displayQuizMessage () {
   const displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
   const showUserMoney = document.getElementById('show-users-score');
   const getUserName = document.getElementById('users-name');
-  getUserName.innerHTML = `${userName}`;
-  showUserMoney.innerHTML = `£${displayMoneyWon}`;
-  if (moneyIndex === -1) {
-    getUserName.innerHTML = `Better luck next time ${userName}`; 
-    showUserMoney.innerHTML = '0'
+  // getUserName.innerHTML = `${userName}`;
+  // showUserMoney.innerHTML = `£${displayMoneyWon}`;
+  if ((score > 0 && score < 5) || (scoreMobile > 0 && scoreMobile < 5)) {
+    getUserName.innerHTML = `Nice effort ${userName}`;
+    showUserMoney.innerHTML = `You won £${displayMoneyWon}`;
+  } else if ((score > 5 && score < 10) || (scoreMobile > 5 && scoreMobile < 10)) {
+    getUserName.innerHTML = `Great Job ${userName}`;
+    showUserMoney.innerHTML = `You walk away with ${displayMoneyWon}`;
+  } else if ((score > 10 && score < 15) || (scoreMobile > 10 && scoreMobile < 15)) {
+    getUserName.innerHTML = `Smashing Job ${userName}`;
+    showUserMoney.innerHTML = `You walk away with an impressive ${displayMoneyWon}`;
+  } else {
+    getUserName.innerHTML = `CONGRATULATIONS ${userName}`;
+    showUserMoney.innerHTML = 'You are walking away as our champion and taking home 1MILLION pounds'
   }
  
 }

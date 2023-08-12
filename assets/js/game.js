@@ -1,4 +1,11 @@
-// 'use strict';
+// Global variables
+let data = {};
+let score = 0;
+let scoreMobile = 0;
+let questionIndex = 0;
+// money index to start at minus 1
+let moneyIndex = -1;
+let questionNumber = 1;
 let userName; // declare the global userName variable
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -7,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputNameArea = document.querySelector('.input-name-section');
   const submitButton = document.getElementById('submit-button');
   const sidePanel = document.querySelector('.side-panel');
+  const sidePanelToggle = document.getElementById('side-panel-toggle');
+  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  const contentMain = document.querySelector('.content.main');
+  const inputNameSection = document.querySelector('.input-name-section');
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -21,34 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('Please enter a name between 4-12 characters long.');
     }
   });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  const sidePanelToggle = document.getElementById('side-panel-toggle');
-  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
-  const contentMain = document.querySelector('.content.main');
-
-  const inputNameSection = document.querySelector('.input-name-section');
- 
-  const sidePanel = document.querySelector('.side-panel');
-  
-  // Output the initial window width for debugging
-  console.log('Initial window width:', window.innerWidth);
 
   sidePanelToggle.addEventListener('click', function () {
     scoreWrapperMobile.classList.toggle('side-panel-open');
     scoreWrapperMobile.classList.toggle('side-panel-closed');
-    // Toggle the visibility of the content
     contentMain.classList.toggle('hidden');
   });
-  
+
   // Hide the side panel toggle when the user is in the input name section
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
-  } 
-  localStorage.clear();
+  }
+  
 });
-
 console.log(userName);
 // API link for question 1-5
 const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple';
@@ -57,15 +53,7 @@ const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficu
 // API link for question 11-15
 const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
 
-// Global variables
-// const mostRecentHighScores = JSON.parse(localStorage.getItem('highScores')) || [];
-let data = {};
-let score = 0;
-let scoreMobile = 0;
-let questionIndex = 0;
-// money index to start at minus 1
-let moneyIndex = -1;
-let questionNumber = 1;
+
 
 async function callApi (urlApi) {
   try {
@@ -172,6 +160,7 @@ function checkAnswer () {
 
     moneyIndex = determineMoneyIndex(score, scoreMobile); // 
     // displayQuizMessageNoMoney()
+    
     setTimeout(endQuiz, 1000);
   }
 }
@@ -388,6 +377,7 @@ function bankMoney () {
     if (confirmAction()) {
       sidePanel.classList.add('hidden');
       scoreWrapperMobile.classList.add('hidden');
+     
       // const money = reverseMoneyList[moneyIndex].innerHTML;
       setTimeout(endQuiz, 500);
     }
@@ -411,7 +401,7 @@ function setHighScore (name, score) {
     userName: name,
     score: score
   };
-
+  console.log('setHighScore called')
   highScores.push(highScoreObject);
 
   // Sort the highScores array by score in descending order
@@ -419,12 +409,13 @@ function setHighScore (name, score) {
   highScores.splice(5);
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
+  console.log('highscores', highScores)
 }
 function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
-  
+  console.log('end quiz called');
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
@@ -435,14 +426,17 @@ function endQuiz () {
   const userName = nameInput.value;
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
-  
+  const highScore = reverseMoneyList[moneyIndex].innerHTML;
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    const highScore = reverseMoneyList[moneyIndex];
-    setHighScore(userName, highScore);
     displayQuizMessage();
+    setHighScore(userName, highScore);
+    // displayQuizMessage();
   } else {
     displayQuizMessageNoMoney();
   }
+  console.log('userName:', userName);
+  console.log('moneyIndex:', moneyIndex);
+  // console.log(highScore);
 }
 
 function displayQuizMessageNoMoney() {

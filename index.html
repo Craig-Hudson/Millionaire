@@ -31,11 +31,12 @@
         <div class="model-content">
           <h2 class="modal-heading">How to play <span class="close-modal">Close &times;</span></h2>
           <div class="content-container">
+            <!-- How to play instructions-->
             <ol>
               <li>Click start quiz to begin the quiz</li>
               <li>Enter your name before you begin to play</li>
-              <li>There will be one question, and four possible questions only one will be correct
-                for every question.
+              <li>There will be one question, and four possible answers, only one will be correct
+                for every question. (Max 15 questions)
               </li>
               <li><i class="fa-solid fa-people-group"></i> This is the ask the audience life line,
               it can only be used once, and be wary it may not always give the correct answer,
@@ -45,12 +46,22 @@
                 away to incorrect answers, again this can only be used once.
               </li>
               <li><i class="fa-sharp fa-solid fa-phone"></i> This is the phone a friend life line, 
-                this life life can only be used once, and will also not  give the correct answers the
+                this life line can only be used once, and will also not give the correct answers the
                 further along the quiz you go.
               </li>
               <li><i class="fa-solid fa-building-columns"></i> This is the bank option, if you select this option
               the quiz will end, only use this option if you can't answer the question and have used all your 
               life lines.
+              </li>
+              <li>There are two safe heavens, one at £1000, and one at £32000</li>
+              <li>If you answer incorrectly before you reach £1000 and don't bank
+                 you will walk away with nothing.
+              </li>
+              <li>If you answer incorrectly before you reach £32000 and don't bank
+                you will walk away with a minimum of £1000.
+              </li>
+              <li>If you answer incorrectly before you reach £1000000 and don't bank
+                you will walk away with a minimum of £32000.
               </li>
             </ol>
           </div>
@@ -70,22 +81,22 @@
       <dialog id="contact-us" class="modal">
         <div class="modal-content">
          <h2 class="modal-heading">Contact us<span class="close-modal">Close &times;</span></h2>
-         <form>
+         <form id="form" method="post" action="thankyou.html">
             <div>
               <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
+              <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
             </div>
             <div>
               <label for="email">Email Address:</label>
-              <input type="email" id="email" name="email" required>
+              <input type="email" id="email" name="email" placeholder="Enter Your Email Address" required>
             </div>
             <div>
               <label for="phone">Phone Number:</label>
-              <input type="tel" id="phone" name="phone" required>
+              <input type="tel" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
             </div>
             <div>
               <label for="message">Message:</label>
-              <textarea id="message" name="message" rows="4" required></textarea>
+              <textarea id="message" name="message" rows="4" placeholder="Enter Your Message Here" required></textarea>
             </div>
             <div>
               <button type="submit">Submit</button>

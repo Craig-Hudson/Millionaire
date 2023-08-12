@@ -150,7 +150,7 @@ function checkAnswer () {
     } else {
       incrementScore();
     }
-    incrementMoneyIndex(moneyIndex);
+    incrementMoneyIndex();
     setTimeout(nextQuestion, 1500);
   } else {
     this.style.background = 'red';
@@ -167,7 +167,11 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
-    determineMoneyWon();
+    console.log('score', score, 'score mobile', scoreMobile)
+    console.log('moneyindex', moneyIndex)
+
+    moneyIndex = determineMoneyIndex(score, scoreMobile); // 
+    // displayQuizMessageNoMoney()
     setTimeout(endQuiz, 1000);
   }
 }
@@ -191,7 +195,7 @@ function nextQuestion () {
   //  Call hard question api when use reaches question 10
     callApi(hardQuestions);
   } else if (score === 15) {
-    alert('Congratulation you won £1,000,000');
+    endQuiz();
   }
 }
 
@@ -251,17 +255,17 @@ function safeHaven () {
     const targetElementMobile5 = scoreMobileReverse[4];
     console.log('Target Element:', targetElementMobile5);
     console.log('mobile score', scoreMobile);
-    targetElement5.classList.add('red');
-    targetElementMobile5.classList.add('red');
+    targetElement5.classList.add('green');
+    targetElementMobile5.classList.add('green');
   } else if (score >= 10 || scoreMobile >= 10) {
     const targetElement5 = scoresDesktopReversed[4];
     const targetElementMobile5 = scoreMobileReverse[4];
-    targetElement5.classList.remove('red');
-    targetElementMobile5.classList.remove('red');
+    targetElement5.classList.remove('green');
+    targetElementMobile5.classList.remove('green');
     const targetElement10 = scoresDesktopReversed[9];
     const targetElementMobile10 = scoreMobileReverse[9];
-    targetElement10.classList.add('red');
-    targetElementMobile10.classList.add('red');
+    targetElement10.classList.add('green');
+    targetElementMobile10.classList.add('green');
   }
 }
 
@@ -323,12 +327,13 @@ function fiftyFiftyLifeLine () {
   }
 }
 
-let PhoneAFriendUsed = false;
-const phoneAFriend = document.querySelectorAll('.phone-a-friend');
-phoneAFriend.forEach(Element => {
-  Element.addEventListener('click', phoneAFriendLifeLine);
+
+let PhoneAFriendUsed = false
+const phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
+phoneAFriendButton.forEach(button => {
+  button.addEventListener('click', phoneAFriendLifeLine);
 });
-// PhoneAFriend.addEventListener('click', function () {
+
 function phoneAFriendLifeLine () {
   if (!PhoneAFriendUsed) {
     const correctAnswer = data.results[questionIndex].correct_answer;
@@ -339,6 +344,7 @@ function phoneAFriendLifeLine () {
     const correctAnswerArray = [correctAnswer];
     const concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     const oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
+
     if ((questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5)) {
       alert(`Hi ${userName}, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
     } else if ((questionIndex >= 0 && score >= 5 && score < 10) || (questionIndex >= 0 && scoreMobile >= 5 && scoreMobile < 10)) {
@@ -346,8 +352,17 @@ function phoneAFriendLifeLine () {
     } else if ((questionIndex >= 0 && score >= 10) || (questionIndex >= 0 && scoreMobile >= 10)) {
       alert(`Hi ${userName} I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
     }
+
+    PhoneAFriendUsed = true; // Mark the lifeline as used
+    disablePhoneAFriendButton(); // Disable the button and hide its text
   }
-  PhoneAFriendUsed = true; // disables the use of the phone a friend lifeline once the user has used it once.
+}
+
+function disablePhoneAFriendButton() {
+  phoneAFriendButton.forEach(button => {
+    button.classList.add('visibility'); // Hide the text
+    button.disabled = true; // Disable the button
+  });
 }
 
 function incrementMoneyIndex () {
@@ -370,7 +385,7 @@ function bankMoney () {
     }
   } else {
     // bank.removeEventListener('click', bankMoney);
-    bank.disabled = true;
+    // bank.disabled = true;
   }
 }
 
@@ -414,11 +429,10 @@ function endQuiz () {
   const reverseMoneyList = [...moneyList].reverse();
   
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    const highScore = reverseMoneyList[moneyIndex].innerHTML;
+    const highScore = reverseMoneyList[moneyIndex];
     setHighScore(userName, highScore);
     displayQuizMessage();
   } else {
-    // Handle the case when moneyIndex is still -1
     displayQuizMessageNoMoney();
   }
 }
@@ -431,28 +445,28 @@ function displayQuizMessageNoMoney() {
 }
 
 // function to adjust the display of how much the user won, and username used.
-function displayQuizMessage () {
+function displayQuizMessage() {
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
   const displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
   const showUserMoney = document.getElementById('show-users-score');
   const getUserName = document.getElementById('users-name');
-  // getUserName.innerHTML = `${userName}`;
-  // showUserMoney.innerHTML = `£${displayMoneyWon}`;
-  if ((score > 0 && score < 5) || (scoreMobile > 0 && scoreMobile < 5)) {
+
+  if ((score >= 1 && score < 5) || (scoreMobile >= 1 && scoreMobile < 5)) {
     getUserName.innerHTML = `Nice effort ${userName}`;
     showUserMoney.innerHTML = `You won £${displayMoneyWon}`;
-  } else if ((score > 5 && score < 10) || (scoreMobile > 5 && scoreMobile < 10)) {
+  } else if ((score >= 5 && score < 10) || (scoreMobile >= 5 && scoreMobile < 10)) {
     getUserName.innerHTML = `Great Job ${userName}`;
-    showUserMoney.innerHTML = `You walk away with ${displayMoneyWon}`;
-  } else if ((score > 10 && score < 15) || (scoreMobile > 10 && scoreMobile < 15)) {
+    showUserMoney.innerHTML = `You walk away with £${displayMoneyWon}`;
+  } else if ((score >= 10 && score < 15) || (scoreMobile >= 10 && scoreMobile < 15)) {
     getUserName.innerHTML = `Smashing Job ${userName}`;
-    showUserMoney.innerHTML = `You walk away with an impressive ${displayMoneyWon}`;
-  } else {
+    showUserMoney.innerHTML = `You walk away with an impressive £${displayMoneyWon}`;
+  } else if ((score === 15) || (scoreMobile === 15)) {
     getUserName.innerHTML = `CONGRATULATIONS ${userName}`;
-    showUserMoney.innerHTML = 'You are walking away as our champion and taking home 1MILLION pounds'
+    showUserMoney.innerHTML = 'You are walking away as our champion and taking home 1MILLION pounds';
   }
- 
+  console.log('score', score);
+  console.log('scoreMobile', scoreMobile);
 }
 
 const playAgain = document.querySelector('.play-again');
@@ -465,15 +479,22 @@ document.addEventListener('click', function (event) {
   }
 });
 
-
-function determineMoneyWon () {
-  if (score < 5 || scoreMobile < 5) {
-    moneyIndex = -1;
-  } else if (score < 10 || scoreMobile < 10) {
-    moneyIndex = 4;
-  } else if ( score < 15 || scoreMobile < 15) {
-    moneyIndex = 9;
+/* This function is with regards to safe havens at score 5 and score 10
+if the user gets an answer incorrect between score 1 and 5 then they win nothing
+if the user gets an answer incorrect between score 5 and 10 then they score £1000
+if the user gets an answer incorrect between score 10 and 15 then they score £32000
+*/
+function determineMoneyIndex (score, scoreMobile) {
+  if ((score >= 1 && score <= 4) || (scoreMobile >= 1 && scoreMobile <= 4)) {
+    return -1;
+  } else if ((score >= 5 && score <= 9) || (scoreMobile >= 5 && scoreMobile <= 9)) {
+    return 4;
+  } else if ((score >= 10 && score < 15) || (scoreMobile >= 10 && scoreMobile < 15)) {
+    return 9;
+  } else {
+    return moneyIndex; // Keep the existing moneyIndex if score is not in the specified ranges
   }
 }
+
 // Call API for easy questions initially
 callApi(easyQuestions);

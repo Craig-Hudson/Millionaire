@@ -288,7 +288,6 @@ function handleAskTheAudience () {
   const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
   const incorrectAnswers = data.results[questionIndex].incorrect_answers;
   const sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
-  
   if (questionIndex >= 0 && score < 5) {
     alert(`The correct answer is ${sanitizedCorrectAnswer}`);
   } else if (questionIndex >= 0 && score >= 5) {
@@ -298,6 +297,7 @@ function handleAskTheAudience () {
   askTheAudience.forEach(element => {
     element.disabled = true; // Disable all audience buttons
     element.removeEventListener('click', handleAskTheAudience); // Remove event listener from all audience buttons
+    element.classList.add('visibility');
   });
 }
 
@@ -321,8 +321,12 @@ function fiftyFiftyLifeLine () {
       if (sliceIncorrectAnswers.includes(button.textContent)) {
         button.style.visibility = 'hidden';
       }
-      fiftyFiftyUsed = true; // to indicate the 50/50 has been used
-      fiftyFifty.disabled = true; // disable 50/50 from being used after the user has used it once.
+
+      fiftyFifty.forEach(button => {
+        fiftyFiftyUsed = true; // to indicate the 50/50 has been used
+        button.disabled = true; // disable button from being used
+        button.classList.add('visibility');
+      })
     });
   }
 }
@@ -377,11 +381,15 @@ bank.forEach(Element => {
 function bankMoney () {
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
+  const sidePanel = document.querySelector('.side-panel');
+  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile')
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     // Confirm the action with the user before proceeding
     if (confirmAction()) {
+      sidePanel.classList.add('hidden');
+      scoreWrapperMobile.classList.add('hidden');
       // const money = reverseMoneyList[moneyIndex].innerHTML;
-      setTimeout(endQuiz, 1500);
+      setTimeout(endQuiz, 500);
     }
   } else {
     // bank.removeEventListener('click', bankMoney);

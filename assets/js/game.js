@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
   } 
-
+  localStorage.clear();
 });
 
 console.log(userName);

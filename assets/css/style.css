@@ -136,6 +136,14 @@ header {
   display: none !important;
 }
 
+.visibility {
+  visibility: hidden;
+}
+
+.green {
+  background: rgb(86, 245, 86);
+}
+
 /* CONTACT MODAL */
 
 #contact-us form div {

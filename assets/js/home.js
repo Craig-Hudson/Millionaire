@@ -1,6 +1,6 @@
 'use strict';
 // window.onload = function () {
-  localStorage.clear();
+  // localStorage.clear();
 // }
 const openBtnModals = document.querySelectorAll('.open-modal');
 const modalContainer = document.querySelector('.modal-container');

@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Kanit', sans-serif;
+  cursor: pointer;
 }
 
 html {
@@ -13,16 +14,25 @@ html {
 }
 
 body {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: #14213D !important;
+  color: whitesmoke;
+}
+
+a {
+  text-decoration: none;
   color: whitesmoke;
 }
 
 header {
   display: flex;
   justify-content: center;
-  height: 20vh;
+  height: 15vh;
+}
+
+#home-page {
+  height: 98vh;
 }
 
 .page-title {
@@ -54,7 +64,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 77vh;
 }
 
 .buttons {
@@ -90,12 +100,12 @@ header {
   display: none;
   color: whitesmoke;
   position: absolute;
-  text-align: center;
+  overflow: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  width: 60%;
+  width: 40%;
   height: 60%;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(31,31,33,1) 73%, rgba(78,79,80,1) 100%, rgba(0,212,255,1) 100%);
 }
@@ -107,7 +117,6 @@ header {
 
 .modal-heading {
   text-align: center;
-  cursor: pointer;
   text-decoration: underline orange;
   padding-bottom: 15px;
 }
@@ -115,12 +124,13 @@ header {
 .content-container ol {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
 }
 
 .close-modal {
   right: 0;
   position: fixed;
+  font-size: 70%;
   margin-right: 10px;
 }
 
@@ -130,9 +140,23 @@ header {
   align-items: center;
 }
 
-#high-scores {
-  overflow-y: scroll;
+/* CONTACT MODAL */
+
+#contact-us form div {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  align-items: center;
 }
+
+#contact-us .modal-heading {
+  display: flex;
+  align-items: center;
+}
+
+/* #high-scores {
+  overflow-y: scroll;
+} */
 
 .active {
   display: block;
@@ -148,14 +172,6 @@ header {
 
 .green {
   background: rgb(86, 245, 86);
-}
-
-/* CONTACT MODAL */
-
-#contact-us form div {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10px;
 }
 
 /* QUIZ SECTION */
@@ -175,6 +191,7 @@ header {
 
 .quiz-title h2 {
   margin: 0;
+  text-decoration: underline #FCA311;
   position: absolute;
   top: 50%; /* Vertically center the h2 */
   transform: translateY(-50%);
@@ -215,6 +232,7 @@ header {
   width: 80%;
   display: flex;
   background-color: #14213D;
+  opacity: 0.96;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
@@ -228,10 +246,9 @@ header {
 
 .background-image {
   background: url(../images/site-images/millionaire-background-image.jpg) no-repeat center center / cover;
-  z-index: 0;
-
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 /* QUIZ SCORES FOR ANYTHING OVER 800PX */
@@ -265,8 +282,8 @@ header {
 
 .answer-button {
   border-radius: 15px;
-  width: 250px;
-  height: 50px;
+  width: 350px;
+  height: 70px;
   padding: 10px 0;
   margin: 10px 5px;
   color: whitesmoke;
@@ -312,6 +329,12 @@ header {
   margin: 0 5px 0 5px;
 }
 
+.life-lines:hover {
+  transition: color 0.4s ease-in-out;
+  color: #ffcc00;
+  transform: scale(1.1);
+}
+
 /* INPUT NAME AREA */
 
 .input-name-section {
@@ -319,7 +342,7 @@ header {
   justify-content: center;
   width: 100%;
   align-items: center;
-  height: 100vh;
+  height: 92vh;
   color: whitesmoke;
   font-size: 140%;
 }
@@ -368,7 +391,7 @@ header {
 .get-center {
   display: none;
   align-items: center;
-  height: 100%;
+  height: 92vh;
   color: whitesmoke;
 }
 
@@ -379,6 +402,58 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  align-items: center;
+  height: 8vh;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent; /* Initial transparent border */
+  transition: border-color 0.3s ease-in-out;;
+}
+
+.social-links a:hover {
+  transition: color 0.4s ease-in-out;
+  color: #ffcc00;
+}
+
+.social-links a {
+  padding: 0 15%;
+  text-decoration: none;
+  font-size: 130%;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+/* 404 error page styling */
+.container404 {
+  height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content404 {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #14213D;
 }
 
 /* media screen under 1000px */
@@ -409,6 +484,11 @@ header {
   .answer-button {
     height: 65px;
     width: 220px;
+  }
+  
+  .background-image {
+    /* background-size: cover; */
+    
   }
 }
 
@@ -452,7 +532,7 @@ header {
   }
 
   .close-modal {
-    font-size: 70%;
+    /* font-size: 70%; */
     margin-top: 5px;
   }
 
@@ -494,14 +574,13 @@ header {
 /* SIDE PANEL TO HIDE SCORES IN FOR TABLET AND MOBILE UNDER 800PX */
 .side-panel {
   position: absolute;
-  top: 50%;
+  top: 2%;
   left: 2%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: white;
   background-color: black;
-  cursor: pointer;
   padding: 0;
   z-index: 10000;
   transition: transform 0.5s ease;
@@ -540,14 +619,31 @@ header {
   padding: 15px;
 }
 
+.content404 {
+  width: 70%;
+  height: 60%;
+  font-size: 90%;
+}
+
 }
 
 /* MEDIA SCREEN UNDER 550PX */
 @media screen and (max-width: 550px) {
+  header {
+    height: 10vh;
+  }
+
+  /* button container home page */
+  .buttons-container {
+    height: 82vh;
+  }
   /* BUTTONS UNDER  550PX*/
+
+
   .buttons {
     width: 25%;
     font-size: 14px;
+    margin: 6px;
   }
 
   .answer-button {
@@ -560,7 +656,7 @@ header {
   .page-title {
     letter-spacing: 1px;
     font-size: 150%;
-    padding-right: 15px;
+    margin-top: 10px;
   }
 
   .logo img {
@@ -579,6 +675,16 @@ header {
 
   .input-form-position {
     font-size: 65%;
+  }
+
+  .content404 {
+    width: 90%;
+    font-size: 80%;
+  }
+
+  /* social links under 500px */
+  footer {
+    font-size: 70%;
   }
 }
 

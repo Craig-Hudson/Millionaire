@@ -75,12 +75,12 @@ async function callApi (urlApi) {
   }
 }
 
+// Function to grab the questions from the api
 function getQuestion () {
   const question = document.getElementById('question');
   if (questionIndex < data.results.length) {
     question.innerHTML = data.results[questionIndex].question;
   }
-  
   getQuestionNumber();
 }
 
@@ -88,6 +88,29 @@ function getQuestionNumber () {
   const questionNumberId = document.getElementById('question-number');
   questionNumberId.innerText = questionNumber;
   questionNumber++;
+}
+
+// function to get the next question
+function nextQuestion () {
+  // increment question index when next question is called
+  questionIndex++;
+  const answerButtons = document.querySelectorAll('.answer-button');
+  answerButtons.forEach((button) => {
+    button.style.visibility = 'visible'; // Set visibility back to 'visible' for all answer buttons
+  });
+  if (questionIndex < data.results.length) {
+    // Continue to the next question if available
+    getQuestion();
+    getAnswers();
+  } else if ((questionIndex === data.results.length) && (score === 5 || scoreMobile === 5)) {
+    //  Call medium question api when user reaches question 5
+    callApi(mediumQuestions);
+  } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
+  //  Call hard question api when use reaches question 10
+    callApi(hardQuestions);
+  } else if (score === 15 || scoreMobile === 15) {
+    endQuiz();
+  }
 }
 
 function getAnswers () {
@@ -165,27 +188,12 @@ function checkAnswer () {
   }
 }
 
-// function to get the next question
-function nextQuestion () {
-  // increment question index when next question is called
-  questionIndex++;
-  const answerButtons = document.querySelectorAll('.answer-button');
-  answerButtons.forEach((button) => {
-    button.style.visibility = 'visible'; // Set visibility back to 'visible' for all answer buttons
-  });
-  if (questionIndex < data.results.length) {
-    // Continue to the next question if available
-    getQuestion();
-    getAnswers();
-  } else if ((questionIndex === data.results.length) && (score === 5 || scoreMobile === 5)) {
-    //  Call medium question api when user reaches question 5
-    callApi(mediumQuestions);
-  } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
-  //  Call hard question api when use reaches question 10
-    callApi(hardQuestions);
-  } else if (score === 15 || scoreMobile === 15) {
-    endQuiz();
-  }
+// https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
+// code for some of this function was taken from the link above.
+function sanitizeAnswer (answer) {
+  const tempElement = document.createElement('div');
+  tempElement.innerHTML = answer;
+  return tempElement.textContent.replace(/[\u2018\u2019]/g, "'");
 }
 
 function incrementScore () {
@@ -231,6 +239,7 @@ function incrementScoreMobile () {
   }
 }
 
+// Function to highlight the safe haven to visualize for the user
 function safeHaven () {
   const scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
   const scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
@@ -238,7 +247,7 @@ function safeHaven () {
   console.log('Score:', score);
   console.log('Score Mobile:', scoreMobile);
 
-  // Check if the user's score is 6 and there are at least 5 elements in the scoresDesktopReversed array
+  // Check if the user's score is between a certain score.
   if ((score >= 5 && score < 10 ) || (scoreMobile >= 5 && scoreMobile < 10)) {
     const targetElement5 = scoresDesktopReversed[4];
     const targetElementMobile5 = scoreMobileReverse[4];
@@ -258,14 +267,7 @@ function safeHaven () {
   }
 }
 
-// https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
-// code for some of this function was taken from the link above.
-function sanitizeAnswer (answer) {
-  const tempElement = document.createElement('div');
-  tempElement.innerHTML = answer;
-  return tempElement.textContent.replace(/[\u2018\u2019]/g, "'");
-}
-
+// LIFE LINE SECTION
 
 const askTheAudience = document.querySelectorAll('.audience');
 askTheAudience.forEach(element => {
@@ -288,11 +290,6 @@ function handleAskTheAudience () {
     element.removeEventListener('click', handleAskTheAudience); // Remove event listener from all audience buttons
     element.classList.add('visibility');
   });
-}
-
-function getRandomIndex (arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
 }
 
 let fiftyFiftyUsed = false;
@@ -320,7 +317,6 @@ function fiftyFiftyLifeLine () {
   }
 }
 
-
 let PhoneAFriendUsed = false
 const phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
 phoneAFriendButton.forEach(button => {
@@ -347,19 +343,15 @@ function phoneAFriendLifeLine () {
     }
 
     PhoneAFriendUsed = true; // Mark the lifeline as used
-    disablePhoneAFriendButton(); // Disable the button and hide its text
+    disablePhoneAFriendButton(); // Disable the button and hide lifeline
   }
 }
 
 function disablePhoneAFriendButton() {
   phoneAFriendButton.forEach(button => {
-    button.classList.add('visibility'); // Hide the text
+    button.classList.add('visibility'); // Hide the lifeline
     button.disabled = true; // Disable the button
   });
-}
-
-function incrementMoneyIndex () {
-  moneyIndex++;
 }
 
 const bank = document.querySelectorAll('.bank');
@@ -374,7 +366,7 @@ function bankMoney () {
   const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile')
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     // Confirm the action with the user before proceeding
-    if (confirmAction()) {
+    if (confirmAction('Are You Sure You Want To Proceed?')) {
       sidePanel.classList.add('hidden');
       scoreWrapperMobile.classList.add('hidden');
      
@@ -386,9 +378,19 @@ function bankMoney () {
     // bank.disabled = true;
   }
 }
+// END OF LIFE LINE SECTION
 
-function confirmAction () {
-  const confirmation = confirm('Are you sure you want to proceed?');
+function getRandomIndex (arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
+function incrementMoneyIndex () {
+  moneyIndex++;
+}
+
+function confirmAction(message) {
+  const confirmation = confirm(message);
   return confirmation;
 }
 
@@ -406,7 +408,7 @@ function setHighScore (name, score) {
 
   // Sort the highScores array by score in descending order
   highScores.sort((a, b) => b.score - a.score);
-  highScores.splice(5);
+  highScores.splice(50);
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log('highscores', highScores)
@@ -480,9 +482,10 @@ function displayQuizMessage() {
   console.log('moneyIndex', moneyIndex);
 }
 
-const playAgain = document.querySelector('.play-again');
-const returnHome = document.querySelector('.return-home-end');
+
 document.addEventListener('click', function (event) {
+  const playAgain = document.querySelector('.play-again');
+  const returnHome = document.querySelector('.return-home-end');
   if (event.target === playAgain) {
     window.location.href = 'quiz.html';
   } else if (event.target === returnHome) {
@@ -506,6 +509,27 @@ function determineMoneyIndex (score, scoreMobile) {
     return moneyIndex; // Keep the existing moneyIndex if score is not in the specified ranges
   }
 }
+
+function hideFooter() {
+  const footer = document.getElementsByTagName('footer')[0];
+  footer.classList.add('hidden');
+}
+const quizBody = document.querySelector('.quiz-body');
+quizBody.addEventListener('mouseenter', hideFooter);
+
+function showFooter() {
+  const footer = document.getElementsByTagName('footer')[0];
+  footer.classList.remove('hidden');
+}
+
+const endGameSection = document.querySelector('#end-game-area');
+endGameSection.addEventListener('mouseenter', showFooter);
+
+const returnHomeButton = document.querySelector('.return-home');
+returnHomeButton.addEventListener('click', function (e) {
+  if (e.target === returnHomeButton);
+  window.location = 'index.html';
+})
 
 // Call API for easy questions initially
 callApi(easyQuestions);

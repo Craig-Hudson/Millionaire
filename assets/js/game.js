@@ -183,7 +183,7 @@ function nextQuestion () {
   } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
   //  Call hard question api when use reaches question 10
     callApi(hardQuestions);
-  } else if (score === 15) {
+  } else if (score === 15 || scoreMobile === 15) {
     endQuiz();
   }
 }
@@ -411,11 +411,13 @@ function setHighScore (name, score) {
   localStorage.setItem('highScores', JSON.stringify(highScores));
   console.log('highscores', highScores)
 }
-function endQuiz () {
+
+function endQuiz() {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
   console.log('end quiz called');
+  
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
@@ -426,24 +428,31 @@ function endQuiz () {
   const userName = nameInput.value;
   const moneyList = document.querySelectorAll('.money');
   const reverseMoneyList = [...moneyList].reverse();
-  const highScore = reverseMoneyList[moneyIndex].innerHTML;
+  let highScore = "0"; // Default value
+  
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
+    highScore = reverseMoneyList[moneyIndex].innerHTML;
+  }
+  
+  console.log('highscore', highScore);
+  
+  if (moneyIndex === -1) {
+    displayQuizMessageNoMoney(userName);
+  } else if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     displayQuizMessage();
     setHighScore(userName, highScore);
-    // displayQuizMessage();
-  } else {
-    displayQuizMessageNoMoney();
+    console.log('highscore', highScore);
   }
+  
   console.log('userName:', userName);
   console.log('moneyIndex:', moneyIndex);
-  // console.log(highScore);
 }
 
-function displayQuizMessageNoMoney() {
+function displayQuizMessageNoMoney(username) {
   const showUserMoney = document.getElementById('show-users-score');
   const getUserName = document.getElementById('users-name');
-  getUserName.innerHTML = `Better luck next time ${userName}`;
-  showUserMoney.innerHTML = 'You walked away with nothing';
+  getUserName.innerHTML = `Better luck next time, ${username}!`;
+  showUserMoney.innerHTML = 'You walked away with Nothing';
 }
 
 // function to adjust the display of how much the user won, and username used.
@@ -454,21 +463,21 @@ function displayQuizMessage() {
   const showUserMoney = document.getElementById('show-users-score');
   const getUserName = document.getElementById('users-name');
 
-  if ((score >= 1 && score < 5) || (scoreMobile >= 1 && scoreMobile < 5)) {
+  if (moneyIndex >= 0 && moneyIndex < 4) {
     getUserName.innerHTML = `Nice effort ${userName}`;
     showUserMoney.innerHTML = `You won £${displayMoneyWon}`;
-  } else if ((score >= 5 && score < 10) || (scoreMobile >= 5 && scoreMobile < 10)) {
+  } else if (moneyIndex >= 4 && moneyIndex < 9) {
     getUserName.innerHTML = `Great Job ${userName}`;
     showUserMoney.innerHTML = `You walk away with £${displayMoneyWon}`;
-  } else if ((score >= 10 && score < 15) || (scoreMobile >= 10 && scoreMobile < 15)) {
+  } else if (moneyIndex >= 9 && moneyIndex < 14) {
     getUserName.innerHTML = `Smashing Job ${userName}`;
     showUserMoney.innerHTML = `You walk away with an impressive £${displayMoneyWon}`;
-  } else if ((score === 15) || (scoreMobile === 15)) {
+  } else if (moneyIndex === 14) {
     getUserName.innerHTML = `CONGRATULATIONS ${userName}`;
     showUserMoney.innerHTML = 'You are walking away as our champion and taking home 1MILLION pounds';
   }
-  console.log('score', score);
-  console.log('scoreMobile', scoreMobile);
+
+  console.log('moneyIndex', moneyIndex);
 }
 
 const playAgain = document.querySelector('.play-again');
@@ -487,7 +496,7 @@ if the user gets an answer incorrect between score 5 and 10 then they score £10
 if the user gets an answer incorrect between score 10 and 15 then they score £32000
 */
 function determineMoneyIndex (score, scoreMobile) {
-  if ((score >= 1 && score <= 4) || (scoreMobile >= 1 && scoreMobile <= 4)) {
+  if ((score > 0 && score <= 4) || (scoreMobile > 0 && scoreMobile <= 4)) {
     return -1;
   } else if ((score >= 5 && score <= 9) || (scoreMobile >= 5 && scoreMobile <= 9)) {
     return 4;

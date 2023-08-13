@@ -52,8 +52,7 @@
 
 Here we have a quiz similar to the game show who wants to be a millionaire, which consists of players
 trying to answer up to a maximum of 15 questions, being able to win up to £ 1,000,000.
-The app I have constructed will be based on some of the concepts on the game show, including answering
-the up to 15 general knowledge questions, and being able to use life lines along the way to help the user answer any questions they may be stuck on. As well as the user being able to keep track of their high scores that will be on the home page.
+The app I have constructed will be based on some of the concepts of the game show, including answering up to 15 general knowledge questions, but the user will need to be wary because if they answer a question wrong before the first safe haven at £1000 they could walk away with nothing, and being able to use life lines along the way to help the user answer any questions they may be stuck on. As well as the user being able to keep track of their high scores that will be on the home page.
 
 ## User Experience (UX)
 
@@ -86,7 +85,7 @@ the up to 15 general knowledge questions, and being able to use life lines along
   - font-family: 'Kanit', sans-serif; will be used through out all pages titles and ordinary text, its easy to read, It's looks very elegant and clean and it will appeal to users who take part in the quiz.
 
   - **Structure**
-    - The structure of the quiz app consists of a home page which contains a page title, a logo and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side pop which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
+    - The structure of the quiz app consists of a home page which contains a page title, a logo and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side panel which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
 
   - **Imagery**
     - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/)
@@ -178,14 +177,11 @@ Chrome Dev Tools - To troubleshoot and test features, solve issues with responsi
 
 Balsamiq - I used Balsamiq wireframes from a desktop app for my wireframes
 
-[W3School](https://www.w3schools.com/) To refer to anything CSS related that i may have been unsure of
+[W3School](https://www.w3schools.com/) To refer to anything Java script related that i may have been unsure of
 
 [Pexels](https://www.pexels.com/) I used pexels for all my images for this project
 
-[flaticon](https://www.flaticon.com/) I used flaticon for my life line logos on the game page
-
 VsCode - I have used vscode as my ide
-
 
 ## Deployment & Local Development
 
@@ -195,7 +191,7 @@ Github Pages was used to deploy the live website. The instructions to achieve th
 ​
 
 1. Log in (or sign up) to Github.
-2. Find the repository for this project here > [The Smokehouse](<https://github.com/Craig-Hudson/The-SmokeHouse>)
+2. Find the repository for this project here > [Millionaire](<https://github.com/Craig-Hudson/Millionaire>)
 3. Click on the Settings link.
 4. Click on the Pages link in the left hand side navigation bar.
 5. In the Source section, choose main from the drop down select branch menu. Select Root from the drop down select folder menu.
@@ -207,23 +203,23 @@ Github Pages was used to deploy the live website. The instructions to achieve th
 #### How to Fork
 
 ​
-To fork The SmokeHouse repository:
+To fork The Millionaire repository:
 ​
 
 1. Log in (or sign up) to Github.
-2. Go to the repository for this project, The SmokeHouse !(<https://github.com/Craig-Hudson/The-SmokeHouse>)
+2. Go to the repository for this project, The SmokeHouse !(<https://github.com/Craig-Hudson/Millionaire.git>)
 3. Click the Fork button in the top right corner.
 ​
 
 #### How to Clone
 
 ​
-To clone The SmokeHouse repository:
+To clone The Millionaire repository:
 ​
 
 1. Log in (or sign up) to GitHub.
 2. Go to the repository for this project.
-3. Click on the code button, select whether you would like to clone with HTTPS !(<https://github.com/Craig-Hudson/The-SmokeHouse>) and copy the link shown.
+3. Click on the code button, select whether you would like to clone with HTTPS !(<https://github.com/Craig-Hudson/Millionaire.git>) and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
 ​

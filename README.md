@@ -76,22 +76,24 @@ the up to 15 general knowledge questions, and being able to use life lines along
 
 ### Design
 
-![color pallette](./assets/images/readme-images/colour%20palette.png)
+![color pallette](./assets/images/readme-images/color-palette.png)
 
-- I will #0D004F which is a Federal blue colour for the background colour.
+- I will be using #14213D which is a ~ Indanthrone Blue PC 208 colour, for background colors.
+- I will be using #FCA311 which is a ~ Sand PC 940 colour, this will be used on correct answer buttons and also to highlight the score the user is currently on.
+- I will be using #000000 and a mix off #E5E5E5 for backgrounds on modals and the colours of the buttons.
   
   - **typography**
   - font-family: 'Kanit', sans-serif; will be used through out all pages titles and ordinary text, its easy to read, It's looks very elegant and clean and it will appeal to users who take part in the quiz.
 
   - **Structure**
-    - The structure of the quiz app consists of a home page which contains a page title, a logo and 3 buttons, Start quiz, how to play and high scores. The start quiz button will take the user to the quiz area on another page, which consists of the question area with 4 possible answers, 3 life lines and a money ladder so the user can track the progress. While the how to play and high scores i will be using a pop up modal to display these.
+    - The structure of the quiz app consists of a home page which contains a page title, a logo and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side pop which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
 
   - **Imagery**
-    - I will be using images of food and pictures of the restaurant to create more of a visual effect and to make the site more appealing to viewers, all of the images on the website were taken from [pexels](https://www.pexels.com/)
+    - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/)
 
   - **Wireframes**
 
- [View wireframes here](./assets/images/wireframe-images/)
+ [View wire frames here](./assets/images/wireframe-images/)
 
 ### Accessability
 
@@ -357,4 +359,5 @@ I would like to acknowledge the following people who helped me along the way in 
 
 - My code institute mentor Narender Singh for all his help and patience with me !
 - My partner for having the patience with me and allowing me more time to work on projects.
-- My fellow classmates for any hints and tips that they have given me over the last two months.
+- My fellow classmates Ross and dan for any hints and tips that they have given me over the last few weeks.
+- Other family who have helped test my quiz application and given me constructive feedback, and ideas that I would be able to improve the quiz application

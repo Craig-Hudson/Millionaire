@@ -473,15 +473,15 @@ function displayQuizMessage() {
     getUserName.innerHTML = `Smashing Job ${userName}`;
     showUserMoney.innerHTML = `You walk away with an impressive £${displayMoneyWon}`;
   } else if (moneyIndex === 14) {
-    getUserName.innerHTML = `CONGRATULATIONS ${userName}`;
-    showUserMoney.innerHTML = 'You are walking away as our champion and taking home 1MILLION pounds';
+    showUserMoney.innerHTML = 'CONGRATULATIONS you won 1MILLION pounds!';
+    getUserName.innerHTML = `Welcome to the millionaires club ${userName}`;
   }
 
   console.log('moneyIndex', moneyIndex);
 }
 
 const playAgain = document.querySelector('.play-again');
-const returnHome = document.querySelector('.return-home');
+const returnHome = document.querySelector('.return-home-end');
 document.addEventListener('click', function (event) {
   if (event.target === playAgain) {
     window.location.href = 'quiz.html';

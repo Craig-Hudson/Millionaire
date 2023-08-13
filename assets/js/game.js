@@ -510,21 +510,6 @@ function determineMoneyIndex (score, scoreMobile) {
   }
 }
 
-function hideFooter() {
-  const footer = document.getElementsByTagName('footer')[0];
-  footer.classList.add('hidden');
-}
-const quizBody = document.querySelector('.quiz-body');
-quizBody.addEventListener('mouseenter', hideFooter);
-
-function showFooter() {
-  const footer = document.getElementsByTagName('footer')[0];
-  footer.classList.remove('hidden');
-}
-
-const endGameSection = document.querySelector('#end-game-area');
-endGameSection.addEventListener('mouseenter', showFooter);
-
 const returnHomeButton = document.querySelector('.return-home');
 returnHomeButton.addEventListener('click', function (e) {
   if (e.target === returnHomeButton);

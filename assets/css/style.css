@@ -11,6 +11,7 @@
 
 html {
   background-color: #14213D;
+  height: 100vh;
 }
 
 body {
@@ -342,7 +343,7 @@ header {
   justify-content: center;
   width: 100%;
   align-items: center;
-  height: 92vh;
+  height: 100vh;
   color: whitesmoke;
   font-size: 140%;
 }
@@ -391,7 +392,7 @@ header {
 .get-center {
   display: none;
   align-items: center;
-  height: 92vh;
+  /* height: 100vh; */
   color: whitesmoke;
 }
 
@@ -399,9 +400,10 @@ header {
   display: none;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 /* FOOTER */
@@ -651,19 +653,11 @@ footer {
     margin-bottom: 5px;
   }
 
-  /* H1 AND LOGO IMAGE AND POSITION UNDER 550PX */
+  /* H1 UNDER 550PX */
 
   .page-title {
     letter-spacing: 1px;
     font-size: 150%;
-    margin-top: 10px;
-  }
-
-  .logo img {
-    position: fixed;
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
     margin-top: 10px;
   }
 
@@ -676,6 +670,16 @@ footer {
   .input-form-position {
     font-size: 65%;
   }
+
+/* QUIZ SECTION UNDER 550PX */
+  .quiz-title h2 {
+    font-size: 150%;
+  }
+
+  .quiz-title .return-home {
+    font-size: 70%;
+  }
+
 
   .content404 {
     width: 90%;

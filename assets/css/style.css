@@ -577,13 +577,13 @@ footer {
 /* SIDE PANEL TO HIDE SCORES IN FOR TABLET AND MOBILE UNDER 800PX */
 .side-panel {
   position: absolute;
-  top: 8%;
-  left: 2%;
+  top: 50%;
+  left: 2.5%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: white;
-  background-color: black;
+  color: #FCA311;
+  font-weight: bold;
   padding: 0;
   z-index: 10000;
   transition: transform 0.5s ease;
@@ -724,6 +724,14 @@ footer {
     width: 190px;
     height: 50px;
   }
+/* QUIZ SECTION UNDER 350PX */
+  .quiz-title .return-home {
+    font-size: 50%;
+  }
+
+  .quiz-title h2 {
+  font-size: 130%;
+  }
 
   .quiz-question {
     font-size: 130%;
@@ -732,6 +740,10 @@ footer {
   .quiz-body {
     font-size: 80%;
   }
+
+  .quiz-body h3 {
+    font-size: 110%;
+}
 
   .columns {
     font-size: 80%;

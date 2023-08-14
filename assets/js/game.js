@@ -301,13 +301,13 @@ function fiftyFiftyLifeLine () {
   if (!fiftyFiftyUsed) {
     const answerButtons = document.querySelectorAll('.answer-button');
     const incorrectAnswers = data.results[questionIndex].incorrect_answers;
-    const sliceIncorrectAnswers = incorrectAnswers.slice(0, 2);
+    const sliceIncorrectAnswers = incorrectAnswers.slice(1, 3);
     console.log(sliceIncorrectAnswers);
     answerButtons.forEach((button) => {
       if (sliceIncorrectAnswers.includes(button.textContent)) {
         button.style.visibility = 'hidden';
       }
-
+      // disables and hides the life line on mobile/tablet and desktop
       fiftyFifty.forEach(button => {
         fiftyFiftyUsed = true; // to indicate the 50/50 has been used
         button.disabled = true; // disable button from being used

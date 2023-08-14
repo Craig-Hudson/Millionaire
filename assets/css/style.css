@@ -9,17 +9,12 @@
   cursor: pointer;
 }
 
-html {
-  background-color: #14213D;
-  height: 100vh;
-} 
-
-body {
-  width: 100vw;
-  height: 100vh;
+html, body {
+  width: 100%;
+  height: 100%;
   background-color: #14213D !important;
   color: whitesmoke;
-}
+} 
 
 a {
   text-decoration: none;
@@ -29,12 +24,10 @@ a {
 header {
   display: flex;
   justify-content: center;
-  height: 15vh;
+  height: 10vh;
 }
 
-#home-page {
-  height: 98vh;
-}
+
 
 .page-title {
   color: whitesmoke;
@@ -65,7 +58,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 77vh;
+  height: 81vh;
 }
 
 .buttons {
@@ -178,14 +171,14 @@ header {
 /* QUIZ SECTION */
 
 .quiz-area {
-  height: 100vh;
+  height: 98vh;
 }
 
 .quiz-title {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  height: 15vh;
+  height: 10vh;
   color: whitesmoke;
   position: relative; 
 }
@@ -210,7 +203,7 @@ header {
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(31,31,33,1) 73%, rgba(78,79,80,1) 100%, rgba(0,212,255,1) 100%);
   position: absolute;
   transform: translateY(-50%);
-  top: 50%; /* Adjust the top distance as needed */
+  top: 50%; 
   right: 2%; /* Position at the top-right corner */
 }
 
@@ -221,7 +214,7 @@ header {
 .quiz-body-container {
   z-index: 9999;
   width: 100%;
-  height: 85vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -253,6 +246,16 @@ header {
 }
 
 /* QUIZ SCORES FOR ANYTHING OVER 800PX */
+.game-container {
+  display: flex;
+}
+.game-area {
+  width: 75%;
+  display: inline-block;
+}
+.quiz-score {
+  width: 25%;
+}
 
 .quiz-scores-container {
   height: 100vh;
@@ -283,10 +286,10 @@ header {
 
 .answer-button {
   border-radius: 15px;
-  width: 350px;
+  width: 330px;
   height: 70px;
   padding: 10px 0;
-  margin: 10px 5px;
+  margin: 10px 10px;
   color: whitesmoke;
   border: 2px solid transparent; 
   transition: border-color 0.3s ease-in-out;;
@@ -295,6 +298,7 @@ header {
 
 .answer-button:hover {
   border-color: #FCA311; 
+  transform: scale(1.05);
 }
 
 .columns {
@@ -334,6 +338,10 @@ header {
   transition: color 0.4s ease-in-out;
   color: #ffcc00;
   transform: scale(1.1);
+}
+
+.fifty-fifty {
+  padding: 18px 21px;
 }
 
 /* INPUT NAME AREA */
@@ -392,18 +400,28 @@ header {
 .get-center {
   display: none;
   align-items: center;
-  /* height: 100vh; */
+  height: 100%;
   color: whitesmoke;
+  justify-content: center;
 }
 
 .end-game-container {
   display: none;
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
+  /* width: 95%; */
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 60vh;
+}
+
+.end-game-container p {
+  font-size: 120%;
+}
+
+.end-game-container button {
+  width: 35%;
 }
 
 /* FOOTER */
@@ -456,6 +474,25 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: #14213D;
+}
+
+
+/* MEDIA SCREEN UNDER 1200PX */
+@media screen and (max-width: 1200px) {
+/* ANSWER BUTTONS */
+  .answer-button {
+    width: 275px;
+  }
+
+  /* LIFE LINES */
+  .life-lines {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .fifty-fifty {
+    padding: 14px 17px;
+  }
 }
 
 /* media screen under 1000px */
@@ -541,7 +578,9 @@ footer {
   .mobile-width {
     width: 100% !important;
   }
-
+  .game-area {
+    width: 100%
+  }
   .quiz-body {
     width: 80%;
     height: 80vh;
@@ -628,6 +667,11 @@ footer {
   font-size: 90%;
 }
 
+/*END GAME SECTION UNDER 800PX  */
+.end-game-container p {
+  font-size: 110%;
+}
+
 }
 
 /* MEDIA SCREEN UNDER 550PX */
@@ -636,12 +680,7 @@ footer {
     height: 10vh;
   }
 
-  /* button container home page */
-  .buttons-container {
-    height: 82vh;
-  }
-  /* BUTTONS UNDER  550PX*/
-
+/* BUTTONS UNDER  550PX*/
 
   .buttons {
     width: 25%;
@@ -747,5 +786,15 @@ footer {
 
   .columns {
     font-size: 80%;
+  }
+
+  /*END GAME */
+
+  .end-game-container h2 {
+    font-size: 120%;
+  }
+
+  .end-game-container p {
+    font-size: 95%;
   }
 }

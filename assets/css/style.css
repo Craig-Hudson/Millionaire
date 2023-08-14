@@ -12,7 +12,7 @@
 html {
   background-color: #14213D;
   height: 100vh;
-}
+} 
 
 body {
   width: 100vw;
@@ -553,6 +553,7 @@ footer {
 
   .columns {
     flex-direction: column;
+    font-size: 90%;
   }
 
   /* MOBILE AND TABLET SIDE BAR FOR SCORES UNDER 800PX */
@@ -576,7 +577,7 @@ footer {
 /* SIDE PANEL TO HIDE SCORES IN FOR TABLET AND MOBILE UNDER 800PX */
 .side-panel {
   position: absolute;
-  top: 2%;
+  top: 8%;
   left: 2%;
   transform: translateY(-50%);
   background: none;
@@ -649,7 +650,10 @@ footer {
   }
 
   .answer-button {
+    width: 200px;
     margin-top: 5px;
+    height: 50px;
+    font-size: 85%;
     margin-bottom: 5px;
   }
 
@@ -663,6 +667,14 @@ footer {
 
   .quiz-body {
     font-size: 90%;
+    height: 70vh;
+  }
+
+  .quiz-body h3 {
+    font-size: 130%;
+  }
+  .columns {
+    font-size: 85%;
   }
 
   /* INPUT BOX SECTION BEFORE QUIZ START */
@@ -718,6 +730,10 @@ footer {
   }
 
   .quiz-body {
+    font-size: 80%;
+  }
+
+  .columns {
     font-size: 80%;
   }
 }

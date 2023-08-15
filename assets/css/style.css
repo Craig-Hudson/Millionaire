@@ -158,7 +158,7 @@ header {
 /* QUIZ SECTION */
 
 .quiz-area {
-  height: 98vh;
+  height: 100vh;
 }
 
 .quiz-title {
@@ -212,8 +212,8 @@ header {
   height: 50vh;
   width: 80%;
   display: flex;
-  background-color: #14213D;
-  opacity: 0.96;
+  background-color: #232323;
+  opacity: 0.9;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
@@ -357,6 +357,12 @@ header {
   border-radius: 15px;
 }
 
+.input-container {
+  background-color: #232323;
+  padding: 15px;
+  opacity: 0.9;
+}
+
 .submit-button-style {
   margin-top: 20px;
   padding: 10px;
@@ -398,6 +404,9 @@ header {
   justify-content: center;
   align-items: center;
   height: 60vh;
+  background-color: #232323;
+  opacity: 0.9;
+  padding: 0 10px;
 }
 
 .end-game-container p {
@@ -460,12 +469,21 @@ footer {
   background-color: #14213D;
 }
 
+/* To get rid of the hover effect on anything that is touchscreen */
+@media (hover: none) {
+  /* Override hover styles for touchscreen devices */
+  .answer-button:hover {
+    border-color: transparent; 
+    transform: none;
+  }
+}
 
 /* MEDIA SCREEN UNDER 1200PX */
 @media screen and (max-width: 1200px) {
 /* ANSWER BUTTONS */
   .answer-button {
     width: 275px;
+     border-color: #FCA311 !important;
   }
 
   /* LIFE LINES */
@@ -484,6 +502,7 @@ footer {
   .life-lines-container {
     padding-bottom: 0;
   }
+
 
   .life-lines-container i {
     height: 40px;
@@ -508,13 +527,7 @@ footer {
     height: 65px;
     width: 220px;
   }
-  
-  .background-image {
-    /* background-size: cover; */
-    
-  }
 }
-
 
 /* MEDIA SCREEN MIN WIDTH 800PX */
 
@@ -543,7 +556,7 @@ footer {
     width: 25%;
   }
 
-  /* MODAL UNDER 800PX */
+/* MODAL UNDER 800PX */
   .modal {
     width: 80%;
     overflow: scroll;

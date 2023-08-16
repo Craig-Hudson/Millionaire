@@ -3,23 +3,35 @@ let data = {};
 let score = 0;
 let scoreMobile = 0;
 let questionIndex = 0;
-// money index to start at minus 1
 let moneyIndex = -1;
 let questionNumber = 1;
 let userName;
-
 const answerButtons = document.querySelectorAll('.answer-button');
+// API link for question 1-5
+const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple';
+// API link for question 6-10
+const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple';
+// API link for question 11-15
+const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
+const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+// LIFE LINE GLOBALS
+let askTheAudience = document.querySelectorAll('.audience');
+let PhoneAFriendUsed = false
+let fiftyFiftyUsed = false;
+let fiftyFifty = document.querySelectorAll('.fifty-fifty');
+let phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
+let bank = document.querySelectorAll('.bank');
+
+
+const returnHomeButton = document.querySelector('.return-home');
 
 document.addEventListener('DOMContentLoaded', function () {
-  const quizArea = document.getElementById('quiz');
-  const user = document.getElementById('name-input');
-  const inputNameArea = document.querySelector('.input-name-section');
-  const submitButton = document.getElementById('submit-button');
-  const sidePanel = document.querySelector('.side-panel');
-  const sidePanelToggle = document.getElementById('side-panel-toggle');
-  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
-  const contentMain = document.querySelector('.content.main');
-  const inputNameSection = document.querySelector('.input-name-section');
+  let quizArea = document.getElementById('quiz');
+  let user = document.getElementById('name-input');
+  let inputNameArea = document.querySelector('.input-name-section');
+  let submitButton = document.getElementById('submit-button');
+  let sidePanel = document.querySelector('.side-panel');
+  let inputNameSection = document.querySelector('.input-name-section');
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -34,27 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  sidePanelToggle.addEventListener('click', function () {
-    scoreWrapperMobile.classList.toggle('side-panel-open');
-    scoreWrapperMobile.classList.toggle('side-panel-closed');
-    contentMain.classList.toggle('hidden');
-  });
-
-  // Hide the side panel toggle when the user is in the input name section
+ // Hide the side panel toggle when the user is in the input name section
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
   }
   
 });
-console.log(userName);
-// API link for question 1-5
-const easyQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple';
-// API link for question 6-10
-const mediumQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple';
-// API link for question 11-15
-const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple';
-
-
 
 async function callApi (urlApi) {
   try {
@@ -78,7 +75,7 @@ async function callApi (urlApi) {
 
 // Function to grab the questions from the api
 function getQuestion () {
-  const question = document.getElementById('question');
+  let question = document.getElementById('question');
   if (questionIndex < data.results.length) {
     question.innerHTML = data.results[questionIndex].question;
   }
@@ -86,7 +83,7 @@ function getQuestion () {
 }
 
 function getQuestionNumber () {
-  const questionNumberId = document.getElementById('question-number');
+  let questionNumberId = document.getElementById('question-number');
   questionNumberId.innerText = questionNumber;
   questionNumber++;
 }
@@ -114,14 +111,9 @@ function nextQuestion () {
 }
 
 function getAnswers () {
-  const correctAnswer = data.results[questionIndex].correct_answer;
-  console.log(correctAnswer);
-  console.log(data.results);
-  // console.log(questionIndex);
-  console.log(score);
-  console.log(moneyIndex);
-  const incorrectAnswer = data.results[questionIndex].incorrect_answers;
-  const newAnswerArray = incorrectAnswer.concat(correctAnswer);
+  let correctAnswer = data.results[questionIndex].correct_answer;
+  let incorrectAnswer = data.results[questionIndex].incorrect_answers;
+  let newAnswerArray = incorrectAnswer.concat(correctAnswer);
   shuffleAnswers(newAnswerArray);
   for (let i = 0; i < answerButtons.length; i++) {
     answerButtons[i].innerHTML = newAnswerArray[i];
@@ -134,6 +126,7 @@ function getAnswers () {
   }
 }
 
+
 function shuffleAnswers (array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -142,20 +135,20 @@ function shuffleAnswers (array) {
 }
 
 function checkAnswer () {
-  const selectedAnswer = this.innerHTML;
-  const correctAnswer = data.results[questionIndex].correct_answer;
-  const sanitizedSelectedAnswer = sanitizeAnswer(selectedAnswer);
-  const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+  let selectedAnswer = this.innerHTML;
+  let correctAnswer = data.results[questionIndex].correct_answer;
+  let sanitizedSelectedAnswer = sanitizeAnswer(selectedAnswer);
+  let sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
   // Checks if the selected answer by the user is the same as the correct answer in the api
   if (sanitizedSelectedAnswer === sanitizedCorrectAnswer) {
     this.style.background = 'orange';
-    // disable buttons so user can not click anymore
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
-    // openScoresMobile();
     if (window.innerWidth <= 800) {
       incrementScoreMobile();
+      setTimeout(openSidePanel, 1000);
+      setTimeout(closeSidePanel, 3000);
     } else {
       incrementScore();
     }
@@ -165,7 +158,7 @@ function checkAnswer () {
     this.style.background = 'red';
 
     // Display the background color of the correct answer when user selects wrong answer
-    const correctAnswerButtons = document.querySelectorAll('.answer-button');
+    let correctAnswerButtons = document.querySelectorAll('.answer-button');
     for (let j = 0; j < correctAnswerButtons.length; j++) {
       if (correctAnswerButtons[j].innerHTML === correctAnswer) {
         correctAnswerButtons[j].style.background = 'orange';
@@ -179,8 +172,6 @@ function checkAnswer () {
     console.log('moneyindex', moneyIndex)
 
     moneyIndex = determineMoneyIndex(score, scoreMobile); // 
-    // displayQuizMessageNoMoney()
-    
     setTimeout(endQuiz, 1000);
   }
 }
@@ -194,13 +185,12 @@ function sanitizeAnswer (answer) {
 }
 
 function incrementScore () {
-  // incrementScore
   score++;
   // function to display users save haven / minimum amount of money won
   safeHaven();
-  const scoreList = document.querySelectorAll('.score');
+  let scoreList = document.querySelectorAll('.score');
   // to get current index
-  const currentScoreIndex = scoreList.length - score;
+  let currentScoreIndex = scoreList.length - score;
   // iterate in reverse to start at last element in currentScore class
   for (let i = scoreList.length - 1; i >= 0; i--) {
     const scoreItem = scoreList[i];
@@ -215,14 +205,13 @@ function incrementScore () {
 
 function incrementScoreMobile () {
   if (window.innerWidth <= 800) {
-    // incrementScore
     scoreMobile++;
     // function to display users save haven / minimum amount of money won
     safeHaven();
     // get .score-mobile class in the mobile scores section
-    const scoreListMobile = document.querySelectorAll('.quiz-scores-mobile .score-mobile');
+    let scoreListMobile = document.querySelectorAll('.quiz-scores-mobile .score-mobile');
     // to get current index
-    const currentScoreIndex = scoreListMobile.length - scoreMobile;
+    let currentScoreIndex = scoreListMobile.length - scoreMobile;
     // iterate in reverse to start at the last element in the currentScore class
     for (let i = scoreListMobile.length - 1; i >= 0; i--) {
       const scoreItem = scoreListMobile[i];
@@ -230,7 +219,7 @@ function incrementScoreMobile () {
 
       if (i === currentScoreIndex) {
         scoreItem.classList.add('current-score');
-        break; // exit the loop once we find the current score
+        break;
       }
     }
   }
@@ -238,10 +227,10 @@ function incrementScoreMobile () {
 
 // Function to highlight the safe haven to visualize for the user
 function safeHaven() {
-  const scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
-  const scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
+  let scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
+  let scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
 //  arrow function to toggle the class to highlight save haven
-  const updateSafeHaven = (index, add) => {
+  let updateSafeHaven = (index, add) => {
     scoresDesktopReversed[index].classList.toggle('green', add);
     scoreMobileReverse[index].classList.toggle('green', add);
   };
@@ -256,17 +245,11 @@ function safeHaven() {
 }
 
 // LIFE LINE SECTION
-
-const askTheAudience = document.querySelectorAll('.audience');
-askTheAudience.forEach(element => {
-  element.addEventListener('click', handleAskTheAudience);
-});
-
 function handleAskTheAudience () {
-  const correctAnswer = data.results[questionIndex].correct_answer;
-  const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
-  const incorrectAnswers = data.results[questionIndex].incorrect_answers;
-  const sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
+  let correctAnswer = data.results[questionIndex].correct_answer;
+  let sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+  let incorrectAnswers = data.results[questionIndex].incorrect_answers;
+  let sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
   if (questionIndex >= 0 && score < 5) {
     alert(`The correct answer is ${sanitizedCorrectAnswer}`);
   } else if (questionIndex >= 0 && score >= 5) {
@@ -280,92 +263,120 @@ function handleAskTheAudience () {
   });
 }
 
-let fiftyFiftyUsed = false;
-const fiftyFifty = document.querySelectorAll('.fifty-fifty');
-fiftyFifty.forEach(Element => {
-  Element.addEventListener('click', fiftyFiftyLifeLine);
-});
-function fiftyFiftyLifeLine () {
+function fiftyFiftyLifeLine() {
   if (!fiftyFiftyUsed) {
     const incorrectAnswers = data.results[questionIndex].incorrect_answers;
     // Slice the incorrect answers array so we only get two incorrect answers to hide for the 50/50 lifeline
     const sliceIncorrectAnswers = incorrectAnswers.slice(1, 3);
-    console.log(sliceIncorrectAnswers);
     answerButtons.forEach((button) => {
       if (sliceIncorrectAnswers.includes(button.textContent)) {
         button.style.visibility = 'hidden';
       }
-      // disables and hides the life line on mobile/tablet and desktop
-      fiftyFifty.forEach(button => {
-        fiftyFiftyUsed = true; // to indicate the 50/50 has been used
-        button.disabled = true; // disable button from being used
-        button.classList.add('visibility');
-      })
+    });
+    console.log(sliceIncorrectAnswers);
+    // Disables and hides the lifeline on mobile/tablet and desktop
+    fiftyFifty.forEach(button => {
+      fiftyFiftyUsed = true;
+      button.disabled = true;
+      button.classList.add('visibility');
     });
   }
 }
 
-// Phone a friend event listener
-let PhoneAFriendUsed = false
-const phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
-phoneAFriendButton.forEach(button => {
-  button.addEventListener('click', phoneAFriendLifeLine);
-});
 
-function phoneAFriendLifeLine () {
+function phoneAFriendLifeLine() {
   if (!PhoneAFriendUsed) {
-    const correctAnswer = data.results[questionIndex].correct_answer;
-    const incorrectAnswers = data.results[questionIndex].incorrect_answers;
-    const sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
-    const sanitizedIncorrectAnswer = sanitizeAnswer(getRandomIndex(incorrectAnswers));
-    const incorrectAnswerArray = [...incorrectAnswers];
-    const correctAnswerArray = [correctAnswer];
-    const concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
-    const oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
+    let correctAnswer = data.results[questionIndex].correct_answer;
+    let incorrectAnswers = data.results[questionIndex].incorrect_answers;
+    let sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
+    let sanitizedIncorrectAnswer = sanitizeAnswer(getRandomIndex(incorrectAnswers));
+    let incorrectAnswerArray = [...incorrectAnswers];
+    let correctAnswerArray = [correctAnswer];
+    let concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
+    let oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
 
-    if ((questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5)) {
-      alert(`Hi ${userName}, I am 100% sure the answer is ${sanitizedCorrectAnswer}`);
-    } else if ((questionIndex >= 0 && score >= 5 && score < 10) || (questionIndex >= 0 && scoreMobile >= 5 && scoreMobile < 10)) {
-      alert(`Hi Craig I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}`);
-    } else if ((questionIndex >= 0 && score >= 10) || (questionIndex >= 0 && scoreMobile >= 10)) {
-      alert(`Hi ${userName} I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}`);
+    // toggleSidePanel();
+   
+    // Display the appropriate message in the modal
+    switch (true) {
+      case (questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5):
+        displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
+        break;
+      case (questionIndex >= 0 && score >= 5 && score < 10) || (questionIndex >= 0 && scoreMobile >= 5 && scoreMobile < 10):
+        displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
+        break;
+      case (questionIndex >= 0 && score >= 10) || (questionIndex >= 0 && scoreMobile >= 10):
+        displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
+        break;
+      default:
+        // Handle other cases if needed
+        break;
     }
 
-    PhoneAFriendUsed = true; // Mark the lifeline as used
-    disablePhoneAFriendButton(); // Disable the button and hide lifeline
+    disablePhoneAFriendButton();
+    PhoneAFriendUsed = true;
   }
 }
-
 function disablePhoneAFriendButton() {
   phoneAFriendButton.forEach(button => {
-    button.classList.add('visibility'); // Hide the lifeline
-    button.disabled = true; // Disable the button
+    button.classList.add('visibility');
+    button.disabled = true;
   });
 }
 
-const bank = document.querySelectorAll('.bank');
-bank.forEach(Element => {
-  Element.addEventListener('click', bankMoney);
-});
 
 function bankMoney () {
-  const moneyList = document.querySelectorAll('.money');
-  const reverseMoneyList = [...moneyList].reverse();
-  const sidePanel = document.querySelector('.side-panel');
-  const scoreWrapperMobile = document.querySelector('.score-wrapper-mobile')
+  let moneyList = document.querySelectorAll('.money');
+  let reverseMoneyList = [...moneyList].reverse();
+  let sidePanel = document.querySelector('.side-panel');
+  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile')
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     // Confirm the action with the user before proceeding
-    if (confirmAction('Are You Sure You Want To Proceed?')) {
+    if (confirmAction('Are You Sure You Want To Bank Your Money?')) {
       sidePanel.classList.add('hidden');
       scoreWrapperMobile.classList.add('hidden');
-     
       // const money = reverseMoneyList[moneyIndex].innerHTML;
       setTimeout(endQuiz, 500);
     }
-  } else {
-    // bank.removeEventListener('click', bankMoney);
-    // bank.disabled = true;
   }
+}
+
+function handleLifeLineEventListeners () {
+  askTheAudience.forEach(element => {
+    element.addEventListener('click', handleAskTheAudience);
+  });
+  fiftyFifty.forEach(Element => {
+    Element.addEventListener('click', fiftyFiftyLifeLine);
+  });
+  phoneAFriendButton.forEach(button => {
+    button.addEventListener('click', () => {
+      closeSidePanel();
+      phoneAFriendLifeLine();
+    });
+  });
+  bank.forEach(Element => {
+    Element.addEventListener('click', bankMoney);
+  });
+}
+handleLifeLineEventListeners();
+
+function displayModalMessage(message) {
+  let modal = document.getElementById('life-lines-modal');
+  let modalMessage = document.getElementById('modal-message');
+
+  modalMessage.textContent = message;
+  modal.style.display = 'flex';
+
+  let closeModalButton = document.getElementById('close-modal');
+  closeModalButton.addEventListener('click', function () {
+    modal.style.display = 'none';
+  })
+
+  window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
 }
 // END OF LIFE LINE SECTION
 
@@ -385,8 +396,6 @@ function confirmAction(message) {
 
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
 // tutorial video above and made my own adjustments to set highscores into local storage
-const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-
 function setHighScore (name, score) {
   const highScoreObject = {
     userName: name,
@@ -407,18 +416,17 @@ function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
-  console.log('end quiz called');
-  
+ 
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }
   
-  const nameInput = document.getElementById('name-input');
-  const userName = nameInput.value;
-  const moneyList = document.querySelectorAll('.money');
-  const reverseMoneyList = [...moneyList].reverse();
+  let nameInput = document.getElementById('name-input');
+  let userName = nameInput.value;
+  let moneyList = document.querySelectorAll('.money');
+  let reverseMoneyList = [...moneyList].reverse();
   let highScore = '0'; // Default value
   
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
@@ -436,47 +444,49 @@ function endQuiz () {
     setHighScore(userName, highScore);
     console.log('highscore', highScore);
   }
-  
-  console.log('userName:', userName);
-  console.log('moneyIndex:', moneyIndex);
 }
 
 function displayQuizMessageNoMoney(username) {
-  const showUserMoney = document.getElementById('show-users-score');
-  const getUserName = document.getElementById('users-name');
+  let showUserMoney = document.getElementById('show-users-score');
+  let getUserName = document.getElementById('users-name');
   getUserName.innerHTML = `Better luck next time, ${username}!`;
   showUserMoney.innerHTML = 'You walked away with Nothing';
 }
 
 // function to adjust the display of how much the user won, and username used.
 function displayQuizMessage() {
-  const moneyList = document.querySelectorAll('.money');
-  const reverseMoneyList = [...moneyList].reverse();
-  const displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
-  const showUserMoney = document.getElementById('show-users-score');
-  const getUserName = document.getElementById('users-name');
+  let getUserName = document.getElementById('users-name');
+  let moneyList = document.querySelectorAll('.money');
+  let showUserMoney = document.getElementById('show-users-score');
+  let reverseMoneyList = [...moneyList].reverse();
+  let displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
 
-  if (moneyIndex >= 0 && moneyIndex < 4) {
-    getUserName.innerHTML = `Nice effort ${userName}`;
-    showUserMoney.innerHTML = `You won £${displayMoneyWon}`;
-  } else if (moneyIndex >= 4 && moneyIndex < 9) {
-    getUserName.innerHTML = `Great Job ${userName}`;
-    showUserMoney.innerHTML = `You walk away with £${displayMoneyWon}`;
-  } else if (moneyIndex >= 9 && moneyIndex < 14) {
-    getUserName.innerHTML = `Smashing Job ${userName}`;
-    showUserMoney.innerHTML = `You walk away with an impressive £${displayMoneyWon}`;
-  } else if (moneyIndex === 14) {
-    showUserMoney.innerHTML = 'CONGRATULATIONS you won 1MILLION pounds!';
-    getUserName.innerHTML = `Welcome to the millionaires club ${userName}`;
+  switch (true) {
+    case (moneyIndex >= 0 && moneyIndex < 4):
+      getUserName.innerHTML = `Nice effort ${userName}`;
+      showUserMoney.innerHTML = `You won £${displayMoneyWon}`;
+      break;
+    case (moneyIndex >= 4 && moneyIndex < 9):
+      getUserName.innerHTML = `Great Job ${userName}`;
+      showUserMoney.innerHTML = `You walk away with £${displayMoneyWon}`;
+      break;
+    case (moneyIndex >= 9 && moneyIndex < 14):
+      getUserName.innerHTML = `Smashing Job ${userName}`;
+      showUserMoney.innerHTML = `You walk away with an impressive £${displayMoneyWon}`;
+      break;
+    case (moneyIndex === 14):
+      showUserMoney.innerHTML = 'CONGRATULATIONS you won 1MILLION pounds!';
+      getUserName.innerHTML = `Welcome to the millionaires club ${userName}`;
+      break;
   }
 
   console.log('moneyIndex', moneyIndex);
 }
 
 document.addEventListener('click', function (event) {
-  const playAgain = document.querySelector('.play-again');
-  const returnHome = document.querySelector('.return-home-end');
-
+  let playAgain = document.querySelector('.play-again');
+  let returnHome = document.querySelector('.return-home-end');
+  
   if (event.target === playAgain) {
     window.location.href = 'quiz.html';
   } else if (event.target === returnHome) {
@@ -502,7 +512,7 @@ function determineMoneyIndex (score, scoreMobile) {
 }
 
 // function to handle the home button click on the quiz page
-const returnHomeButton = document.querySelector('.return-home');
+
 returnHomeButton.addEventListener('click', function (e) {
   if (e.target === returnHomeButton) {
     if (confirmAction('Are you sure you want to return home? Your progress will be lost')) {
@@ -511,5 +521,35 @@ returnHomeButton.addEventListener('click', function (e) {
   }
 })
 
+function toggleSidePanel () {
+  let sidePanelToggle = document.getElementById('side-panel-toggle');
+  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  let contentMain = document.querySelector('.content.main');
+  sidePanelToggle.addEventListener('click', function () {
+    scoreWrapperMobile.classList.toggle('side-panel-open');
+    scoreWrapperMobile.classList.toggle('side-panel-closed');
+    contentMain.classList.toggle('hidden');
+  });
+}
+toggleSidePanel();
+
+function closeSidePanel() {
+  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  let contentMain = document.querySelector('.content.main');
+  
+  scoreWrapperMobile.classList.remove('side-panel-open');
+  scoreWrapperMobile.classList.add('side-panel-closed');
+  contentMain.classList.add('hidden');
+}
+
+
+function openSidePanel () {
+  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  let contentMain = document.querySelector('.content.main');
+  
+  scoreWrapperMobile.classList.remove('side-panel-closed');
+  scoreWrapperMobile.classList.add('side-panel-open');
+  contentMain.classList.remove('hidden');
+}
 // Call API for easy questions initially
 callApi(easyQuestions);

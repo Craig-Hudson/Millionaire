@@ -79,8 +79,8 @@
   <section id="mobile-scores">
     <div class="score-wrapper-mobile side-panel-closed">
       <button id="side-panel-toggle" class="side-panel"  type="button">
-        <i class="fa-solid fa-angles-right icon-open"></i>
-        <i class="fa-solid fa-angles-left icon-close"></i>
+        <i class="fa-solid fa-angles-left icon-open"></i>
+        <i class="fa-solid fa-angles-right icon-close"></i>
       </button>
       <div class="content main hidden">
         <div class="life-lines-container-mobile">
@@ -109,6 +109,13 @@
       </div>
     </div>
   </section>
+  <!-- pop up messages when user interacts with the life lines -->
+  <div id="life-lines-modal" class="modal-life-lines">
+    <div class="modal-content-life-lines">
+      <span class="close" id="close-modal">&times;</span>
+      <div id="modal-message"></div>
+    </div>
+  </div>
   <section id="end-game-area" class="get-center background-image">
     <div class="end-game-container">
       <h2><span id="show-users-score"></span></h2>

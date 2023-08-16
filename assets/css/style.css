@@ -123,21 +123,17 @@ header {
 
 /* CONTACT MODAL */
 
-#contact-us form div {
+.contact-us-form form div {
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
   align-items: center;
 }
 
-#contact-us .modal-heading {
+.contact-us-form .modal-heading {
   display: flex;
   align-items: center;
 }
-
-/* #high-scores {
-  overflow-y: scroll;
-} */
 
 .active {
   display: block;
@@ -237,6 +233,7 @@ header {
   width: 75%;
   display: inline-block;
 }
+
 .quiz-score {
   width: 25%;
 }
@@ -264,6 +261,18 @@ header {
 
 .money-marker {
   background-color: orange;
+}
+
+/* QUIZ SCORES MOBILE */
+.quiz-scores-mobile {
+  list-style: none;
+  padding-top: 5%;
+  letter-spacing: 1px;
+  font-size: 110%;
+}
+
+.score-mobile {
+  padding: 4px 0; 
 }
 
 /* ANSWER BUTTONS THAT ARE IN THE QUIZ BODY */
@@ -328,6 +337,54 @@ header {
   padding: 18px 21px;
 }
 
+/* life line modal */
+.modal-life-lines {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #232323;
+  opacity: 0.9;
+  z-index: 9999;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-life-lines {
+  /* background-color: ; */
+  position: relative; 
+  color: whitesmoke; 
+  width: 60%;
+  height: 30%; 
+  background-color: #232323;
+  padding: 20px;
+  border: 1px solid #FCA311;
+  text-align: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 3%;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* INPUT NAME AREA */
 
 .input-name-section {
@@ -385,8 +442,8 @@ header {
   padding: 10px;
 }
 /* END OF INPUT SECTION */
-/* END GAME AREA */
 
+/* END GAME SECTION */
 .get-center {
   display: none;
   align-items: center;
@@ -416,6 +473,7 @@ header {
 .end-game-container button {
   width: 35%;
 }
+/* ENF OF END GAME SECTION */
 
 /* FOOTER */
 
@@ -467,6 +525,10 @@ footer {
   justify-content: center;
   align-items: center;
   background-color: #14213D;
+}
+
+.content404 button {
+  width: 35%;
 }
 
 /* To get rid of the hover effect on anything that is touchscreen */
@@ -613,12 +675,12 @@ footer {
 /* SIDE PANEL TO HIDE SCORES IN FOR TABLET AND MOBILE UNDER 800PX */
 .side-panel {
   position: absolute;
-  top: 50%;
-  left: 0%;
+  bottom: 0;
+  right: 0;
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #FCA311;
+  color: whitesmoke;
   font-weight: bold;
   padding: 0;
   z-index: 10000;
@@ -655,7 +717,6 @@ footer {
 
 .life-lines-container-mobile i {
   font-size: 20px;
-  padding: 15px;
 }
 
 .content404 {
@@ -737,6 +798,15 @@ footer {
   /* social links under 500px */
   footer {
     font-size: 70%;
+  }
+
+  .fifty-fifty {
+    padding: 14px 17px;
+  }
+
+  /* 404 */
+  .content404 button {
+    width: 45%;
   }
 }
 

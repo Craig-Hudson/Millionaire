@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
   }
-  
 });
 
 async function callApi (urlApi) {
@@ -250,10 +249,14 @@ function handleAskTheAudience () {
   let sanitizedCorrectAnswer = sanitizeAnswer(correctAnswer);
   let incorrectAnswers = data.results[questionIndex].incorrect_answers;
   let sanitizedIncorrectAnswers = sanitizeAnswer(getRandomIndex(incorrectAnswers));
-  if (questionIndex >= 0 && score < 5) {
-    alert(`The correct answer is ${sanitizedCorrectAnswer}`);
-  } else if (questionIndex >= 0 && score >= 5) {
-    alert(`The answer is either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswers}`);
+  let highNumber = highRandomPercentage();
+  let lowNumber = lowRandomPercentage();
+  let lowNumber2 = lowRandomPercentage();
+  if (score <= 4 || scoreMobile <= 4) {
+    displayModalMessage(`The audience voted ${highNumber}% for ${sanitizedCorrectAnswer}, but the final decision lies with you ${userName}`);
+  }
+  if (score >= 5 || scoreMobile >= 5) {
+    displayModalMessage(`The audience voted ${lowNumber}% for ${sanitizedCorrectAnswer} and ${lowNumber2}% for ${sanitizedIncorrectAnswers}.\n These were the two highest percentages. The decision is yours!`)
   }
 
   askTheAudience.forEach(element => {
@@ -295,9 +298,6 @@ function phoneAFriendLifeLine() {
     let concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     let oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
 
-    // toggleSidePanel();
-   
-    // Display the appropriate message in the modal
     switch (true) {
       case (questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5):
         displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
@@ -335,18 +335,23 @@ function bankMoney () {
     if (confirmAction('Are You Sure You Want To Bank Your Money?')) {
       sidePanel.classList.add('hidden');
       scoreWrapperMobile.classList.add('hidden');
-      // const money = reverseMoneyList[moneyIndex].innerHTML;
       setTimeout(endQuiz, 500);
     }
   }
 }
 
 function handleLifeLineEventListeners () {
-  askTheAudience.forEach(element => {
-    element.addEventListener('click', handleAskTheAudience);
+  askTheAudience.forEach(button => {
+    button.addEventListener('click', () => {
+      closeSidePanel();
+      handleAskTheAudience();
+    });
   });
-  fiftyFifty.forEach(Element => {
-    Element.addEventListener('click', fiftyFiftyLifeLine);
+  fiftyFifty.forEach(button => {
+    button.addEventListener('click', () => {
+      closeSidePanel();
+      fiftyFiftyLifeLine();
+    });
   });
   phoneAFriendButton.forEach(button => {
     button.addEventListener('click', () => {
@@ -432,17 +437,13 @@ function endQuiz () {
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     highScore = reverseMoneyList[moneyIndex].innerHTML;
   }
-  
-  console.log('highscore', highScore);
   // Display message when user scores zero in the end game section
   if (moneyIndex === -1) {
     displayQuizMessageNoMoney(userName);
   } else if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    // displays a message to users in end game section
     displayQuizMessage();
     // sets the high scores and sends to local storage.
     setHighScore(userName, highScore);
-    console.log('highscore', highScore);
   }
 }
 
@@ -497,8 +498,7 @@ document.addEventListener('click', function (event) {
 /* This function is with regards to safe havens at score 5 and score 10
 if the user gets an answer incorrect between score 1 and 5 then they win nothing
 if the user gets an answer incorrect between score 5 and 10 then they score £1000
-if the user gets an answer incorrect between score 10 and 15 then they score £32000
-*/
+if the user gets an answer incorrect between score 10 and 15 then they score £32000 */
 function determineMoneyIndex (score, scoreMobile) {
   if ((score > 0 && score <= 4) || (scoreMobile > 0 && scoreMobile <= 4)) {
     return -1;
@@ -510,8 +510,6 @@ function determineMoneyIndex (score, scoreMobile) {
     return moneyIndex; // Keep the existing moneyIndex if score is not in the specified ranges
   }
 }
-
-// function to handle the home button click on the quiz page
 
 returnHomeButton.addEventListener('click', function (e) {
   if (e.target === returnHomeButton) {
@@ -533,6 +531,7 @@ function toggleSidePanel () {
 }
 toggleSidePanel();
 
+// function for just closing the side panel and attaching it to an event listener.
 function closeSidePanel() {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let contentMain = document.querySelector('.content.main');
@@ -542,7 +541,7 @@ function closeSidePanel() {
   contentMain.classList.add('hidden');
 }
 
-
+// function to open side panel when the user gets question correct on mobile and tablet.
 function openSidePanel () {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let contentMain = document.querySelector('.content.main');
@@ -551,5 +550,18 @@ function openSidePanel () {
   scoreWrapperMobile.classList.add('side-panel-open');
   contentMain.classList.remove('hidden');
 }
+
+function highRandomPercentage () {
+  // random number between 75-100
+  let highNumber = Math.floor(Math.random() * (100 - 75 + 1)) + 75;
+  return highNumber;
+}
+
+function lowRandomPercentage () {
+  // random number between 30 and 50
+  let lowNumber = Math.floor(Math.random() * (50 - 30 + 1) + 30)
+  return lowNumber;
+}
+
 // Call API for easy questions initially
 callApi(easyQuestions);

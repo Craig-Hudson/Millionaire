@@ -35,10 +35,10 @@
         <div class="quiz-scores-container">
           <!-- life lines -->
           <div class="life-lines-container">
-            <i id="ask-the-audience" class="audience fa-solid fa-people-group life-lines" title="Ask The Audience"></i>
-            <i id="fifty-fifty" class="fifty-fifty fa-solid fa-percent life-lines" title="Fifty Fifty"></i>
-            <i id="phone-a-friend" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" title="Phone A Friend"></i>
-            <i id="bank" class="bank fa-solid fa-building-columns life-lines" title="Bank"></i>
+            <i id="ask-the-audience" class="audience fa-solid fa-people-group life-lines" aria-label="audience icon" title="Ask The Audience"></i>
+            <i id="fifty-fifty" class="fifty-fifty fa-solid fa-percent life-lines" aria-label="Percentage icon" title="Fifty Fifty"></i>
+            <i id="phone-a-friend" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" aria-label="Phone icon" title="Phone A Friend"></i>
+            <i id="bank" class="bank fa-solid fa-building-columns life-lines" aria-label="Bank icon" title="Bank"></i>
           </div>
           <!-- score area -->
           <ul class="quiz-scores">
@@ -68,8 +68,8 @@
         <!-- Question and answer area -->
         <div class="quiz-body-container">
           <div class="quiz-body">
-            <div><h3>Question: <span id="question-number"></span></h3></div>
-            <h3 id="question" class="quiz-question"></h3>
+            <h3>Question: <span id="question-number"></span></h3>
+            <h3 id="question" class="quiz-question">What time is it?</h3>
             <div class="answer-options">
               <div class="columns">
                 <button type="button" id="answer1" data-number="1" class="answer-button">answer1</button>
@@ -86,7 +86,7 @@
     </div>
   </section>
   <!-- mobile scores section -->
-  <section id="mobile-scores">
+  <div id="mobile-scores">
     <div class="score-wrapper-mobile side-panel-closed">
       <button id="side-panel-toggle" class="side-panel"  type="button">
         <i class="fa-solid fa-angles-left icon-open"></i>
@@ -94,10 +94,10 @@
       </button>
       <div class="content main hidden">
         <div class="life-lines-container-mobile">
-          <i id="ask-the-audience-mobile" class="audience fa-solid fa-people-group life-lines" title="Ask The Audience"></i>
-          <i id="fifty-fifty-mobile" class="fifty-fifty fa-solid fa-percent life-lines" title="Fifty Fifty"></i>
-          <i id="phone-a-friend-mobile" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" title="Phone A Friend"></i> 
-          <i id="bank-mobile" class="bank fa-solid fa-building-columns life-lines" title="Bank"></i>
+          <i id="ask-the-audience-mobile" class="audience fa-solid fa-people-group life-lines" aria-label="Audience icon" title="Ask The Audience"></i>
+          <i id="fifty-fifty-mobile" class="fifty-fifty fa-solid fa-percent life-lines" aria-label="Percentage icon" title="Fifty Fifty"></i>
+          <i id="phone-a-friend-mobile" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" aria-label="Phone icons" title="Phone A Friend"></i> 
+          <i id="bank-mobile" class="bank fa-solid fa-building-columns life-lines" aria-label="Bank icon"  title="Bank"></i>
         </div>
         <ul class="quiz-scores-mobile">
             <li class="score-mobile">15: £<span class="money">1000000</span></li>
@@ -118,7 +118,7 @@
         </ul>
       </div>
     </div>
-  </section>
+  </div>
   <!-- pop up messages when user interacts with the life lines -->
   <div id="life-lines-modal" class="modal-life-lines">
     <div class="modal-content-life-lines">
@@ -128,7 +128,7 @@
   </div>
   <section id="end-game-area" class="get-center background-image">
     <div class="end-game-container">
-      <h2><span id="show-users-score"></span></h2>
+      <h2><span id="show-users-score">100</span></h2>
       <p id="users-name"></p>
       <p>You can either play again, or return home and view your high scores!</p>
       <button type="button" class="buttons play-again">Play Again?</button>

@@ -18,11 +18,11 @@
     - [Favicon](#favicon)
     - [Home Page](#home-page)
     - [Home Page modals](#home-page-modals)
+    - [Input Name Page](#input-name-page)
     - [Game Page](#game-page)
     - [pop up modal messages when user interacts with life lines.](#pop-up-modal-messages-when-user-interacts-with-life-lines)
-    - [Menu](#menu)
-    - [Testimonials](#testimonials)
-    - [Our Story](#our-story)
+    - [End Game Page](#end-game-page)
+    - [Thank You Page](#thank-you-page)
     - [Footer](#footer)
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
@@ -125,16 +125,28 @@ By implementing them few points above I have made my webpage as accessible and u
 ![Favicon Image](/assets/images/site-images/favicon-m.webp)
 
 ### Home Page
+
 ![Home Page](assets/images/readme-images/home-page.webp)
 
 ### Home Page modals
 
-- How to play Modal
+- How to play Modal has a scroll effect to fit the content in, and thats fors desktop, tablet and mobile, and will then list and give the user information on how to play the quiz.
+
 ![How to play modal](assets/images/readme-images/how-to-play-modal.webp)
-- High Score Modal
+
+- High Score Modal will store the high scores of the user, I have used local storage to achieve this, so the user will be able to view their own high scores, high scores are also listed highest to lowest and if the user scores higher and they've reached the maximum amount of high scores (50), the lowest score will be replaced and the newer high score added into the high score display.
+
 ![High scores modal](assets/images/readme-images/highscore-modal.webp)
-- Contact us Modal
+
+- Contact us Modal a simple for for the user to fill in for any general enquires and any bugs/errors found, which will then take the user to a thank you page.
+
 ![Contact us modal](assets/images/readme-images/contact-modal.webp)
+
+### Input Name Page
+
+- Input Name Section
+
+![Input Name page](assets/images/readme-images/input-name-section.webp)
 
 ### Game Page
 
@@ -145,41 +157,32 @@ By implementing them few points above I have made my webpage as accessible and u
 
 - Phone a friend pop up
 ![Phone a friend](assets/images/readme-images/phone-a-friend-pop-up-message.webp)
+
 - Ask the Audience
 ![Ask the audience](assets/images/readme-images/ask-the-audience-pop-up-message.webp)
 
+### End Game Page
 
-- I went with a pop up modal booking form rather than having a booking form on a separate page, this was to keep the structure of the website all contained onto 1 page that is scrollable rather than just having 1 page that splits off from the rest of the website.
-![Pop up modal](/assets/readme-images/pop-up-modal.png)
+- End Game Section
+- The end game section will display a message to the user depending on how the user has performed on the quiz, which also includes the score the user achieved on the quiz, and then the options to play again or return home to be able to view their high scores.
+- ![End Game Section](assets/images/readme-images/end-game-section.webp)
 
-### Menu
+### Thank You Page
 
-- I created a basic menu with starters and mains
-![Menu](/assets/readme-images/menu.png)
+-Thank You Page
 
-### Testimonials
-
-- I created a testimonial section to show new customers what they can expect from the company
-![Testimonials](/assets/readme-images/testimonials.png)
-
-### Our Story
-
-- I created a heading with an image to open up the our story section
-![Our story heading](/assets/readme-images/about-us-heading-1.png)
-
-- Then i have created a section that gives a brief overview of the history and gives contact, location, and opening times below.
-![Our Story](/assets/readme-images/our-story-1.png)
+![Thank You Page](assets/images/readme-images/thank-you-page.webp)
 
 ### Footer
 
 - A footer at the bottom of the page with the copyright and navigation links for social networks
-![Footer](/assets/readme-images/footer.png)
+![Footer](/assets/images/readme-images/footer.webp)
 
 ## Technologies Used
 
 ### Languages Used
 
-HTML, CSS Bootstrap and javaScript has been used for this project
+HTML, CSS and JavaScript have been used for this project.
 
 ### Frameworks, Libraries & Programs Used
 
@@ -194,20 +197,19 @@ Git - For version control.
 ​
 [Font Awesome](https://fontawesome.com/) - For the iconography on the website.
 
-​
-Chrome Dev Tools - To troubleshoot and test features, solve issues with responsiveness and styling.
+​Chrome Dev Tools - To troubleshoot and test features, solve issues with responsiveness and styling.
 
-[Bootstrap v5.0](https://getbootstrap.com/docs/5.0/getting-started/download/) - To help create a responsive website with the use of bootstrap grid, and bootstrap classes
+[Convert png to webp](https://www.freeconvert.com/) - I converted my images to webp using this site.
 
 [tiny.png](https://tinypng.com/) - To reduce the file size of my images for better website performance
 
-[Image resizer](https://www.resizepixel.com/) - To reduce any unnecessary height and width on photos, also minimizing file size
+[Image resizer](https://www.resizepixel.com/) - To reduce any unnecessary height and width on photos, also minimizing file size.
 
-Balsamiq - I used Balsamiq wireframes from a desktop app for my wireframes
+Balsamiq - I used Balsamiq wireframes from a desktop app for my wireframes,
 
-[W3School](https://www.w3schools.com/) To refer to anything Java script related that i may have been unsure of
+[W3School](https://www.w3schools.com/) To refer to anything Java script related that i may have been unsure of.
 
-[Pexels](https://www.pexels.com/) I used pexels for all my images for this project
+[Vecteezy](https://www.vecteezy.com/) - I used this website to get the image for my background
 
 VsCode - I have used vscode as my ide
 
@@ -235,7 +237,7 @@ To fork The Millionaire repository:
 ​
 
 1. Log in (or sign up) to Github.
-2. Go to the repository for this project, The SmokeHouse !(<https://github.com/Craig-Hudson/Millionaire.git>)
+2. Go to the repository for this project, Millionaire !(<https://github.com/Craig-Hudson/Millionaire.git>)
 3. Click the Fork button in the top right corner.
 ​
 
@@ -359,13 +361,13 @@ Full testing was done on the following browsers:
 
 ### Code Used
 
-[Bootstrap carousel](http://https://getbootstrap.com/docs/5.3/components/carousel/#how-it-works "Bootstrap carousel") - I used the code from bootstrap to create the structure of the carousel and have added additional bootstrap classes and my own classes where necessary.
+- The code from the function below tas taken from [Stack Overflow](https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript)
+![Sanitize Function](assets/images/readme-images/sanitize-function.webp)
 
-[Bootstrap hamburger menu](http:/https://getbootstrap.com/docs/5.3/components/navbar/#how-it-works/ "Bootstrap hamburger menu") - I used the code from bootstrap v 5.3 to create the hamburger menu
 
-[Bootstrap modal](https://getbootstrap.com/docs/5.3/components/modal/#how-it-works "Bootstrap Modal") - I have used the code from bootstrap to create the pop up modal, and then have targeted the classes for my own styles
-
-NOTE: All id selectors and !important were used in my css to override the css coming from bootstrap
+- The code for both of these functions which are used for getting the users scores into local storage was used by using a video tutorial from this [youtube tutorial](https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9)
+![Highscore function in the game file](assets/images/readme-images/highscore-game-js.webp)
+![highscore funciton in the home file](assets/images/readme-images/highscore-home-js.webp)
 
 ### Content
 

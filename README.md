@@ -16,8 +16,10 @@
     - [Accessability](#accessability)
   - [Features](#features)
     - [Favicon](#favicon)
-    - [Image Carousel](#image-carousel)
-    - [Pop up Modal](#pop-up-modal)
+    - [Home Page](#home-page)
+    - [Home Page modals](#home-page-modals)
+    - [Game Page](#game-page)
+    - [pop up modal messages when user interacts with life lines.](#pop-up-modal-messages-when-user-interacts-with-life-lines)
     - [Menu](#menu)
     - [Testimonials](#testimonials)
     - [Our Story](#our-story)
@@ -88,7 +90,7 @@ The app I have constructed will be based on some of the concepts of the game sho
     - The structure of the quiz app consists of a home page which contains a page title, a logo and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side panel which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
 
   - **Imagery**
-    - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/)
+    - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/), and is used through out the quiz app as the background image.
 
   - **Wireframes**
 
@@ -106,20 +108,46 @@ By implementing them few points above I have made my webpage as accessible and u
 
 ## Features
 
-- The Smokehouse webpage is a single page website which contains a navbar, which comprises of a hamburger menu for smaller devices, a pop up modal for reservation booking, an image carousel with a welcome message,a menu section, our story section, testimonial section and a footer.
+- The Millionaire quiz contains the homepage, which has 4 buttons and a title, the buttons consist of
+  start quiz, how to play, high scores and contact us. The high scores button will display a pop up
+  modal to display the users high scores that will be saved in local storage and the highs scores will be ranked from highest to lowest.
+  The how to play section again will be a pop up modal which has an overflow scroll to display the
+  rules of the game to the user.
+  The contact us button again will be a pop up modal which will give the user the chance to fill in a form, to contact if they encounter any problems with the game, or any general enquires.
+  The start quiz button will then redirect the user to the quiz game page, which consists of the scores which also has the life lines for the user to interact with, this section runs down the left side of the page, and then the quiz area next to it, which consists of the page title, a home button, the quiz questions and answers.
+  For mobile users the scores and the lifelines will be hidden in a side panel, which the user will be able to interact with for the user to view their score and use the lifelines.
+  Then when the quiz is over the user will be taken to the end game section, which will display messages based on how the user has performed, and then give the user the chance to either play again, or return home to view their high scores, or to be able to contact us if any issues arise.
 
 ### Favicon
 
 - A favicon in the browser tab
   
-![Favicon Image](/assets/readme-images/favicon-feature.png)
+![Favicon Image](/assets/images/site-images/favicon-m.webp)
 
-### Image Carousel
+### Home Page
+![Home Page](assets/images/readme-images/home-page.webp)
 
-- A carousel of images at the top of the page, with a welcome message on the first image
-![Image Carousel](/assets/readme-images/image-carousel.png)
+### Home Page modals
 
-### Pop up Modal
+- How to play Modal
+![How to play modal](assets/images/readme-images/how-to-play-modal.webp)
+- High Score Modal
+![High scores modal](assets/images/readme-images/highscore-modal.webp)
+- Contact us Modal
+![Contact us modal](assets/images/readme-images/contact-modal.webp)
+
+### Game Page
+
+- Game Page
+  ![game page](assets/images/readme-images/game-page.webp)
+
+### pop up modal messages when user interacts with life lines.
+
+- Phone a friend pop up
+![Phone a friend](assets/images/readme-images/phone-a-friend-pop-up-message.webp)
+- Ask the Audience
+![Ask the audience](assets/images/readme-images/ask-the-audience-pop-up-message.webp)
+
 
 - I went with a pop up modal booking form rather than having a booking form on a separate page, this was to keep the structure of the website all contained onto 1 page that is scrollable rather than just having 1 page that splits off from the rest of the website.
 ![Pop up modal](/assets/readme-images/pop-up-modal.png)

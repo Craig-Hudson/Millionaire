@@ -96,16 +96,24 @@
   <!-- mobile scores section -->
   <div id="mobile-scores">
     <div class="score-wrapper-mobile side-panel-closed">
-      <button id="side-panel-toggle" class="side-panel"  type="button">
+      <button id="side-panel-toggle" class="side-panel"  type="button" title="Click to open">
         <i class="fa-solid fa-angles-left icon-open"></i>
         <i class="fa-solid fa-angles-right icon-close"></i>
       </button>
       <div class="content main hidden">
         <div class="life-lines-container-mobile">
-          <i id="ask-the-audience-mobile" class="audience fa-solid fa-people-group life-lines" aria-label="Audience icon" title="Ask The Audience"></i>
-          <i id="fifty-fifty-mobile" class="fifty-fifty fa-solid fa-percent life-lines" aria-label="Percentage icon" title="Fifty Fifty"></i>
-          <i id="phone-a-friend-mobile" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" aria-label="Phone icons" title="Phone A Friend"></i> 
-          <i id="bank-mobile" class="bank fa-solid fa-building-columns life-lines" aria-label="Bank icon"  title="Bank"></i>
+          <button type="button" aria-label="Audience icon" class="audience life-line-button">
+            <i id="ask-the-audience-mobile" class="fa-solid fa-people-group life-lines"  title="Ask The Audience"></i>
+          </button>
+          <button type="button" aria-label="Percentage icon" class="fifty-fifty life-line-button">
+            <i id="fifty-fifty-mobile" class="fa-solid fa-percent life-lines" title="Fifty Fifty"></i>
+          </button>
+          <button type="button" aria-label="Phone icon" class="phone-a-friend life-line-button">
+            <i id="phone-a-friend-mobile" class="fa-sharp fa-solid fa-phone life-lines" title="Phone A Friend"></i> 
+          </button>
+          <button type="button" aria-label="Bank Icon" class="bank life-line-button">
+            <i id="bank-mobile" class="bank fa-solid fa-building-columns life-lines" title="Bank"></i>
+          </button>
         </div>
         <ul class="quiz-scores-mobile">
             <li class="score-mobile">15: £<span class="money">1000000</span></li>

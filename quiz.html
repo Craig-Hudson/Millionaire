@@ -35,11 +35,19 @@
         <div class="quiz-scores-container">
           <!-- life lines -->
           <div class="life-lines-container">
-            <i id="ask-the-audience" class="audience fa-solid fa-people-group life-lines" aria-label="audience icon" title="Ask The Audience"></i>
-            <i id="fifty-fifty" class="fifty-fifty fa-solid fa-percent life-lines" aria-label="Percentage icon" title="Fifty Fifty"></i>
-            <i id="phone-a-friend" class="phone-a-friend fa-sharp fa-solid fa-phone life-lines" aria-label="Phone icon" title="Phone A Friend"></i>
-            <i id="bank" class="bank fa-solid fa-building-columns life-lines" aria-label="Bank icon" title="Bank"></i>
-          </div>
+            <button type="button" aria-label="Audience icon" class="audience life-line-button">
+              <i id="ask-the-audience" class="fa-solid fa-people-group life-lines" title="Ask The Audience"></i>
+            </button>
+            <button type="button" aria-label="percentage icons" class="fifty-fifty life-line-button">
+              <i id="fifty-fifty" class="fifty-fifty fa-solid fa-percent life-lines" title="Fifty Fifty"></i>
+            </button>
+            <button type="button" aria-label="Phone icon" class="phone-a-friend life-line-button">
+              <i id="phone-a-friend" class="fa-sharp fa-solid fa-phone life-lines" title="Phone A Friend"></i>
+            </button>
+            <button type="button" aria-label="Bank icon" class="bank life-line-button">
+              <i id="bank" class="fa-solid fa-building-columns life-lines" title="Bank"></i>
+            </button>
+            </div>
           <!-- score area -->
           <ul class="quiz-scores">
             <li class="score">15: £<span class="money">1000000</span></li>

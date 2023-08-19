@@ -16,7 +16,7 @@ const hardQuestions = 'https://opentdb.com/api.php?amount=5&category=9&difficult
 const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 // LIFE LINE GLOBALS
 let askTheAudience = document.querySelectorAll('.audience');
-let PhoneAFriendUsed = false
+let PhoneAFriendUsed = false;
 let fiftyFiftyUsed = false;
 let fiftyFifty = document.querySelectorAll('.fifty-fifty');
 let phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
@@ -65,10 +65,11 @@ async function callApi (urlApi) {
       //   console.log('No questions found in the API response.');
       // }
     } else {
-      console.log('Error fetching data from the API.');
+      //  error to handle the failure to fetch the questions data
+      window.location.href = '500.html'
     }
   } catch (error) {
-    console.error(error);
+    window.location.href = '500.html'
   }
 }
 
@@ -167,9 +168,6 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
-    console.log('score', score, 'score mobile', scoreMobile)
-    console.log('moneyindex', moneyIndex)
-
     moneyIndex = determineMoneyIndex(score, scoreMobile); // 
     setTimeout(endQuiz, 1000);
   }
@@ -256,7 +254,7 @@ function handleAskTheAudience () {
     displayModalMessage(`The audience voted ${highNumber}% for ${sanitizedCorrectAnswer}, but the final decision lies with you ${userName}`);
   }
   if (score >= 5 || scoreMobile >= 5) {
-    displayModalMessage(`The audience voted ${lowNumber}% for ${sanitizedCorrectAnswer} and ${lowNumber2}% for ${sanitizedIncorrectAnswers}.\n These were the two highest percentages. The decision is yours!`)
+    displayModalMessage(`The audience voted ${lowNumber}% for ${sanitizedCorrectAnswer} and ${lowNumber2}% for ${sanitizedIncorrectAnswers}. These were the two highest percentages. The decision is yours!`);
   }
 
   askTheAudience.forEach(element => {
@@ -266,7 +264,7 @@ function handleAskTheAudience () {
   });
 }
 
-function fiftyFiftyLifeLine() {
+function fiftyFiftyLifeLine () {
   if (!fiftyFiftyUsed) {
     const incorrectAnswers = data.results[questionIndex].incorrect_answers;
     // Slice the incorrect answers array so we only get two incorrect answers to hide for the 50/50 lifeline
@@ -329,7 +327,7 @@ function bankMoney () {
   let moneyList = document.querySelectorAll('.money');
   let reverseMoneyList = [...moneyList].reverse();
   let sidePanel = document.querySelector('.side-panel');
-  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile')
+  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     // Confirm the action with the user before proceeding
     if (confirmAction('Are You Sure You Want To Bank Your Money?')) {
@@ -375,13 +373,21 @@ function displayModalMessage(message) {
   let closeModalButton = document.getElementById('close-modal');
   closeModalButton.addEventListener('click', function () {
     modal.style.display = 'none';
-  })
+  });
 
   window.addEventListener('click', function(event) {
     if (event.target === modal) {
       modal.style.display = 'none';
     }
-  });
+  })
+  window.addEventListener('keydown', function (event) {
+    const key = event.key
+    if (key === 'Escape') {
+      modal.style.display = 'none';
+    }
+  })
+
+  ;
 }
 // END OF LIFE LINE SECTION
 
@@ -406,7 +412,6 @@ function setHighScore (name, score) {
     userName: name,
     score: score
   };
-  console.log('setHighScore called')
   highScores.push(highScoreObject);
 
   // Sort the highScores array by score in descending order
@@ -414,7 +419,6 @@ function setHighScore (name, score) {
   highScores.splice(50);
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
-  console.log('highscores', highScores)
 }
 
 function endQuiz () {
@@ -517,7 +521,7 @@ returnHomeButton.addEventListener('click', function (e) {
       window.location = 'index.html';
     }
   }
-})
+});
 
 function toggleSidePanel () {
   let sidePanelToggle = document.getElementById('side-panel-toggle');
@@ -559,7 +563,7 @@ function highRandomPercentage () {
 
 function lowRandomPercentage () {
   // random number between 30 and 50
-  let lowNumber = Math.floor(Math.random() * (50 - 30 + 1) + 30)
+  let lowNumber = Math.floor(Math.random() * (50 - 30 + 1) + 30);
   return lowNumber;
 }
 

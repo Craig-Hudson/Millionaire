@@ -8,16 +8,16 @@
   <meta name="author" content="Millionaire quiz">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="icon" type="image/x-icon" href="assets/images/site-images/favicon-m.webp">
-
   <title>Millionaire Quiz</title>
 </head>
+<!-- <a href="https://www.vecteezy.com/free-photos">Free Stock photos by Vecteezy</a> -->
 <body class="background-image">
   <header>
     <!--Page Title-->
     <h1 class="page-title">Millionaire Quiz</h1>
   </header>
     
-  <section>
+  <main>
     <!--buttons for each section of the site for user to access-->
     <div class="buttons-container">
       <button type="button" class="buttons start-quiz">Start Quiz</button>
@@ -81,7 +81,7 @@
       <dialog id="contact-us" class="modal contact-us-form">
         <div class="modal-content">
         <h2 class="modal-heading">Contact us<span class="close-modal">Close &times;</span></h2>
-        <form id="form" method="post" action="thankyou.html">
+        <form id="form" method="get" action="thankyou.html">
           <div>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
@@ -99,20 +99,20 @@
             <textarea id="message" name="message" rows="4" placeholder="Enter Your Message Here" required></textarea>
             </div>
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" class="buttons">Submit</button>
             </div>
           </form>
         </div>
       </dialog>
     </div>
-  </section>
+  </main>
   <footer>
     <div class="social-links">
       <a href="https://twitter.com/CraigHu77170043" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
       <a href="https://github.com/Craig-Hudson" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
       <a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
     </div>
-    <p>&copy Craig Hudson. All Rights Reserved</p>
+    <p>&copy; Craig Hudson. All Rights Reserved</p>
   </footer>
   <script src="https://kit.fontawesome.com/67d3e93815.js" crossorigin="anonymous"></script>
   <script src="assets/js/home.js"></script>

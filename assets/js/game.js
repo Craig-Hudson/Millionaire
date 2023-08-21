@@ -115,6 +115,7 @@ function getAnswers () {
   let incorrectAnswer = data.results[questionIndex].incorrect_answers;
   let newAnswerArray = incorrectAnswer.concat(correctAnswer);
   shuffleAnswers(newAnswerArray);
+  console.log(correctAnswer);
   for (let i = 0; i < answerButtons.length; i++) {
     answerButtons[i].innerHTML = newAnswerArray[i];
     answerButtons[i].style.background = '';
@@ -266,9 +267,9 @@ function handleAskTheAudience () {
 
 function fiftyFiftyLifeLine () {
   if (!fiftyFiftyUsed) {
-    const incorrectAnswers = data.results[questionIndex].incorrect_answers;
+    let incorrectAnswers = data.results[questionIndex].incorrect_answers;
     // Slice the incorrect answers array so we only get two incorrect answers to hide for the 50/50 lifeline
-    const sliceIncorrectAnswers = incorrectAnswers.slice(1, 3);
+    let sliceIncorrectAnswers = sanitizeAnswer(incorrectAnswers.slice(1, 3));
     answerButtons.forEach((button) => {
       if (sliceIncorrectAnswers.includes(button.textContent)) {
         button.style.visibility = 'hidden';
@@ -284,7 +285,6 @@ function fiftyFiftyLifeLine () {
   }
 }
 
-
 function phoneAFriendLifeLine() {
   if (!PhoneAFriendUsed) {
     let correctAnswer = data.results[questionIndex].correct_answer;
@@ -295,26 +295,26 @@ function phoneAFriendLifeLine() {
     let correctAnswerArray = [correctAnswer];
     let concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     let oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
-
-    switch (true) {
-      case (questionIndex >= 0 && score < 5) || (questionIndex >= 0 && scoreMobile < 5):
-        displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
-        break;
-      case (questionIndex >= 0 && score >= 5 && score < 10) || (questionIndex >= 0 && scoreMobile >= 5 && scoreMobile < 10):
-        displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
-        break;
-      case (questionIndex >= 0 && score >= 10) || (questionIndex >= 0 && scoreMobile >= 10):
-        displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
-        break;
-      default:
-        // Handle other cases if needed
-        break;
+    console.log(moneyIndex);
+    if (moneyIndex < 4) {
+      displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
+      console.log('first');
+    } else if (moneyIndex < 9 && moneyIndex >= 4) {
+      displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
+      console.log('second');
+    } else if (moneyIndex >= 9 && moneyIndex < 14) {
+      displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
+      console.log('third');
+    } else {
+      displayModalMessage(`Hi ${userName}, I believe the correct answer is ${sanitizedCorrectAnswer}`);
+      console.log('4th');
     }
-
+  
     disablePhoneAFriendButton();
     PhoneAFriendUsed = true;
   }
 }
+
 function disablePhoneAFriendButton() {
   phoneAFriendButton.forEach(button => {
     button.classList.add('visibility');
@@ -385,9 +385,7 @@ function displayModalMessage(message) {
     if (key === 'Escape') {
       modal.style.display = 'none';
     }
-  })
-
-  ;
+  });
 }
 // END OF LIFE LINE SECTION
 

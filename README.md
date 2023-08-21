@@ -207,7 +207,7 @@ VsCode - I have used vscode as my ide
 
 ## Testing
 
-All my testing can be found in the [testing file](../Who-wants-to-be-a-millionaire/testing.md)
+All my testing can be found in the [testing file](testing.md)
 ## Deployment & Local Development
 
 ### Deployment

@@ -171,8 +171,12 @@ Testing was done on the following devices and browsers
 | Home button  | Ask the user if they want to leave the page  | Click button  | I was asked if i wanted to leave the page, as much progress would be lost.  | Pass  |
 | Hover effect on answer buttons  | When hovered over the borders should go orange, and the button should grow slightly in size, this is for desktop only.  | Hover over answer buttons   | All answer buttons grew in size and border colours changed to orange.  | Pass  |
 | Hover effect on life lines  | When hovered over the life lines should grow in size and turn orange  | Hover over life line icons  | All icons grew in size, and turned orange while hovered over  | Pass  |
-| pop up message when ask the audience and phone a friend life lines are clicked  | Message to pop up  | Click both ask the audience and phone a friend  | pop up messages on both life lines popped up  |   |
-
+| pop up message when ask the audience and phone a friend life lines are clicked  | Message to pop up  | Click both ask the audience and phone a friend  | pop up messages on both life lines popped up  | Pass  |
+| Fifty fifty life line  | Hide to answer buttons  | Click fifty fifty lifeline  | Two answers hid from the users screen, this was testing on multiple question and answers from each of the three api's  | Pass  |
+|  Bank icon | Ask user if they are sure they want to bank, and then exit the quiz to end game section where user messages are displayed.  | Click on bank life line  | I was asked if I wanted to bank, and then upon clicking on yes I was directed to another page where there was a message displaying what I had won. | Pass  |
+| Api testing (easy)  | Questions 1-5 should have the easy api  | go through questions 1-5 using console.logs to determine the correct api is in place  | The console.log showed throughout that the easy api was in place ![Easy API](assets/images/testing-images/easy-api.webp)   | Pass   |
+|  Api testing (medium) | Questions 6-10 should have the medium api  | go through questions 6-10 using console.logs to determine the correct api is in place  | The console.log showed throughout that the medium api was in place ![Medium API](assets/images/testing-images/medium-api.webp)    | Pass  |
+| Api testing (hard)  | Questions 11-15 should have the hard api   | go through questions 11-15 using console.logs to determine the correct api is in place   | The console.log showed throughout that the hard api was in place ![Hard API](assets/images/testing-images/hard-api.webp)   |   |
 
 ## Bugs
 

@@ -28,7 +28,7 @@ a {
 header {
   display: flex;
   justify-content: center;
-  height: 11vh;
+  height: 10vh;
 }
 
 .page-title {
@@ -493,7 +493,6 @@ header {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  /* width: 95%; */
   justify-content: center;
   align-items: center;
   height: 60vh;
@@ -508,6 +507,10 @@ header {
 
 .end-game-container button {
   width: 35%;
+}
+
+.end-game-container * {
+  margin: 7px 0;
 }
 /* ENF OF END GAME SECTION */
 
@@ -667,14 +670,6 @@ footer {
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(31,31,33,1) 73%, rgba(78,79,80,1) 100%, rgba(0,212,255,1) 100%);
   color: whitesmoke;
 }
-/* To get rid of the hover effect on anything that is touchscreen */
-@media (hover: none) {
-  /* Override hover styles for touchscreen devices */
-  .answer-button:hover {
-    border-color: transparent; 
-    transform: none;
-  }
-}
 
 /* MEDIA SCREEN UNDER 1200PX */
 @media screen and (max-width: 1200px) {
@@ -782,9 +777,11 @@ footer {
   .mobile-width {
     width: 100% !important;
   }
+
   .game-area {
     width: 100%
   }
+
   .quiz-body {
     width: 80%;
     height: 80vh;
@@ -864,6 +861,10 @@ footer {
     font-size: 20px;
   }
 
+  .life-lines-container-mobile .fa-percent {
+    padding: 14px 17px;
+  }
+
   .content-404 {
     width: 70%;
     height: 60%;
@@ -883,15 +884,19 @@ footer {
     height: 60%;
     width: 80%;
   }
+
+  /* To get rid of the hover effect on anything that is touchscreen */
+@media (hover: none) {
+  .answer-button:hover {
+    border-color: transparent; 
+    transform: none;
+  }
+}
 }
 
 /* MEDIA SCREEN UNDER 550PX */
 @media screen and (max-width: 550px) {
-  header {
-    height: 10vh;
-  }
-
-/* BUTTONS UNDER  550PX*/
+  /* BUTTONS UNDER  550PX*/
 
   .buttons {
     width: 25%;
@@ -914,6 +919,7 @@ footer {
     width: 100%;
   }
 
+  /* Quiz Area */
   .page-title {
     letter-spacing: 1px;
     font-size: 150%;
@@ -928,6 +934,7 @@ footer {
   .quiz-body h3 {
     font-size: 130%;
   }
+  
   .columns {
     font-size: 85%;
   }
@@ -936,6 +943,10 @@ footer {
 
   .input-form-position {
     font-size: 65%;
+  }
+
+  .input-name-section h2 {
+    font-size: 130%;
   }
 
 /* QUIZ SECTION UNDER 550PX */
@@ -947,10 +958,9 @@ footer {
     font-size: 70%;
   }
 
-
-  .content-404 {
-    width: 90%;
-    font-size: 80%;
+/* side bar pop out */
+  .main {
+    font-size: 70%;
   }
 
   /* social links under 500px */
@@ -958,9 +968,10 @@ footer {
     font-size: 70%;
   }
 
-  .fifty-fifty {
+  /* Life lines */
+  /* .fifty-fifty {
     padding: 14px 17px;
-  }
+  } */
 
   .modal-content-life-lines {
     font-size: 120%;
@@ -969,6 +980,11 @@ footer {
   /* 404 html */
   .content-404 button {
     width: 45%;
+  }
+
+  .content-404 {
+    width: 90%;
+    font-size: 80%;
   }
 
   /* 500 html */

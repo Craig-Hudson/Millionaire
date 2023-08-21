@@ -27,6 +27,7 @@
   - [Technologies Used](#technologies-used)
     - [Languages Used](#languages-used)
     - [Frameworks, Libraries \& Programs Used](#frameworks-libraries--programs-used)
+  - [Testing](#testing)
   - [Deployment \& Local Development](#deployment--local-development)
     - [Deployment](#deployment)
     - [Local Development](#local-development)
@@ -203,6 +204,10 @@ VsCode - I have used vscode as my ide
 
 [open trivia db](https://opentdb.com/) - I used this database for the api's used for the quiz.
 
+
+## Testing
+
+All my testing can be found in the [testing file](../Who-wants-to-be-a-millionaire/testing.md)
 ## Deployment & Local Development
 
 ### Deployment

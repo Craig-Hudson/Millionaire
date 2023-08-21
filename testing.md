@@ -13,6 +13,7 @@
   - [wave reports](#wave-reports)
   - [Manual Testing](#manual-testing)
     - [Testing user Stories](#testing-user-stories)
+    - [Full Testing](#full-testing)
   - [Bugs](#bugs)
 
 ## Overview
@@ -124,7 +125,7 @@ This includes using chrome developer tools to test for responsiveness and for ge
 | As a frequent visitor I want to be able to keep track of my high score even if I exit the page.  | This was achieved by creating a function that will save the users name and high score into local storage so when the user returns to the website even after closing the webpage the users scores will always be there.  |
 | As a frequent visitor I want to be able to see the high scores of users from all over the world.  | Unfortunately this was not achieved in this project, but this will be something I will be looking to add in any future development, once I learn the backend and databases.  |
 
-*** Full Testing
+### Full Testing
 
 Testing was done on the following devices and browsers
 
@@ -157,5 +158,27 @@ Testing was done on the following devices and browsers
 |  Validation between 4-12 Characters | Error message to pop up to warn user that they are required to enter between 4-12 characters  | Enter less than 4 and more than 12 Characters  | Error message popped up to warn user  | Pass  |
 | submit button  | Taken the the quiz area  | Click submit  | I was taken to the quiz area section  | Pass   |
 
+- **Quiz Page - Game Area
+
+| Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| Correct answer button highlights orange  | Answer button to highlight orange  | Click answer  | Correct answer highlighted  | pass  |
+| incorrect answer to highlight red, and show user correct answer by highlighting orange  | incorrect answer red, correct answer orange  | Click incorrect answer  | incorrect answer was red, and correct answer was orange  | pass  |
+| money ladder to highlight orange to show user the current score on the money ladder when they answer correctly  | score to highlight answer  | Click correct answer  | The score on the money ladder highlighted  | pass  |
+| money ladder to increment and highlight their current score | example the user is on £100 on the money ladder, if the user gets the next question correct the highlight will be taken off £100 and put onto £200  | Answer next question correctly  | The highlight was taken off £100 and put onto £200  | pass  |
+| MOBILE USERS side bar for score and life lines open / close  | When user slicked the side bar toggle it should pop out  | Click side bar toggle  | Side bar opened and closed | Passed  |
+|  Mobile Users side bar to pop out and back in again automatically when answered question correctly | Side toggle to pop out automatically  | Answer question correctly  | Side toggle opened and gave enough time for the user to see their score   | Pass  |
+| Home button  | Ask the user if they want to leave the page  | Click button  | I was asked if i wanted to leave the page, as much progress would be lost.  | Pass  |
+| Hover effect on answer buttons  | When hovered over the borders should go orange, and the button should grow slightly in size, this is for desktop only.  | Hover over answer buttons   | All answer buttons grew in size and border colours changed to orange.  | Pass  |
+| Hover effect on life lines  | When hovered over the life lines should grow in size and turn orange  | Hover over life line icons  | All icons grew in size, and turned orange while hovered over  | Pass  |
+| pop up message when ask the audience and phone a friend life lines are clicked  | Message to pop up  | Click both ask the audience and phone a friend  | pop up messages on both life lines popped up  |   |
+
 
 ## Bugs
+
+- **Solved Bugs**
+
+| Bug found  | How I resolved  |
+| ------------ | ------------ |
+| Hover effect on answer buttons not working on firefox desktop browser  | I had a media query that stopped the hover effect for touchscreen devices, but this was also effecting desktop on firefox browsers. So I put this media query into the media query for screens that are less than 800px so desktop users on firefox can see the hover effect.  |
+|  Phone a friend life line not displaying correct messages | It seem the issue was with my initial conditional statements comparing the score, which was outputting correctly in the function with many of console logs, but didn't work, so i adjusted the conditional to compare the moneyIndex and now all the messages are outputting as expected ![phone A Friend bug fix](assets/images/testing-images/phone-a-friend-bug.webp) |

@@ -65,7 +65,7 @@ This includes using chrome developer tools to test for responsiveness and for ge
 
 - Home page JavaScript validation on JShint
 
-![home JavaScript](assets/images/testing-images/home-js-jshint.webp)
+![home JavaScript](assets/images/testing-images/jshint-home.webp)
 
 - Game page javascript validation on JShint
 
@@ -96,7 +96,6 @@ This includes using chrome developer tools to test for responsiveness and for ge
 - All the wave reports have zero errors and zero contrast errors, a few of them have alerts for possible headings and adjacent links.
 
 ## Manual Testing
-
 
 ### Testing user Stories
 
@@ -158,7 +157,7 @@ Testing was done on the following devices and browsers
 |  Validation between 4-12 Characters | Error message to pop up to warn user that they are required to enter between 4-12 characters  | Enter less than 4 and more than 12 Characters  | Error message popped up to warn user  | Pass  |
 | submit button  | Taken the the quiz area  | Click submit  | I was taken to the quiz area section  | Pass   |
 
-- **Quiz Page - Game Area
+- **Quiz Page - Game Area**
 
 | Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
@@ -176,7 +175,12 @@ Testing was done on the following devices and browsers
 |  Bank icon | Ask user if they are sure they want to bank, and then exit the quiz to end game section where user messages are displayed.  | Click on bank life line  | I was asked if I wanted to bank, and then upon clicking on yes I was directed to another page where there was a message displaying what I had won. | Pass  |
 | Api testing (easy)  | Questions 1-5 should have the easy api  | go through questions 1-5 using console.logs to determine the correct api is in place  | The console.log showed throughout that the easy api was in place ![Easy API](assets/images/testing-images/easy-api.webp)   | Pass   |
 |  Api testing (medium) | Questions 6-10 should have the medium api  | go through questions 6-10 using console.logs to determine the correct api is in place  | The console.log showed throughout that the medium api was in place ![Medium API](assets/images/testing-images/medium-api.webp)    | Pass  |
-| Api testing (hard)  | Questions 11-15 should have the hard api   | go through questions 11-15 using console.logs to determine the correct api is in place   | The console.log showed throughout that the hard api was in place ![Hard API](assets/images/testing-images/hard-api.webp)   |   |
+| Api testing (hard)  | Questions 11-15 should have the hard api   | go through questions 11-15 using console.logs to determine the correct api is in place   | The console.log showed throughout that the hard api was in place ![Hard API](assets/images/testing-images/hard-api.webp)   | Pass  |
+| Quiz ending  | The quiz should end in the following three events, the user answers a question in correctly, the user banks their money, or the user wins the quiz  | Answer incorrectly, bank my money, and win the quiz  | When I answered a question incorrect the quiz ended, When I banked my money the Quiz ended, When I won the quiz the quiz ended.  | Pass   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 ## Bugs
 

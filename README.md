@@ -28,6 +28,7 @@
     - [Languages Used](#languages-used)
     - [Frameworks, Libraries \& Programs Used](#frameworks-libraries--programs-used)
   - [Testing](#testing)
+    - [Bugs](#bugs)
   - [Deployment \& Local Development](#deployment--local-development)
     - [Deployment](#deployment)
     - [Local Development](#local-development)
@@ -76,10 +77,12 @@ The app I have constructed will be based on some of the concepts of the game sho
   - font-family: 'Kanit', sans-serif; will be used through out all pages titles and ordinary text, its easy to read, It's looks very elegant and clean and it will appeal to users who take part in the quiz.
 
   - **Structure**
-    - The structure of the quiz app consists of a home page which contains a page title, a logo and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side panel which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
+    - The structure of the quiz app consists of a home page which contains a page title, a background image and 4 buttons, Start quiz, how to play, high scores and contact us.The how to play, high scores, and contact us will be a pop on modal on desktop tablet and mobile. The start quiz button will take the user to an area that will require the user to enter their name.Then the quiz area will appear once the user has submitted their name.  The question area will consist of the question area with 4 possible answers, 3 life lines, a bank option,and a money ladder so the user can track their progress. On mobile devices the 3 life lines, bank option and money ladder will be hidden in a side panel which can pop out for the user to be able to view and track their progress, along side being able to user the 3 life lines and bank option.
 
   - **Imagery**
-    - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/), and is used through out the quiz app as the background image.
+    - I have only used one image for the webpage thus far. which was taken from [Vecteezy](https://www.vecteezy.com/), and is used through out the quiz app as the background image. 
+
+  - **Please note, during the development process I felt the need to replace the logo with a background image, as I felt the app was lacking a visual presence.**
 
   - **Wireframes**
 
@@ -204,10 +207,19 @@ VsCode - I have used vscode as my ide
 
 [open trivia db](https://opentdb.com/) - I used this database for the api's used for the quiz.
 
-
 ## Testing
 
 All my testing can be found in the [testing file](testing.md)
+
+### Bugs
+
+- **Solved Bugs**
+
+| Bug found  | How I resolved  |
+| ------------ | ------------ |
+| Hover effect on answer buttons not working on firefox desktop browser  | I had a media query that stopped the hover effect for touchscreen devices, but this was also effecting desktop on firefox browsers. So I put this media query into the media query for screens that are less than 800px so desktop users on firefox can see the hover effect.  |
+|  Phone a friend life line not displaying correct messages | It seem the issue was with my initial conditional statements comparing the score, which was outputting correctly in the function with many of console logs, but didn't work, so i adjusted the conditional to compare the moneyIndex and now all the messages are outputting as expected ![phone A Friend bug fix](assets/images/testing-images/phone-a-friend-bug.webp) |
+
 ## Deployment & Local Development
 
 ### Deployment
@@ -252,6 +264,13 @@ To clone The Millionaire repository:
 ## Credits
 
 ### Code Used
+
+- Most of the code in this project was written my myself, references to w3schools and mdn web docs have been made with some of the code also, weather thats remembering a syntax, or re jogging my memory.
+
+- I had to take code from the following sources below.
+
+- I had to use the fisher yates shuffle to shuffle my answers I took the code from [Geeks For Geeks](https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/)
+![Shuffle answer function](assets/images/testing-images/shuffle-answers-function.webp)
 
 - The code from the function below tas taken from [Stack Overflow](https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript)
 ![Sanitize Function](assets/images/readme-images/sanitize-function.webp)

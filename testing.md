@@ -23,7 +23,7 @@ This includes using chrome developer tools to test for responsiveness and for ge
 Console.logs and Alerts were used during the development to test the functionality and ensure things like event Listeners were working as expected, or any functions that have conditionals were correctly working. I have added some evidence of this in a small table below.
 
 | What was tested | Description  | Evidence  |
-|--------|----------|
+|--------|----------|-------|
 | Event Listeners  | For all of my event listeners that required the user to click or key press I used alerts to tell me that I had set up the event listener correctly  | ![Alert evidence](assets/images/testing-images/click-event-test.webp) ![Alert evidence](assets/images/testing-images/click-event-result.webp)  |
 | Ask the audience function  | For this function I used a mix of console.logs to double check the data from the api's, and then using alerts in the if statements to test if the conditional statements were correct.   | ![Ask the audience evidence](assets/images/testing-images/ask-the-audience-manual-test.webp)  |
 | Bank function  | For this function again I used a mix of console logs to check if the data was correct, and then alerts to check if the event listener was correctly working  | ![Bank money evidence](assets/images/testing-images/bank-money-function-manual-tests.webp)  |

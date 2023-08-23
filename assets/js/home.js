@@ -11,7 +11,6 @@ function openModal (modalId) {
   modalContainer.classList.add('active');
   modal.classList.add('active');
   if (modalId === 'high-scores') {
-    console.log('highscores');
     updateHighScoresDisplay();
   }
 }

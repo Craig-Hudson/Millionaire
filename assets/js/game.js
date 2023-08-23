@@ -22,7 +22,6 @@ let fiftyFifty = document.querySelectorAll('.fifty-fifty');
 let phoneAFriendButton = document.querySelectorAll('.phone-a-friend');
 let bank = document.querySelectorAll('.bank');
 
-
 const returnHomeButton = document.querySelector('.return-home');
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -34,13 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
   let inputNameSection = document.querySelector('.input-name-section');
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
-
+    // validation for users name
     if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
       quizArea.classList.remove('hidden');
       inputNameArea.style.display = 'none';
       sidePanel.classList.remove('hidden');
       userName = user.value; // assign user input to the global userName variable
-      console.log(userName);
     } else {
       alert('Please enter a name between 4-12 characters long.');
     }
@@ -61,9 +59,7 @@ async function callApi (urlApi) {
         questionIndex = 0; // Reset question index to 0 when new data is fetched
         getQuestion(); // call get question function to display new questions
         getAnswers(); // call get answers function to grab new answers
-      } // else {
-      //   console.log('No questions found in the API response.');
-      // }
+      }
     } else {
       //  error to handle the failure to fetch the questions data
       window.location.href = '500.html'
@@ -82,6 +78,7 @@ function getQuestion () {
   getQuestionNumber();
 }
 
+// Increment the question number that's displayed
 function getQuestionNumber () {
   let questionNumberId = document.getElementById('question-number');
   questionNumberId.innerText = questionNumber;
@@ -93,7 +90,7 @@ function nextQuestion () {
   // increment question index when next question is called
   questionIndex++;
   answerButtons.forEach((button) => {
-    button.style.visibility = 'visible'; // Set visibility back to 'visible' for all answer buttons
+    button.style.visibility = 'visible'; // Set visibility back to 'visible' for all answer buttons if fifty fifty life line is used
   });
   if (questionIndex < data.results.length) {
     // Continue to the next question if available
@@ -106,16 +103,17 @@ function nextQuestion () {
   //  Call hard question api when use reaches question 10
     callApi(hardQuestions);
   } else if (score === 15 || scoreMobile === 15) {
+    // End quiz function called if the user gets all 15 questions correct
     endQuiz();
   }
 }
 
+// Get answers from the api, and disable buttons once clicked to prevent user form selecting more than one answer
 function getAnswers () {
   let correctAnswer = data.results[questionIndex].correct_answer;
   let incorrectAnswer = data.results[questionIndex].incorrect_answers;
   let newAnswerArray = incorrectAnswer.concat(correctAnswer);
   shuffleAnswers(newAnswerArray);
-  console.log(correctAnswer);
   for (let i = 0; i < answerButtons.length; i++) {
     answerButtons[i].innerHTML = newAnswerArray[i];
     answerButtons[i].style.background = '';
@@ -127,7 +125,8 @@ function getAnswers () {
   }
 }
 
-
+// https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
+// This function was taken from the Link above (fisher yates shuffle)
 function shuffleAnswers (array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -148,6 +147,7 @@ function checkAnswer () {
     }
     if (window.innerWidth <= 800) {
       incrementScoreMobile();
+      // This will pop the side panel for mobile user in and out if they answer correctly
       setTimeout(openSidePanel, 1000);
       setTimeout(closeSidePanel, 3000);
     } else {
@@ -166,6 +166,7 @@ function checkAnswer () {
         break;
       }
     }
+    // Disable answer buttons
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
@@ -176,6 +177,7 @@ function checkAnswer () {
 
 // https://stackoverflow.com/questions/6555182/remove-all-special-characters-except-space-from-a-string-using-javascript
 // code for some of this function was taken from the link above.
+// Function to remove special characters coming from the api's
 function sanitizeAnswer (answer) {
   const tempElement = document.createElement('div');
   tempElement.innerHTML = answer;
@@ -261,7 +263,7 @@ function handleAskTheAudience () {
   askTheAudience.forEach(element => {
     element.disabled = true; // Disable all audience buttons
     element.removeEventListener('click', handleAskTheAudience); // Remove event listener from all audience buttons
-    element.classList.add('visibility');
+    element.classList.add('visibility'); // hides lifelines once used
   });
 }
 
@@ -275,7 +277,6 @@ function fiftyFiftyLifeLine () {
         button.style.visibility = 'hidden';
       }
     });
-    console.log(sliceIncorrectAnswers);
     // Disables and hides the lifeline on mobile/tablet and desktop
     fiftyFifty.forEach(button => {
       fiftyFiftyUsed = true;
@@ -295,21 +296,15 @@ function phoneAFriendLifeLine() {
     let correctAnswerArray = [correctAnswer];
     let concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     let oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
-    console.log(moneyIndex);
     if (moneyIndex < 4) {
       displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
-      console.log('first');
     } else if (moneyIndex < 9 && moneyIndex >= 4) {
       displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
-      console.log('second');
     } else if (moneyIndex >= 9 && moneyIndex < 14) {
       displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
-      console.log('third');
     } else {
       displayModalMessage(`Hi ${userName}, I believe the correct answer is ${sanitizedCorrectAnswer}`);
-      console.log('4th');
     }
-  
     disablePhoneAFriendButton();
     PhoneAFriendUsed = true;
   }
@@ -338,6 +333,7 @@ function bankMoney () {
   }
 }
 
+// Function to handle all life line click events
 function handleLifeLineEventListeners () {
   askTheAudience.forEach(button => {
     button.addEventListener('click', () => {
@@ -362,7 +358,7 @@ function handleLifeLineEventListeners () {
   });
 }
 handleLifeLineEventListeners();
-
+// Life line modal
 function displayModalMessage(message) {
   let modal = document.getElementById('life-lines-modal');
   let modalMessage = document.getElementById('modal-message');
@@ -387,8 +383,8 @@ function displayModalMessage(message) {
     }
   });
 }
-// END OF LIFE LINE SECTION
 
+// Gets a random index for use in lifelines
 function getRandomIndex (arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
@@ -424,6 +420,7 @@ function endQuiz () {
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
  
+  // hides side toggle icons/ Quiz area and displays end game section
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
@@ -436,6 +433,7 @@ function endQuiz () {
   let reverseMoneyList = [...moneyList].reverse();
   let highScore = '0'; // Default value
   
+  // Gets the highscore depending on where the user is on the money ladder
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     highScore = reverseMoneyList[moneyIndex].innerHTML;
   }
@@ -449,6 +447,7 @@ function endQuiz () {
   }
 }
 
+// Display message in the end game section when user scores 0
 function displayQuizMessageNoMoney(username) {
   let showUserMoney = document.getElementById('show-users-score');
   let getUserName = document.getElementById('users-name');
@@ -482,8 +481,6 @@ function displayQuizMessage() {
       getUserName.innerHTML = `Welcome to the millionaires club ${userName}`;
       break;
   }
-
-  console.log('moneyIndex', moneyIndex);
 }
 
 document.addEventListener('click', function (event) {

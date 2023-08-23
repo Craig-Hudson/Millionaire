@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   handleLifeLineEventListeners();
   toggleSidePanel();
+  callApi(easyQuestions);
 });
 
 async function callApi (urlApi) {
@@ -324,20 +325,42 @@ function bankMoney () {
   let reverseMoneyList = [...moneyList].reverse();
   let sidePanel = document.querySelector('.side-panel');
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
+  let confirmAction = document.querySelector('.confirm-action');
+  
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    // Confirm the action with the user before proceeding
-    // confirmAction('Are You Sure You Want To Bank Your Money?')
+    confirmAction.classList.remove('hidden')
     sidePanel.classList.add('hidden');
     scoreWrapperMobile.classList.add('hidden');
-    setTimeout(endQuiz, 500);
+    displayModalMessage(`Are you sure you want to bank your money ${userName}, the game will end`);
+    confirmYesOrNo();
   }
   console.log('I was called')
 }
 
+// confirmation function for modal
+function confirmYesOrNo() {
+  let confirmYes = document.querySelector('.confirm-yes');
+  let confirmNo = document.querySelector('.confirm-no')
+  let modal = document.getElementById('life-lines-modal');
+  
+  confirmYes.addEventListener('click', function(e) {
+    if (e.target === confirmYes) {
+      setTimeout(endQuiz, 500);
+      setTimeout(closeModal, 500);
+    }
+  })
 
-function confirmAction(message) {
-  const confirmation = confirm(message);
-  return confirmation;
+  confirmNo.addEventListener('click', function(e) {
+    if (e.target === confirmNo) {
+      closeModal();
+    }
+  })
+}
+
+
+function closeModal() {
+  let modal = document.getElementById('life-lines-modal');
+  modal.style.display = 'none';
 }
 
 // Function to handle all life line click events
@@ -361,10 +384,7 @@ function handleLifeLineEventListeners () {
     });
   });
   bank.forEach(Element => {
-    Element.addEventListener('click', () => {
-      confirmAction('Are you sure you want to bank your money?');
-      bankMoney();
-    });
+    Element.addEventListener('click', bankMoney);
   });
 }
 
@@ -515,12 +535,27 @@ function determineMoneyIndex (score, scoreMobile) {
   }
 }
 
+// Event listener to get the user to confirm if they want to leave the game page
 returnHomeButton.addEventListener('click', function (e) {
+  let confirmYes = document.querySelector('.confirm-yes');
+  let confirmNo = document.querySelector('.confirm-no')
+  let confirmAction = document.querySelector('.confirm-action');
   if (e.target === returnHomeButton) {
-    if (confirmAction('Are you sure you want to return home? Your progress will be lost')) {
-      window.location = 'index.html';
-    }
+    displayModalMessage(`Are you sure you would like to return home ${userName}? Your progress will be lost`);
+    confirmAction.classList.remove('hidden');
   }
+  confirmYes.addEventListener('click', function(e) {
+    if (e.target === confirmYes) {
+      window.location.href = 'index.html'
+      closeModal();
+    }
+  })
+
+  confirmNo.addEventListener('click', function(e) {
+    if (e.target === confirmNo) {
+      closeModal();
+    }
+  })
 });
 
 function toggleSidePanel () {
@@ -568,4 +603,4 @@ function lowRandomPercentage () {
 }
 
 // Call API for easy questions initially
-callApi(easyQuestions);
+// callApi(easyQuestions);

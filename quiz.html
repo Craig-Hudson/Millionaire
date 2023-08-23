@@ -134,18 +134,22 @@
       </div>
     </div>
   </div>
-  <!-- pop up messages when user interacts with the life lines -->
+  <!-- pop up messages when user interacts with the life lines and the home button -->
   <div id="life-lines-modal" class="modal-life-lines">
     <div class="modal-content-life-lines">
       <span class="close" id="close-modal">&times;</span>
       <div id="modal-message"></div>
+      <div class="hidden confirm-action">
+        <button type="button" class="buttons confirm-yes">Yes</button>
+        <button type="button" class="buttons confirm-no">No</button>
+      </div>
     </div>
   </div>
   <section id="end-game-area" class="get-center background-image">
     <div class="end-game-container">
       <h2><span id="show-users-score">100</span></h2>
       <p id="users-name"></p>
-      <p>You can either play again, or return home and view your high scores!</p>
+      <p>You can either play again, or return home <br> and view your high scores!</p>
       <button type="button" class="buttons play-again" aria-label="Return to input name section to play again">Play Again?</button>
       <button type="button" class="buttons return-home-end" aria-label="Return to home page">Return Home?</button>
     </div>

@@ -404,6 +404,7 @@ header {
   border: 1px solid #FCA311;
   text-align: center; 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -423,6 +424,19 @@ header {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.confirm-action {
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-action button {
+  width: 35%;
+  padding: 6px 20px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
 }
 /* End of life lines modal */
 
@@ -505,7 +519,8 @@ header {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  height: 40vh;
+  height: 50vh;
+  width: 40vw;
   background-color: #232323;
   opacity: 0.9;
   padding: 0 10px;
@@ -750,7 +765,7 @@ footer {
 /* MEDIA SCREEN MIN WIDTH 800PX */
 
 @media screen and (min-width: 801px) {
-  #side-panel-toggle {
+  .side-panel {
     display: none !important;
   }
 }
@@ -892,6 +907,7 @@ footer {
 
   .end-game-container {
     height: 60vh;
+    width: 100%;
   }
 
   .thank-you-message {

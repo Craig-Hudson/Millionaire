@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
   }
+  handleLifeLineEventListeners();
+  toggleSidePanel();
 });
 
 async function callApi (urlApi) {
@@ -317,7 +319,6 @@ function disablePhoneAFriendButton() {
   });
 }
 
-
 function bankMoney () {
   let moneyList = document.querySelectorAll('.money');
   let reverseMoneyList = [...moneyList].reverse();
@@ -325,12 +326,18 @@ function bankMoney () {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     // Confirm the action with the user before proceeding
-    if (confirmAction('Are You Sure You Want To Bank Your Money?')) {
-      sidePanel.classList.add('hidden');
-      scoreWrapperMobile.classList.add('hidden');
-      setTimeout(endQuiz, 500);
-    }
+    // confirmAction('Are You Sure You Want To Bank Your Money?')
+    sidePanel.classList.add('hidden');
+    scoreWrapperMobile.classList.add('hidden');
+    setTimeout(endQuiz, 500);
   }
+  console.log('I was called')
+}
+
+
+function confirmAction(message) {
+  const confirmation = confirm(message);
+  return confirmation;
 }
 
 // Function to handle all life line click events
@@ -354,10 +361,13 @@ function handleLifeLineEventListeners () {
     });
   });
   bank.forEach(Element => {
-    Element.addEventListener('click', bankMoney);
+    Element.addEventListener('click', () => {
+      confirmAction('Are you sure you want to bank your money?');
+      bankMoney();
+    });
   });
 }
-handleLifeLineEventListeners();
+
 // Life line modal
 function displayModalMessage(message) {
   let modal = document.getElementById('life-lines-modal');
@@ -392,11 +402,6 @@ function getRandomIndex (arr) {
 
 function incrementMoneyIndex () {
   moneyIndex++;
-}
-
-function confirmAction(message) {
-  const confirmation = confirm(message);
-  return confirmation;
 }
 
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
@@ -528,7 +533,7 @@ function toggleSidePanel () {
     contentMain.classList.toggle('hidden');
   });
 }
-toggleSidePanel();
+
 
 // function for just closing the side panel and attaching it to an event listener.
 function closeSidePanel() {

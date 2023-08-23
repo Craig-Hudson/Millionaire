@@ -14,12 +14,20 @@
   - [Manual Testing](#manual-testing)
     - [Testing user Stories](#testing-user-stories)
     - [Full Testing](#full-testing)
-  - [Bugs](#bugs)
 
 ## Overview
 
 I used test driven development throughout the entire build for this project.
-This includes using chrome developer tools to test for responsiveness and for general positioning of elements, I also used the dev tools for my JavaScript to help identify where any issues were arising from so they could be corrected before moving on.
+This includes using chrome developer tools to test for responsiveness and for general positioning of elements, I also used the dev tools for my JavaScript to help identify if there was any errors in the console and where the issues may of been arising from.
+
+Console.logs and Alerts were used during the development to test the functionality and ensure things like event Listeners were working as expected, or any functions that have conditionals were correctly working. I have added some evidence of this in a small table below.
+
+| What was tested | Description  | Evidence  |
+|--------|----------|
+| Event Listeners  | For all of my event listeners that required the user to click or key press I used alerts to tell me that I had set up the event listener correctly  | ![Alert evidence](assets/images/testing-images/click-event-test.webp) ![Alert evidence](assets/images/testing-images/click-event-result.webp)  |
+| Ask the audience function  | For this function I used a mix of console.logs to double check the data from the api's, and then using alerts in the if statements to test if the conditional statements were correct.   | ![Ask the audience evidence](assets/images/testing-images/ask-the-audience-manual-test.webp)  |
+| Bank function  | For this function again I used a mix of console logs to check if the data was correct, and then alerts to check if the event listener was correctly working  | ![Bank money evidence](assets/images/testing-images/bank-money-function-manual-tests.webp)  |
+| Console logs in chrome dev tools  | Evidence of the use of dev tools and using the console to show me the question and correct answers from the api, and the actual api itself | ![console evidence](assets/images/testing-images/console-logs-question-answer.webp)  |
 
 ## Automated Testing
 
@@ -171,22 +179,41 @@ Testing was done on the following devices and browsers
 | Hover effect on answer buttons  | When hovered over the borders should go orange, and the button should grow slightly in size, this is for desktop only.  | Hover over answer buttons   | All answer buttons grew in size and border colours changed to orange.  | Pass  |
 | Hover effect on life lines  | When hovered over the life lines should grow in size and turn orange  | Hover over life line icons  | All icons grew in size, and turned orange while hovered over  | Pass  |
 | pop up message when ask the audience and phone a friend life lines are clicked  | Message to pop up  | Click both ask the audience and phone a friend  | pop up messages on both life lines popped up  | Pass  |
-| Fifty fifty life line  | Hide to answer buttons  | Click fifty fifty lifeline  | Two answers hid from the users screen, this was testing on multiple question and answers from each of the three api's  | Pass  |
+| Fifty fifty life line  | Hide two answer buttons  | Click fifty fifty lifeline  | Two answers hid from the users screen, this was testing on multiple questions and answers from each of the three api's  | Pass  |
 |  Bank icon | Ask user if they are sure they want to bank, and then exit the quiz to end game section where user messages are displayed.  | Click on bank life line  | I was asked if I wanted to bank, and then upon clicking on yes I was directed to another page where there was a message displaying what I had won. | Pass  |
 | Api testing (easy)  | Questions 1-5 should have the easy api  | go through questions 1-5 using console.logs to determine the correct api is in place  | The console.log showed throughout that the easy api was in place ![Easy API](assets/images/testing-images/easy-api.webp)   | Pass   |
 |  Api testing (medium) | Questions 6-10 should have the medium api  | go through questions 6-10 using console.logs to determine the correct api is in place  | The console.log showed throughout that the medium api was in place ![Medium API](assets/images/testing-images/medium-api.webp)    | Pass  |
 | Api testing (hard)  | Questions 11-15 should have the hard api   | go through questions 11-15 using console.logs to determine the correct api is in place   | The console.log showed throughout that the hard api was in place ![Hard API](assets/images/testing-images/hard-api.webp)   | Pass  |
-| Quiz ending  | The quiz should end in the following three events, the user answers a question in correctly, the user banks their money, or the user wins the quiz  | Answer incorrectly, bank my money, and win the quiz  | When I answered a question incorrect the quiz ended, When I banked my money the Quiz ended, When I won the quiz the quiz ended.  | Pass   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+| Quiz ending  | The quiz should end in the following three events, the user answers a question in correctly, the user banks their money, or the user wins the quiz  | Answer incorrectly, bank my money, and win the quiz  | When I answered a question incorrect the quiz ended, When I banked my money the Quiz ended, When I won the quiz the quiz ended.  | Pass  |
+| Safe haven  | Example user is on question 9 and £16,000 if user answers incorrect they will only win £1000 unless they bank The two safe havens are set when user answer question 5 and 10 £1000, and £32,000 | Answer incorrectly too test both safe havens are working as expected  | Both safe havens worked as expected, I answer question incorrect and question 6, 7, 12, and 13  | Pass  |
 
-## Bugs
+- **Quiz page - End game section**
+| Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| Correct username being displayed  | Whatever the user entered as the username to be displayed in the end game message  | Add my username in the input section  | My name was correctly displayed  | Pass  |
+| Correct score being displayed  | The users score being displayed in the message  | PLay quiz and check score before ending the quiz  | Every time the score I scored, was the score being displayed in the end game message  | Pass  |
+| Play again button  | Return to input name section  | CLick button  | Taken to input name section  | Pass  |
+| Return home button  | Return to the home page  | Click button  | Taken to the home page  | Pass  |
 
-- **Solved Bugs**
+- **Thank you page**
+| Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| Quiz title link to home page  | Take user back to home page  | Click title  | Taken back to home page  | Pass  |
+|  Return home button | Take user back to home page  | Click button  | Taken back to home page  | Pass  |
+| social media links, to open in new tab  | All 3 social media links in the footer should open in a new tab  | Click social media icons  | All three icons opened in separate tabs  | Pass  |
 
-| Bug found  | How I resolved  |
-| ------------ | ------------ |
-| Hover effect on answer buttons not working on firefox desktop browser  | I had a media query that stopped the hover effect for touchscreen devices, but this was also effecting desktop on firefox browsers. So I put this media query into the media query for screens that are less than 800px so desktop users on firefox can see the hover effect.  |
-|  Phone a friend life line not displaying correct messages | It seem the issue was with my initial conditional statements comparing the score, which was outputting correctly in the function with many of console logs, but didn't work, so i adjusted the conditional to compare the moneyIndex and now all the messages are outputting as expected ![phone A Friend bug fix](assets/images/testing-images/phone-a-friend-bug.webp) |
+- **404 Error Page**
+| Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| Quiz title link to home page  | Take user back to home page  | Click title  | Taken back to home page  | Pass  |
+|  Return home button | Take user back to home page  | Click button  | Taken back to home page  | Pass  |
+| social media links, to open in new tab  | All 3 social media links in the footer should open in a new tab  | Click social media icons  | All three icons opened in separate tabs  | Pass  |
+
+- **500 Error page**
+  
+| Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| Quiz title link to home page  | Take user back to home page  | Click title  | Taken back to home page  | Pass  |
+|  Return home button | Take user back to home page  | Click button  | Taken back to home page  | Pass  |
+| social media links, to open in new tab  | All 3 social media links in the footer should open in a new tab  | Click social media icons  | All three icons opened in separate tabs  | Pass  |
+

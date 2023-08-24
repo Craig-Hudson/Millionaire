@@ -75,10 +75,14 @@ Console.logs and Alerts were used during the development to test the functionali
 
 ![home JavaScript](assets/images/testing-images/jshint-home.webp)
 
-- Game page javascript validation on JShint
+- Game page javascript validation on JShint has one warning for 'async functions' is only available in ES8 (use 'esversion: 8'). which I cant configure on the jshint validator, there are no issues with the function itself, and everything is working as expected.
 
 ![Game JavaScript](assets/images/testing-images/game-js-jshint.webp)
 
+
+- Thankyou JavaScript validation on Jshint
+
+![Home JavaScript](assets/images/testing-images/thankyou-jshint-test.webp)
 ## wave reports
 
 - Home page

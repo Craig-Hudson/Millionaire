@@ -360,7 +360,9 @@ function confirmYesOrNo() {
 
 function closeModal() {
   let modal = document.getElementById('life-lines-modal');
+  let confirmAction = document.querySelector('.confirm-action');
   modal.style.display = 'none';
+  confirmAction.classList.add('hidden');
 }
 
 // Function to handle all life line click events

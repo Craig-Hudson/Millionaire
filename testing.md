@@ -188,6 +188,7 @@ Testing was done on the following devices and browsers
 | Safe haven  | Example user is on question 9 and £16,000 if user answers incorrect they will only win £1000 unless they bank The two safe havens are set when user answer question 5 and 10 £1000, and £32,000 | Answer incorrectly too test both safe havens are working as expected  | Both safe havens worked as expected, I answer question incorrect and question 6, 7, 12, and 13  | Pass  |
 
 - **Quiz page - End game section**
+  
 | Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | Correct username being displayed  | Whatever the user entered as the username to be displayed in the end game message  | Add my username in the input section  | My name was correctly displayed  | Pass  |
@@ -196,6 +197,7 @@ Testing was done on the following devices and browsers
 | Return home button  | Return to the home page  | Click button  | Taken to the home page  | Pass  |
 
 - **Thank you page**
+  
 | Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | Quiz title link to home page  | Take user back to home page  | Click title  | Taken back to home page  | Pass  |
@@ -203,6 +205,7 @@ Testing was done on the following devices and browsers
 | social media links, to open in new tab  | All 3 social media links in the footer should open in a new tab  | Click social media icons  | All three icons opened in separate tabs  | Pass  |
 
 - **404 Error Page**
+  
 | Feature  | Expected outcome  | Testing performed  | Result  | Pass/Fail  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | Quiz title link to home page  | Take user back to home page  | Click title  | Taken back to home page  | Pass  |

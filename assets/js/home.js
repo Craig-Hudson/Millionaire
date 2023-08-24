@@ -10,6 +10,7 @@ function openModal (modalId) {
   const modal = document.getElementById(modalId);
   modalContainer.classList.add('active');
   modal.classList.add('active');
+  
   if (modalId === 'high-scores') {
     updateHighScoresDisplay();
   }

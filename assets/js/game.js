@@ -65,10 +65,10 @@ async function callApi (urlApi) {
       }
     } else {
       //  error to handle the failure to fetch the questions data
-      window.location.href = '500.html'
+      window.location.href = '500.html';
     }
   } catch (error) {
-    window.location.href = '500.html'
+    window.location.href = '500.html';
   }
 }
 
@@ -328,33 +328,31 @@ function bankMoney () {
   let confirmAction = document.querySelector('.confirm-action');
   
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
-    confirmAction.classList.remove('hidden')
+    confirmAction.classList.remove('hidden');
     sidePanel.classList.add('hidden');
     scoreWrapperMobile.classList.add('hidden');
     displayModalMessage(`Are you sure you want to bank your money ${userName}, the game will end`);
     confirmYesOrNo();
   }
-  console.log('I was called')
 }
 
 // confirmation function for modal
 function confirmYesOrNo() {
   let confirmYes = document.querySelector('.confirm-yes');
-  let confirmNo = document.querySelector('.confirm-no')
-  let modal = document.getElementById('life-lines-modal');
+  let confirmNo = document.querySelector('.confirm-no');
   
   confirmYes.addEventListener('click', function(e) {
     if (e.target === confirmYes) {
       setTimeout(endQuiz, 500);
       setTimeout(closeModal, 500);
     }
-  })
+  });
 
   confirmNo.addEventListener('click', function(e) {
     if (e.target === confirmNo) {
       closeModal();
     }
-  })
+  });
 }
 
 
@@ -373,18 +371,21 @@ function handleLifeLineEventListeners () {
       handleAskTheAudience();
     });
   });
+
   fiftyFifty.forEach(button => {
     button.addEventListener('click', () => {
       closeSidePanel();
       fiftyFiftyLifeLine();
     });
   });
+
   phoneAFriendButton.forEach(button => {
     button.addEventListener('click', () => {
       closeSidePanel();
       phoneAFriendLifeLine();
     });
   });
+
   bank.forEach(Element => {
     Element.addEventListener('click', bankMoney);
   });
@@ -403,13 +404,14 @@ function displayModalMessage(message) {
     modal.style.display = 'none';
   });
 
-  window.addEventListener('click', function(event) {
+  window.addEventListener('click', function (event) {
     if (event.target === modal) {
       modal.style.display = 'none';
     }
-  })
+  });
+
   window.addEventListener('keydown', function (event) {
-    const key = event.key
+    const key = event.key;
     if (key === 'Escape') {
       modal.style.display = 'none';
     }
@@ -526,21 +528,22 @@ if the user gets an answer incorrect between score 1 and 5 then they win nothing
 if the user gets an answer incorrect between score 5 and 10 then they score £1000
 if the user gets an answer incorrect between score 10 and 15 then they score £32000 */
 function determineMoneyIndex (score, scoreMobile) {
-  if ((score > 0 && score <= 4) || (scoreMobile > 0 && scoreMobile <= 4)) {
-    return -1;
-  } else if ((score >= 5 && score <= 9) || (scoreMobile >= 5 && scoreMobile <= 9)) {
-    return 4;
-  } else if ((score >= 10 && score < 15) || (scoreMobile >= 10 && scoreMobile < 15)) {
-    return 9;
-  } else {
-    return moneyIndex; // Keep the existing moneyIndex if score is not in the specified ranges
+  switch (true) {
+    case (score > 0 && score <= 4) || (scoreMobile > 0 && scoreMobile <= 4):
+      return -1;
+    case (score >= 5 && score <= 9) || (scoreMobile >= 5 && scoreMobile <= 9):
+      return 4;
+    case (score >= 10 && score < 15) || (scoreMobile >= 10 && scoreMobile < 15):
+      return 9;
+    default:
+      return moneyIndex; // Keep the existing moneyIndex if score is not in the specified ranges
   }
 }
 
 // Event listener to get the user to confirm if they want to leave the game page
 returnHomeButton.addEventListener('click', function (e) {
   let confirmYes = document.querySelector('.confirm-yes');
-  let confirmNo = document.querySelector('.confirm-no')
+  let confirmNo = document.querySelector('.confirm-no');
   let confirmAction = document.querySelector('.confirm-action');
   if (e.target === returnHomeButton) {
     displayModalMessage(`Are you sure you would like to return home ${userName}? Your progress will be lost`);
@@ -548,16 +551,16 @@ returnHomeButton.addEventListener('click', function (e) {
   }
   confirmYes.addEventListener('click', function(e) {
     if (e.target === confirmYes) {
-      window.location.href = 'index.html'
+      window.location.href = 'index.html';
       closeModal();
     }
-  })
+  });
 
   confirmNo.addEventListener('click', function(e) {
     if (e.target === confirmNo) {
       closeModal();
     }
-  })
+  });
 });
 
 function toggleSidePanel () {

@@ -667,6 +667,7 @@ footer {
   height: 35%;
   width: 60%;
   font-size: 100%;
+  padding: 0 5px;
 }
 
 .button-thankyou {
@@ -940,6 +941,7 @@ footer {
   .thank-you-message {
     height: 60%;
     width: 80%;
+
   }
 
   /* To get rid of the hover effect on anything that is touchscreen */

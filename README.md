@@ -219,6 +219,12 @@ All my testing can be found in the [testing file](testing.md)
 | ------------ | ------------ |
 | Hover effect on answer buttons not working on firefox desktop browser  | I had a media query that stopped the hover effect for touchscreen devices, but this was also effecting desktop on firefox browsers. So I put this media query into the media query for screens that are less than 800px so desktop users on firefox can see the hover effect.  |
 |  Phone a friend life line not displaying correct messages | It seem the issue was with my initial conditional statements comparing the score, which was outputting correctly in the function with many of console logs, but didn't work, so i adjusted the conditional to compare the moneyIndex and now all the messages are outputting as expected ![phone A Friend bug fix](assets/images/testing-images/phone-a-friend-bug.webp) |
+| Banking on mobile devices asked user for confirmation twice  | I couldnt find anything in the javascript causing the issue, the function wasn't being called twice, so I checked the html, and I noticed I had the class bank twice which in effect caused the confirmation two execute twice.  |
+| When I click on the home button and click no, and then goto click a life line the option to return home or stay on the game page are still there.  | Simple fix of add the class of hidden in the closeModal function to hide the yes or no buttons when the modal is closed.  |
+
+- **Known Bugs**
+
+Currently There is no known bugs
 
 ## Deployment & Local Development
 

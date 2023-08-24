@@ -90,7 +90,7 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 40px 20px;
+  padding: 25px;
   width: 50%;
   height: 70%;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(31,31,33,1) 73%, rgba(78,79,80,1) 100%, rgba(0,212,255,1) 100%);
@@ -111,6 +111,12 @@ header {
   display: flex;
   flex-direction: column;
   align-items: baseline;
+  line-height: 2;
+  padding-left: 5px;
+}
+
+.content-container li {
+  margin-bottom: 3px;
 }
 
 .close-modal {
@@ -131,7 +137,11 @@ header {
   align-items: center;
 }
 
-/* CONTACT MODAL */
+/* CONTACT MODAL */ 
+ .contact-us-form {
+  margin: 0 auto;
+}
+
 
 .contact-us-form form div {
   display: flex;
@@ -149,10 +159,26 @@ header {
   padding-bottom: 6px;
 }
 
+.contact-us-form input {
+  padding: 5px 2px;
+}
+
 .contact-us-form button {
   width: -moz-fit-content;
   width: fit-content;
   padding: 4px 8px;
+}
+
+.form-message {
+  padding-left: 5px;
+}
+
+.center-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 /* END OF HOME PAGE MODALS */
 
@@ -174,7 +200,7 @@ header {
 }
 
 .green {
-  background: rgb(86, 245, 86);
+  background: green;
 }
 /* End of classes used for javascript */
 
@@ -416,7 +442,7 @@ header {
   cursor: pointer;
   position: absolute;
   top: 0;
-  right: 3%;
+  right: 2%;
 }
 
 .close:hover,
@@ -776,6 +802,7 @@ footer {
   /* PAGE TITLE 800PX */
   .page-title {
     font-size: 160%;
+    margin-top: 20px;
   }
   
   /* BUTTONS UNDER 800PX */
@@ -932,6 +959,10 @@ footer {
     width: 25%;
     font-size: 14px;
     margin: 6px;
+  }
+
+  .buttons-container button {
+    margin: 5% 0;
   }
 
   .answer-button {

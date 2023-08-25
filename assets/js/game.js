@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
   submitButton.addEventListener('click', function(event) {
     event.preventDefault();
     // validation for users name
-    if (user.value !== '' && user.value.length >= 4 && user.value.length <= 12) {
+    if (user.value !== '' && user.value.length >= 4 && user.value.length <= 16) {
       quizArea.classList.remove('hidden');
       inputNameArea.style.display = 'none';
       sidePanel.classList.remove('hidden');
       userName = user.value; // assign user input to the global userName variable
     } else {
-      alert('Please enter a name between 4-12 characters long.');
+      alert('Please enter a name between 4-16 characters long.');
     }
   });
 
@@ -95,19 +95,27 @@ function nextQuestion () {
   answerButtons.forEach((button) => {
     button.style.visibility = 'visible'; // Set visibility back to 'visible' for all answer buttons if fifty fifty life line is used
   });
-  if (questionIndex < data.results.length) {
-    // Continue to the next question if available
-    getQuestion();
-    getAnswers();
-  } else if ((questionIndex === data.results.length) && (score === 5 || scoreMobile === 5)) {
-    //  Call medium question api when user reaches question 5
-    callApi(mediumQuestions);
-  } else if ((questionIndex === data.results.length) && (score === 10 || scoreMobile === 10)) {
-  //  Call hard question api when use reaches question 10
-    callApi(hardQuestions);
-  } else if (score === 15 || scoreMobile === 15) {
-    // End quiz function called if the user gets all 15 questions correct
-    endQuiz();
+  switch (true) {
+    case questionIndex < data.results.length:
+      // Continue to the next question if available
+      getQuestion();
+      getAnswers();
+      break;
+    case (questionIndex === data.results.length) && (score === 5 || scoreMobile === 5):
+      // Call medium question api when user reaches question 5
+      callApi(mediumQuestions);
+      break;
+    case (questionIndex === data.results.length) && (score === 10 || scoreMobile === 10):
+      // Call hard question api when use reaches question 10
+      callApi(hardQuestions);
+      break;
+    case score === 15 || scoreMobile === 15:
+      // End quiz function called if the user gets all 15 questions correct
+      endQuiz();
+      break;
+    default:
+      // Handle other cases if needed
+      break;
   }
 }
 
@@ -229,7 +237,7 @@ function incrementScoreMobile () {
 }
 
 // Function to highlight the safe haven to visualize for the user
-function safeHaven() {
+function safeHaven () {
   let scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
   let scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
 //  arrow function to toggle the class to highlight save haven
@@ -299,15 +307,22 @@ function phoneAFriendLifeLine () {
     let correctAnswerArray = [correctAnswer];
     let concatAnswerArray = incorrectAnswerArray.concat(correctAnswerArray);
     let oneSanitizedConcatAnswer = sanitizeAnswer(getRandomIndex(concatAnswerArray));
-    if (moneyIndex < 4) {
-      displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
-    } else if (moneyIndex < 9 && moneyIndex >= 4) {
-      displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
-    } else if (moneyIndex >= 9 && moneyIndex < 14) {
-      displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
-    } else {
-      displayModalMessage(`Hi ${userName}, I believe the correct answer is ${sanitizedCorrectAnswer}`);
+
+    switch (true) {
+      case moneyIndex < 4:
+        displayModalMessage(`Hi ${userName}, I am 100% sure the correct answer is ${sanitizedCorrectAnswer}.`);
+        break;
+      case moneyIndex < 9 && moneyIndex >= 4:
+        displayModalMessage(`Hi ${userName}, I am only 50% sure on this one. I think it's either ${sanitizedCorrectAnswer} or ${sanitizedIncorrectAnswer}.`);
+        break;
+      case moneyIndex >= 9 && moneyIndex < 14:
+        displayModalMessage(`Hi ${userName}, I am really not sure on this one, if I'd have to choose one I'd choose ${oneSanitizedConcatAnswer}.`);
+        break;
+      default:
+        displayModalMessage(`Hi ${userName}, I believe the correct answer is ${sanitizedCorrectAnswer}`);
+        break;
     }
+    
     disablePhoneAFriendButton();
     PhoneAFriendUsed = true;
   }
@@ -545,6 +560,7 @@ returnHomeButton.addEventListener('click', function (e) {
     displayModalMessage(`Are you sure you would like to return home ${userName}? Your progress will be lost`);
     confirmAction.classList.remove('hidden');
   }
+
   confirmYes.addEventListener('click', function(e) {
     if (e.target === confirmYes) {
       window.location.href = 'index.html';

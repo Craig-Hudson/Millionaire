@@ -209,7 +209,7 @@ function incrementScore () {
 function incrementScoreMobile () {
   if (window.innerWidth <= 800) {
     scoreMobile++;
-    // function to display users save haven / minimum amount of money won
+    // function to display users safe haven / minimum amount of money won
     safeHaven();
     // get .score-mobile class in the mobile scores section
     let scoreListMobile = document.querySelectorAll('.quiz-scores-mobile .score-mobile');
@@ -289,7 +289,7 @@ function fiftyFiftyLifeLine () {
   }
 }
 
-function phoneAFriendLifeLine() {
+function phoneAFriendLifeLine () {
   if (!PhoneAFriendUsed) {
     let correctAnswer = data.results[questionIndex].correct_answer;
     let incorrectAnswers = data.results[questionIndex].incorrect_answers;
@@ -323,24 +323,20 @@ function disablePhoneAFriendButton() {
 function bankMoney () {
   let moneyList = document.querySelectorAll('.money');
   let reverseMoneyList = [...moneyList].reverse();
-  let sidePanel = document.querySelector('.side-panel');
-  let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let confirmAction = document.querySelector('.confirm-action');
   
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     confirmAction.classList.remove('hidden');
-    sidePanel.classList.add('hidden');
-    scoreWrapperMobile.classList.add('hidden');
     displayModalMessage(`Are you sure you want to bank your money ${userName}, the game will end`);
     confirmYesOrNo();
+    closeSidePanel();
   }
 }
 
 // confirmation function for modal
-function confirmYesOrNo() {
+function confirmYesOrNo () {
   let confirmYes = document.querySelector('.confirm-yes');
   let confirmNo = document.querySelector('.confirm-no');
-  
   confirmYes.addEventListener('click', function(e) {
     if (e.target === confirmYes) {
       setTimeout(endQuiz, 500);
@@ -356,7 +352,7 @@ function confirmYesOrNo() {
 }
 
 
-function closeModal() {
+function closeModal () {
   let modal = document.getElementById('life-lines-modal');
   let confirmAction = document.querySelector('.confirm-action');
   modal.style.display = 'none';
@@ -392,7 +388,7 @@ function handleLifeLineEventListeners () {
 }
 
 // Life line modal
-function displayModalMessage(message) {
+function displayModalMessage (message) {
   let modal = document.getElementById('life-lines-modal');
   let modalMessage = document.getElementById('modal-message');
 
@@ -477,7 +473,7 @@ function endQuiz () {
 }
 
 // Display message in the end game section when user scores 0
-function displayQuizMessageNoMoney(username) {
+function displayQuizMessageNoMoney (username) {
   let showUserMoney = document.getElementById('show-users-score');
   let getUserName = document.getElementById('users-name');
   getUserName.innerHTML = `Better luck next time, ${username}!`;
@@ -485,7 +481,7 @@ function displayQuizMessageNoMoney(username) {
 }
 
 // function to adjust the display of how much the user won, and username used.
-function displayQuizMessage() {
+function displayQuizMessage () {
   let getUserName = document.getElementById('users-name');
   let moneyList = document.querySelectorAll('.money');
   let showUserMoney = document.getElementById('show-users-score');
@@ -576,7 +572,7 @@ function toggleSidePanel () {
 
 
 // function for just closing the side panel and attaching it to an event listener.
-function closeSidePanel() {
+function closeSidePanel () {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let contentMain = document.querySelector('.content.main');
   
@@ -606,6 +602,3 @@ function lowRandomPercentage () {
   let lowNumber = Math.floor(Math.random() * (50 - 30 + 1) + 30);
   return lowNumber;
 }
-
-// Call API for easy questions initially
-// callApi(easyQuestions);

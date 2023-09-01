@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   handleLifeLineEventListeners();
   toggleSidePanel();
+  iconGrow();
   callApi(easyQuestions);
 });
 
@@ -328,7 +329,7 @@ function phoneAFriendLifeLine () {
   }
 }
 
-function disablePhoneAFriendButton() {
+function disablePhoneAFriendButton () {
   phoneAFriendButton.forEach(button => {
     button.classList.add('visibility');
     button.disabled = true;
@@ -352,14 +353,14 @@ function bankMoney () {
 function confirmYesOrNo () {
   let confirmYes = document.querySelector('.confirm-yes');
   let confirmNo = document.querySelector('.confirm-no');
-  confirmYes.addEventListener('click', function(e) {
+  confirmYes.addEventListener('click', function (e) {
     if (e.target === confirmYes) {
       setTimeout(endQuiz, 500);
       setTimeout(closeModal, 500);
     }
   });
 
-  confirmNo.addEventListener('click', function(e) {
+  confirmNo.addEventListener('click', function (e) {
     if (e.target === confirmNo) {
       closeModal();
     }
@@ -440,7 +441,7 @@ function incrementMoneyIndex () {
 }
 
 // https://www.youtube.com/watch?v=DFhmNLKwwGw&list=PLDlWc9AfQBfZIkdVaOQXi1tizJeNJipEx&index=9
-// tutorial video above and made my own adjustments to set highscores into local storage
+// tutorial video above and made my own adjustments to set high scores into local storage
 function setHighScore (name, score) {
   const highScoreObject = {
     userName: name,
@@ -473,7 +474,7 @@ function endQuiz () {
   let reverseMoneyList = [...moneyList].reverse();
   let highScore = '0'; // Default value
   
-  // Gets the highscore depending on where the user is on the money ladder
+  // Gets the high score depending on where the user is on the money ladder
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     highScore = reverseMoneyList[moneyIndex].innerHTML;
   }
@@ -503,6 +504,7 @@ function displayQuizMessage () {
   let reverseMoneyList = [...moneyList].reverse();
   let displayMoneyWon = reverseMoneyList[moneyIndex].innerHTML;
 
+  // Switch statement to display end game quiz message depending on users money index(score)
   switch (true) {
     case (moneyIndex >= 0 && moneyIndex < 4):
       getUserName.innerHTML = `Nice effort ${userName}`;
@@ -561,14 +563,14 @@ returnHomeButton.addEventListener('click', function (e) {
     confirmAction.classList.remove('hidden');
   }
 
-  confirmYes.addEventListener('click', function(e) {
+  confirmYes.addEventListener('click', function (e) {
     if (e.target === confirmYes) {
       window.location.href = 'index.html';
       closeModal();
     }
   });
 
-  confirmNo.addEventListener('click', function(e) {
+  confirmNo.addEventListener('click', function (e) {
     if (e.target === confirmNo) {
       closeModal();
     }
@@ -617,4 +619,19 @@ function lowRandomPercentage () {
   // random number between 30 and 50
   let lowNumber = Math.floor(Math.random() * (50 - 30 + 1) + 30);
   return lowNumber;
+}
+
+// Function to grow and shrink arrow icon toggler that's displayed on mobile devices
+function iconGrow () {
+  let icon = document.querySelector('.icon-open');
+  let isBigger = false;
+
+  setInterval(() => {
+    if (isBigger) {
+      icon.style.transform = 'scale(1.3)';
+    } else {
+      icon.style.transform = 'scale(1.0)';
+    }
+    isBigger = !isBigger;
+  }, 3000);
 }

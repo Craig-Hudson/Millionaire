@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let submitButton = document.getElementById('submit-button');
   let sidePanel = document.querySelector('.side-panel');
   let inputNameSection = document.querySelector('.input-name-section');
-  submitButton.addEventListener('click', function(event) {
+  submitButton.addEventListener('click', function (event) {
     event.preventDefault();
     // validation for users name
     if (user.value !== '' && user.value.length >= 4 && user.value.length <= 16) {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
- // Hide the side panel toggle when the user is in the input name section
+  // Hide the side panel toggle when the user is in the input name section
   if (inputNameSection) {
     sidePanel.classList.add('hidden');
   }
@@ -182,7 +182,7 @@ function checkAnswer () {
     for (let j = 0; j < answerButtons.length; j++) {
       answerButtons[j].disabled = true;
     }
-    moneyIndex = determineMoneyIndex(score, scoreMobile); // 
+    moneyIndex = determineMoneyIndex(score, scoreMobile); //
     setTimeout(endQuiz, 1000);
   }
 }
@@ -241,7 +241,8 @@ function incrementScoreMobile () {
 function safeHaven () {
   let scoresDesktopReversed = Array.from(document.querySelectorAll('.score')).reverse();
   let scoreMobileReverse = Array.from(document.querySelectorAll('.score-mobile')).reverse();
-//  arrow function to toggle the class to highlight save haven
+
+  //  arrow function to toggle the class to highlight save haven
   let updateSafeHaven = (index, add) => {
     scoresDesktopReversed[index].classList.toggle('green', add);
     scoreMobileReverse[index].classList.toggle('green', add);
@@ -323,7 +324,7 @@ function phoneAFriendLifeLine () {
         displayModalMessage(`Hi ${userName}, I believe the correct answer is ${sanitizedCorrectAnswer}`);
         break;
     }
-    
+
     disablePhoneAFriendButton();
     PhoneAFriendUsed = true;
   }
@@ -340,7 +341,7 @@ function bankMoney () {
   let moneyList = document.querySelectorAll('.money');
   let reverseMoneyList = [...moneyList].reverse();
   let confirmAction = document.querySelector('.confirm-action');
-  
+
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     confirmAction.classList.remove('hidden');
     displayModalMessage(`Are you sure you want to bank your money ${userName}, the game will end`);
@@ -366,7 +367,6 @@ function confirmYesOrNo () {
     }
   });
 }
-
 
 function closeModal () {
   let modal = document.getElementById('life-lines-modal');
@@ -460,20 +460,20 @@ function endQuiz () {
   const hideQuiz = document.getElementById('quiz');
   const endGameArea = document.getElementById('end-game-area');
   const sidePanel = document.querySelector('.side-panel');
- 
+
   // hides side toggle icons/ Quiz area and displays end game section
   if (hideQuiz && endGameArea) {
     sidePanel.classList.add('hidden');
     hideQuiz.classList.add('hidden');
     endGameArea.style.display = 'flex';
   }
-  
+
   let nameInput = document.getElementById('name-input');
   let userName = nameInput.value;
   let moneyList = document.querySelectorAll('.money');
   let reverseMoneyList = [...moneyList].reverse();
   let highScore = '0'; // Default value
-  
+
   // Gets the high score depending on where the user is on the money ladder
   if (moneyIndex >= 0 && moneyIndex < reverseMoneyList.length) {
     highScore = reverseMoneyList[moneyIndex].innerHTML;
@@ -528,7 +528,7 @@ function displayQuizMessage () {
 document.addEventListener('click', function (event) {
   let playAgain = document.querySelector('.play-again');
   let returnHome = document.querySelector('.return-home-end');
-  
+
   if (event.target === playAgain) {
     window.location.href = 'quiz.html';
   } else if (event.target === returnHome) {
@@ -588,12 +588,11 @@ function toggleSidePanel () {
   });
 }
 
-
 // function for just closing the side panel and attaching it to an event listener.
 function closeSidePanel () {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let contentMain = document.querySelector('.content.main');
-  
+
   scoreWrapperMobile.classList.remove('side-panel-open');
   scoreWrapperMobile.classList.add('side-panel-closed');
   contentMain.classList.add('hidden');
@@ -603,7 +602,7 @@ function closeSidePanel () {
 function openSidePanel () {
   let scoreWrapperMobile = document.querySelector('.score-wrapper-mobile');
   let contentMain = document.querySelector('.content.main');
-  
+
   scoreWrapperMobile.classList.remove('side-panel-closed');
   scoreWrapperMobile.classList.add('side-panel-open');
   contentMain.classList.remove('hidden');

@@ -3,7 +3,7 @@
 ------------
 [Link to live site here](https://craig-hudson.github.io/Millionaire/  "Link to live site here")
 
-![Am I responsive image]()
+![Am I responsive image](assets/images/readme-images/am-i-responsive.webp)
 
 ## Table of Contents
 
@@ -291,7 +291,7 @@ To clone The Millionaire repository:
 The use of the information which I used for the sanitizeAnswer function which I used some of the code from an stack overflow post and the high score local storage functions in the game.js and home.js files which I used a youtube tutorial for.
 The use of w3schools for any prompts for any syntax I may of needed a reminder off.
 
-The other content for this project was written by Craig Hudson
+The other content for this project was written by Craig Hudson.
 
 ### media
 
@@ -301,7 +301,7 @@ The other content for this project was written by Craig Hudson
 
 I would like to acknowledge the following people who helped me along the way in completing this project:
 
-- My code institute mentor Narender Singh for feedback and he many ways I can improve.
+- My code institute mentor Narender Singh for feedback and the many ways I can improve.
 - My partner for having the patience with me and allowing me more time to work on projects.
 - My fellow classmates Ross and dan for any hints and tips that they have given me over the last few weeks.
-- Other family who have helped test my quiz application and given me constructive feedback, and ideas that I would be able to improve the quiz application
+- Other family who have helped test my quiz application and given me constructive feedback, and ideas that I would be able to improve the quiz application.
